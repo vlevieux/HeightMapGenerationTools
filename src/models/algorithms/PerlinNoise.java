@@ -9,25 +9,8 @@
 
 package models.algorithms;
 
-public class PerlinNoise extends Generation{
+import models.Map;
 
-	@Override
-	protected void apply() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void setParameters() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void getProgress() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+public class PerlinNoise {
 
 }
