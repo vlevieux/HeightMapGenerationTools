@@ -10,5 +10,9 @@
 package models.algorithms;
 
 public class PerlinNoise extends Generation{
+	
+	public void apply() {
+		
+	}
 
 }
