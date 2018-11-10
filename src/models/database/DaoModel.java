@@ -9,6 +9,6 @@
 
 package models.database;
 
-public class DaoModels {
+public class DaoModel {
 
 }
