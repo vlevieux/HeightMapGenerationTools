@@ -1,5 +1,5 @@
 package algorithms;
 
-public class PerlinNoise {
+public class PerlinNoise extends Generation{
 
 }

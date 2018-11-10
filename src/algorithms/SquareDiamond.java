@@ -1,5 +1,5 @@
 package algorithms;
 
-public class SquareDiamond {
+public class SquareDiamond extends Generation{
 
 }
