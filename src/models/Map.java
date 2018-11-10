@@ -1,6 +1,16 @@
+/**
+ * Map.java
+ * Purpose: 
+ *
+ * HeighMapGenerationTools
+ * @author 
+ * @version 1.0 
+ */
+
 package models;
 
 public class Map {
+	
 	private int size;
 	private double[][] map;
 	
