@@ -11,4 +11,22 @@ package models.algorithms;
 
 public class SquareDiamond extends Generation{
 
+	@Override
+	protected void apply() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setParameters() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void getProgress() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

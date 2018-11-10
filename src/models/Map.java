@@ -14,10 +14,21 @@ public class Map {
 	private int size;
 	private double[][] map;
 	
-	Map(int size){
+	public Map(int size){
 		this.setSize(size);
 		map = new double[this.size][this.size];
 		setZeros();
+	}
+	
+	/**
+	 * Set value in at position i,j.
+	 * @param i coordinate (must be positive)
+	 * @param j coordinate (must be positive)
+	 * @param value value to set
+	 */
+	public void set(int i, int j, double value) {
+		if (i>=0 & i<this.size & j>=0 & j<this.size)
+			this.map[i][j] = value;
 	}
 	
 	/**

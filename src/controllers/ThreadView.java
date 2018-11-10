@@ -10,5 +10,9 @@
 package controllers;
 
 public class ThreadView {
-
+	
+	public static void main (String[] args){
+		
+	}
+	
 }
