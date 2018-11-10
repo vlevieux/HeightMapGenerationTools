@@ -1,11 +1,10 @@
-package controllers;
+package models;
 
-public class MapProcessing {
-
+public class Map {
 	private int size;
 	private double[][] map;
 	
-	MapProcessing(int size){
+	Map(int size){
 		this.setSize(size);
 		map = new double[this.size][this.size];
 		setZeros();
@@ -138,4 +137,5 @@ public class MapProcessing {
 		}
 		return r.toString();
 	}
+
 }
