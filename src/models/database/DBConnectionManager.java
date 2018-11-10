@@ -20,7 +20,7 @@ public class DBConnectionManager {
 	// Code database URL
 	private static final String DB_URL = "jdbc:mysql://www.papademas.net:3307/510labs?autoReconnect=true&useSSL=false";
 	// Database credentials
-	private static final String USERNAME = ""; 
+	private static final String USERNAME = "g"; 
 	private static final String PASSWORD = "";
 
     public static Connection getConnection() {
