@@ -9,12 +9,6 @@
 
 package models;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 public class Map {
 	
 	private int size;
@@ -24,6 +18,12 @@ public class Map {
 		this.setSize(size);
 		map = new double[this.size][this.size];
 		setZeros();
+	}
+	
+	// TODO need to be tested
+	public void changeSize(int size) {
+		this.setSize(size);
+		map = new double[this.size][this.size];
 	}
 	
 	/**
@@ -125,21 +125,6 @@ public class Map {
 			}
 		}
 		return max;
-	}
-	
-	public void generateImage() {
-		BufferedImage img = new BufferedImage(this.getSize(), this.getSize(),BufferedImage.TYPE_INT_RGB);
-		for (int j=0;j<this.getSize(); j++) {
-			for (int i=0; i<this.getSize(); i++) {
-				img.setRGB(i, j, (int)this.get(i,j)+((int)this.get(i,j)<<8)+((int)this.get(i,j)<<16));
-			}
-		}
-		try {
-			File f = new File("test.png");
-			ImageIO.write(img,  "png", f);
-		}catch (IOException e) {
-			System.out.println("Error: "+e);
-		}
 	}
 	
 	/**

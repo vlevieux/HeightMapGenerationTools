@@ -13,25 +13,23 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import models.Map;
 
-public class SquareDiamond {
+public class SquareDiamond extends AlgorithmModel {
 
-	private static int size;
-	private static int stepSize;
-	private static int halfStepSize;
-	private static int variance = 20;
-	private static int minRandom = 50;
-	private static int maxRandom = 200;
-	public static int progress = 0;
+	private  int stepSize;
+	private  int halfStepSize;
+	private  int variance = 20;
+	private  int minRandom = 50;
+	private  int maxRandom = 1000;
+	public  int progress = 0;
 	
-	static public void getParameters() {
-		System.out.println("Variance :"+variance);
+	public SquareDiamond(int size){
+		super(size);
+		this.apply();
+		System.out.println(this.map);
+		this.generateImage();
 	}
 	
-	static public void setParameters(int variance) {
-		SquareDiamond.variance = variance;
-	}
-	
-	static public void apply(Map map)  {
+	public void apply()  {
 		map.setZeros();
 		size = map.getSize();
 		stepSize = size-1;
@@ -43,7 +41,7 @@ public class SquareDiamond {
 		
 		while (stepSize>1) {
 			// TODO adapt to size of map with parameters
-			progress += 100/10;
+			this.setProgress(this.getProgress()+100/10);
 			halfStepSize = stepSize/2;
 			diamond(map);
 			square(map);
@@ -51,7 +49,7 @@ public class SquareDiamond {
 		}
 	}
 	
-	private static void diamond(Map map) {
+	private  void diamond(Map map) {
 		double topLeft;
 		double topRight;
 		double botLeft;
@@ -71,7 +69,7 @@ public class SquareDiamond {
 		}
 	}
 	
-	private static void square(Map map) {
+	private  void square(Map map) {
 		int shift = 0;
 		int average;
 		int rand;
