@@ -17,6 +17,7 @@ public class ThreadComputing implements Runnable {
 	
 	public void run() {
 		SquareDiamond SD = new SquareDiamond(9);
+		SD.apply();
 	}
 	
 }
