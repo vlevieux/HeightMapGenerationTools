@@ -18,9 +18,18 @@ public class SquareDiamond {
 	private static int size;
 	private static int stepSize;
 	private static int halfStepSize;
-	private static int variance = 50;
+	private static int variance = 20;
 	private static int minRandom = 50;
 	private static int maxRandom = 200;
+	public static int progress = 0;
+	
+	static public void getParameters() {
+		System.out.println("Variance :"+variance);
+	}
+	
+	static public void setParameters(int variance) {
+		SquareDiamond.variance = variance;
+	}
 	
 	static public void apply(Map map)  {
 		map.setZeros();
@@ -33,11 +42,12 @@ public class SquareDiamond {
 		map.set(size-1, size-1, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
 		
 		while (stepSize>1) {
+			// TODO adapt to size of map with parameters
+			progress += 100/10;
 			halfStepSize = stepSize/2;
 			diamond(map);
 			square(map);
-			stepSize/=2;
-			
+			stepSize/=2;	
 		}
 	}
 	

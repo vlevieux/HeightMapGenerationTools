@@ -37,6 +37,12 @@ public class Map {
 			this.map[i][j] = value;
 	}
 	
+	/**
+	 * Get value at position i,j.
+	 * @param i coordinate (must be positive)
+	 * @param j coordinate (must be positive)
+	 * @return value at position i,j
+	 */
 	public double get(int i, int j) {
 		return map[i][j];
 	}

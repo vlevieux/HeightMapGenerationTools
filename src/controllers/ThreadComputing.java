@@ -9,33 +9,32 @@
 
 package controllers;
 
-public class ThreadComputing implements Runnable{
-	   private Thread thread;
-	   private String threadName;
+import models.Map;
+import models.algorithms.Random;
+import models.algorithms.SquareDiamond;
 
-	   ThreadComputing(String name) {
-		   threadName = name;
-		   System.out.println("Creating " +  threadName );
-	   }
-
-	   public void run() {
-		   System.out.println("Running " +  threadName );
-		   try {
-				   // Let the thread sleep for a while.
-				   Thread.sleep(50);
-			   }
-		   catch (InterruptedException ie) {
-			   System.out.println("Thread " +  threadName + " interrupted.");
-			   ie.printStackTrace();
-		   }
-		   System.out.println("Thread " +  threadName + " exiting.");
-	   }
-
-	   public void start () {
-		   System.out.println("Starting " +  threadName );
-		   if (thread == null) {
-			   thread = new Thread (this, threadName);
-			   thread.start ();
-		   }
-	   }
+public class ThreadComputing implements Runnable {
+	
+	private Map map;
+	private int methodId;
+	
+	ThreadComputing(Map map, Integer methodId) {
+		this.map = map;
+		this.methodId = methodId;
+	}
+	
+	public void run() {
+		switch (this.methodId) {
+		case 0:
+			Random.apply(this.map);
+			break;
+		case 1:
+			SquareDiamond.apply(this.map);
+			break;
+		}	
+	}
+	
+	public int getProgress() {
+		return SquareDiamond.progress;
+	}
 }
