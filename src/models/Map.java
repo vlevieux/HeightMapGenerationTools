@@ -20,7 +20,10 @@ public class Map {
 		setZeros();
 	}
 	
-	// TODO need to be tested
+	/**
+	 * Change the size of the existing map
+	 * @param size new size of the map
+	 */
 	public void changeSize(int size) {
 		this.setSize(size);
 		map = new double[this.size][this.size];

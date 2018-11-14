@@ -15,18 +15,14 @@ import models.Map;
 
 public class SquareDiamond extends AlgorithmModel {
 
-	private  int stepSize;
-	private  int halfStepSize;
-	private  int variance = 20;
-	private  int minRandom = 50;
-	private  int maxRandom = 1000;
-	public  int progress = 0;
+	private int stepSize;
+	private int halfStepSize;
+	private int variance = 20;
+	private int minRandom = 50;
+	private int maxRandom = 1000;
 	
 	public SquareDiamond(int size){
 		super(size);
-		this.apply();
-		System.out.println(this.map);
-		this.generateImage();
 	}
 	
 	public void apply()  {
