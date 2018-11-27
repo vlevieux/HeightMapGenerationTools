@@ -14,19 +14,10 @@ public class Random extends AlgorithmModel {
 	public void apply() {
 		
 		size = this.map.getSize();
-		int pointDone = 0;
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
 				pointDone++;
 				this.setProgress((double)(pointDone/((double)this.size*this.size)));
-				this.publishProgress(this.pB::setProgress);
-				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				this.map.set(i, j, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
 			}
 		}

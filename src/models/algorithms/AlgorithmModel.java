@@ -3,24 +3,24 @@ package models.algorithms;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.function.DoubleConsumer;
 
 import javax.imageio.ImageIO;
 
-import javafx.application.Platform;
+import controllers.AlgorithmListener;
+import javafx.beans.property.DoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import models.Map;
 
-public abstract class AlgorithmModel {
-	
-	//Testing
-	public ProgressBar pB;
+public abstract class AlgorithmModel implements Runnable {
 	
 	protected Map map;
 	protected int size;
+	
+	protected int pointDone = 0;
 	protected double progress;
+	
+	protected AlgorithmListener listener;
 	
 	AlgorithmModel(int size){
 		this.size = size;
@@ -36,13 +36,15 @@ public abstract class AlgorithmModel {
 	public void setProgress(double progress) {
 		if (progress >= 0 && progress <= 1)
 			this.progress = progress;
+		if (listener != null)
+			listener.onProgressUpdate(progress);
 	}
 	
 	public double getProgress() {
 		return this.progress;
 	}
 	
-	public Image generateImage() {
+	public void generateImage() {
 		this.reformatValue();
 		BufferedImage img = new BufferedImage(this.map.getSize(), this.map.getSize(),BufferedImage.TYPE_INT_RGB);
 		for (int j=0;j<this.map.getSize(); j++) {
@@ -50,13 +52,13 @@ public abstract class AlgorithmModel {
 				img.setRGB(i, j, (int)this.map.get(i,j)+((int)this.map.get(i,j)<<8)+((int)this.map.get(i,j)<<16));
 			}
 		}
-		/*try {
+		try {
 			File f = new File("test.png");
 			ImageIO.write(img,  "png", f);
 		}catch (IOException e) {
 			System.out.println("Error: "+e);
-		}*/
-		return SwingFXUtils.toFXImage(img, null);
+		}
+		listener.onFinished(SwingFXUtils.toFXImage(img, null));
 	}
 	
 	protected void reformatValue() {
@@ -69,8 +71,13 @@ public abstract class AlgorithmModel {
 		}
 	}
 	
-	public void publishProgress(DoubleConsumer progressUpdate) {
-		System.out.println(this.getProgress());
-		Platform.runLater(() -> progressUpdate.accept(this.getProgress()));
+	@Override
+	public void run() {
+		this.apply();
+		this.generateImage();
+	}
+	
+	public void addListener(AlgorithmListener listener) {
+		this.listener = listener;
 	}
 }

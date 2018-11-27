@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -19,7 +21,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import models.algorithms.AlgorithmModel;
 import models.algorithms.Random;
+import models.algorithms.SquareDiamond;
 
 public class FXMLController {
 	
@@ -54,6 +58,8 @@ public class FXMLController {
 	
 	StringProperty algorithmName = new SimpleStringProperty();
 	
+	DoubleProperty algorithmProgress = new SimpleDoubleProperty(0.0);
+	
 	private TextField[] numericTextFields;
 	
 	public void initialize() {
@@ -69,38 +75,64 @@ public class FXMLController {
 			    }
 			});
 		}
+	
+		algorithmProgress.addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				main_progress_bar_progress_bar.setProgress((double)newValue);
+			}
+		});
     }
 	
 	@FXML
     void menuRun(ActionEvent event) {
 		int size = 0;
-		Image image;
+		AlgorithmModel algo;
+		
+		//Checking size != 0
+		size = Integer.valueOf(random_anchor_text_field_size.getText());
+		if (size == 0) {
+			alertDialog("Error in parameters", "Argument size cannot be 0.", "To generate a Map, you must enter a positive integer in the size field.");
+			return;
+		}
 		switch (algorithmName.getValueSafe()) {
 			case "Random":
-				size = Integer.valueOf(random_anchor_text_field_size.getText());
-				if (size == 0) {
-					alertDialog("Error in parameters", "Argument size cannot be 0.", "To generate a Map, you must enter a positive integer in the size field.");
-					return;
-				}
 				
+				//Check min>max
 				int min = Integer.valueOf(random_anchor_text_field_min.getText());
 				int max = Integer.valueOf(random_anchor_text_field_max.getText());
 				if (min>max) {
 					alertDialog("Error in parameters", "Argument min is greater than max.", "To generate a Map, you must enter 2 value : min and max.");
 					return;
 				}
-				Random algo = new Random(size);
-				ThreadComputing tc = new ThreadComputing(algo, main_progress_bar_progress_bar);
-				Thread t2 = new Thread(tc);
-				t2.start();
-				//Random algo = new Random(size);
-				//algo.apply();
-				//image = algo.generateImage();
-				//main_image_view_map.setImage(image);
+				
+				algo = new Random(size);
 				break;
 			case "Square Diamond":
+				algo = new SquareDiamond(2049);
 				break;
+			default:
+					alertDialog("Error unknown Algorithm", "Algorithm you have selected is not recognized.", "You must select one algorithm from the menu list.");
+				return;
 		}
+		
+		algo.addListener(new AlgorithmListener() {
+
+			@Override
+			public void onProgressUpdate(double progress) {
+				main_progress_bar_progress_bar.setProgress(progress);
+				
+			}
+
+			@Override
+			public void onFinished(Image img) {
+				main_image_view_map.setImage(img);
+			}
+			
+		});
+		
+		Thread t = new Thread(algo);
+		t.start();
     }
 	
 	@FXML
