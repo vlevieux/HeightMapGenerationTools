@@ -36,8 +36,6 @@ public class SquareDiamond extends AlgorithmModel {
 		map.set(size-1, size-1, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
 		
 		while (stepSize>1) {
-			// TODO adapt to size of map with parameters
-			this.setProgress(this.getProgress()+100/10);
 			halfStepSize = stepSize/2;
 			diamond(map);
 			square(map);
@@ -61,8 +59,7 @@ public class SquareDiamond extends AlgorithmModel {
 				average = (topLeft + topRight + botLeft + botRight)/4;
 				rand = ThreadLocalRandom.current().nextInt(0, variance + 1) - variance /2;
 				map.set(i + halfStepSize, j + halfStepSize, average + rand);
-				pointDone++;
-				this.setProgress((double)(pointDone/((double)this.size*this.size)));
+				pointCalculated();
 			}
 		}
 	}

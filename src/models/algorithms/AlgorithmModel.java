@@ -44,6 +44,11 @@ public abstract class AlgorithmModel implements Runnable {
 		return this.progress;
 	}
 	
+	protected void pointCalculated() {
+		pointDone++;
+		this.setProgress((double)(pointDone/((double)this.size*this.size)));
+	}
+	
 	public void generateImage() {
 		this.reformatValue();
 		BufferedImage img = new BufferedImage(this.map.getSize(), this.map.getSize(),BufferedImage.TYPE_INT_RGB);

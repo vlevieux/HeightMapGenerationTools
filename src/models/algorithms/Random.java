@@ -16,8 +16,7 @@ public class Random extends AlgorithmModel {
 		size = this.map.getSize();
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
-				pointDone++;
-				this.setProgress((double)(pointDone/((double)this.size*this.size)));
+				pointCalculated();
 				this.map.set(i, j, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
 			}
 		}

@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +12,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -54,6 +56,9 @@ public class FXMLController {
 	private ImageView main_image_view_map;
 	
 	@FXML
+	private Label main_label_status;
+	
+	@FXML
 	private ProgressBar main_progress_bar_progress_bar;
 	
 	StringProperty algorithmName = new SimpleStringProperty();
@@ -75,13 +80,6 @@ public class FXMLController {
 			    }
 			});
 		}
-	
-		algorithmProgress.addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				main_progress_bar_progress_bar.setProgress((double)newValue);
-			}
-		});
     }
 	
 	@FXML
@@ -121,7 +119,6 @@ public class FXMLController {
 			@Override
 			public void onProgressUpdate(double progress) {
 				main_progress_bar_progress_bar.setProgress(progress);
-				
 			}
 
 			@Override
