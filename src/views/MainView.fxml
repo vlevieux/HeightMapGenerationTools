@@ -16,19 +16,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLController">
    <children>
       <SplitPane dividerPositions="0.31981981981981983" layoutY="29.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane>
                <children>
-                  <MenuButton alignment="CENTER" layoutX="21.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="45.0">
+                  <MenuButton fx:id="main_menu_btn_algorithm_list" alignment="CENTER" layoutX="21.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="45.0">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Random" />
-                      <MenuItem mnemonicParsing="false" text="SquareDiamond" />
+                      <MenuItem mnemonicParsing="false" onAction="#setRandomMenuItem" text="Random" />
+                      <MenuItem mnemonicParsing="false" onAction="#setSquareDiamondMenuItem" text="SquareDiamond" />
                     </items>
                   </MenuButton>
-                  <AnchorPane layoutX="20.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0">
+                  <AnchorPane fx:id="main_anchor_pane_random" layoutX="20.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="31.0" text="Size : (px X px)" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="100.0" />
+                        <TextField fx:id="random_anchor_text_field_size" text="50" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
+                        <Label layoutX="14.0" layoutY="153.0" text="Min :" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="100.0" />
+                        <TextField fx:id="random_anchor_text_field_min" layoutY="176.0" maxWidth="-Infinity" prefWidth="100.0" text="0" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
+                        <Label layoutX="14.0" layoutY="277.0" text="Max :" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="100.0" />
+                        <TextField fx:id="random_anchor_text_field_max" layoutY="295.0" maxWidth="-Infinity" prefWidth="100.0" text="255" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="main_anchor_pane_square_diamond" layoutX="20.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0">
                      <children>
                         <Label layoutX="14.0" layoutY="31.0" text="Size" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="223.0" />
                         <TextField layoutY="63.0" maxWidth="-Infinity" prefWidth="100.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
@@ -44,24 +54,11 @@
                         <Slider AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="110.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="20.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0">
-                     <children>
-                        <Label layoutX="14.0" layoutY="31.0" text="Size" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="223.0" />
-                        <TextField layoutY="63.0" maxWidth="-Infinity" prefWidth="100.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
-                        <Slider AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="110.0" />
-                        <Label layoutX="14.0" layoutY="153.0" text="Min" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="223.0" />
-                        <TextField layoutY="176.0" maxWidth="-Infinity" prefWidth="100.0" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
-                        <Slider AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="110.0" />
-                        <Label layoutX="14.0" layoutY="277.0" text="Max" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="223.0" />
-                        <TextField layoutY="295.0" maxWidth="-Infinity" prefWidth="100.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" />
-                        <Slider AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="110.0" />
-                     </children>
-                  </AnchorPane>
                </children></AnchorPane>
           <AnchorPane>
                <children>
-                  <ProgressBar id="ProgressBar" layoutX="377.0" layoutY="664.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" progress="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="5.0" />
-                  <ImageView fitHeight="500.0" fitWidth="500.0" layoutX="18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0" />
+                  <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" layoutX="377.0" layoutY="664.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" progress="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="5.0" />
+                  <ImageView fx:id="main_image_view_map" fitHeight="500.0" fitWidth="500.0" layoutX="18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0" />
                   <Button layoutX="33.0" layoutY="551.0" mnemonicParsing="false" text="Cancel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="500.0">
                      <font>
                         <Font size="12.0" />
@@ -102,6 +99,13 @@
                <accelerator>
                   <KeyCodeCombination alt="UP" code="ENTER" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                </accelerator>
+               <items>
+                  <MenuItem fx:id="main_menu_run_run" mnemonicParsing="false" onAction="#menuRun" text="Run">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>

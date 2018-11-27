@@ -18,7 +18,7 @@ public class Test extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
 		    
-	        Scene scene = new Scene(root, 300, 275);
+	        Scene scene = new Scene(root);
 	    
 	        stage.setTitle("FXML Welcome");
 	        stage.setScene(scene);
@@ -29,9 +29,7 @@ public class Test extends Application {
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
-		Random random = new Random(2); 
-		random.reformatValue();
-		//launch(args);
+		launch(args);
 	}
 
 }

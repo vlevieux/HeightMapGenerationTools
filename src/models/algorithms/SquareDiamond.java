@@ -103,4 +103,16 @@ public class SquareDiamond extends AlgorithmModel {
 			}
 		}
 	}
+
+	@Override
+	public void getParameters() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setParameters(java.util.Map<String, String> parametersMap) {
+		// TODO Auto-generated method stub
+		
+	}
 }
