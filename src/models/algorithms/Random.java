@@ -9,7 +9,7 @@ public class Random extends AlgorithmModel {
 	private static int minRandom = 0;
 	private static int maxRandom = 255;
 	
-	Random(int size){
+	public Random(int size){
 		super(size);
 	}
 	public void apply() {

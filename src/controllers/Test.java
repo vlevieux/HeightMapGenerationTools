@@ -1,34 +1,37 @@
 package controllers;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import models.Map;
+import models.algorithms.AlgorithmModel;
 import models.algorithms.Random;
 import models.algorithms.SquareDiamond;
 
-public class Test {
-
+public class Test extends Application {
+	
+	@Override
+	public void start(Stage stage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
+		    
+	        Scene scene = new Scene(root, 300, 275);
+	    
+	        stage.setTitle("FXML Welcome");
+	        stage.setScene(scene);
+	        stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
-
-		Map map = new Map(9);
-		map.fill(200);
-		System.out.println(map);
-		map.changeSize(17);
-		map.offset(50);
-		System.out.println(map);
-		/*System.out.println("Debut");
-		Map map = new Map(1025);
-		ThreadComputing tc = new ThreadComputing();
-		Thread t2 = new Thread(tc);
-		t2.start();
-		System.out.println("Thread is already running");
-		t2.join();
-		System.out.println("Thread is finished");
-		//System.out.println(map);*/
-		
-		//map.generateImage();*/
-		
-		//SquareDiamond.getParameters();
-		//SquareDiamond.setParameters(12);
-		//SquareDiamond.getParameters();
+		Random random = new Random(2); 
+		random.reformatValue();
+		//launch(args);
 	}
 
 }

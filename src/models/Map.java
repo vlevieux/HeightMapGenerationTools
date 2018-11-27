@@ -9,6 +9,9 @@
 
 package models;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Map {
 	
 	private int size;
@@ -160,6 +163,23 @@ public class Map {
 		}
 		System.out.println(sum);
 		return sum/(this.size*this.size);
+	}
+	
+	// TODO : Need to be tested
+	public double getMedian() {
+		double[] list = new double[this.size*this.size];
+		int k = 0;
+		for (int j = 0; j<this.size; j++) {
+			for (int i = 0; i<this.size; i++) {
+	            list[k] = this.map[i][j];
+	            k++;
+	        }
+	    }
+		Arrays.sort(list);
+		if ((this.size*this.size)%2 == 0) {
+			return list[(this.size*this.size)/2];
+		}
+		return list[(((this.size*this.size)+1)/2)];
 	}
 	
 	public String toString() {
