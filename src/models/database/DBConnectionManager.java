@@ -18,10 +18,10 @@ public class DBConnectionManager {
 	private static String driverName = "com.mysql.jdbc.Driver";
 	private static Connection con;
 	// Code database URL
-	private static final String DB_URL = "jdbc:mysql://www.papademas.net:3307/510labs?autoReconnect=true&useSSL=false";
+	private static final String DB_URL = "jdbc:mysql://www.papademas.net:3307/fp510?autoReconnect=true&useSSL=false";
 	// Database credentials
-	private static final String USERNAME = ""; 
-	private static final String PASSWORD = "";
+	private static final String USERNAME = "fpuser"; 
+	private static final String PASSWORD = "510";
 
     public static Connection getConnection() {
         try {
