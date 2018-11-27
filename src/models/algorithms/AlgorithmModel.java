@@ -50,21 +50,12 @@ public abstract class AlgorithmModel {
 	}
 	
 	public void reformatValue() {
-		map.setSize(2);
-		map.set(1, 1, 33);
-		map.set(1, 0, -100);
-		System.out.println(map.getMax());
-		System.out.println(map.getMin());
 		double a = 255.0/(map.getMax()-map.getMin());
-		System.out.println(a);		
 		double b = 255.0/(map.getMax()-map.getMin())*map.getMin();
-		System.out.println(b);
-		System.out.println(map);
 		for (int j=0;j<this.map.getSize(); j++) {
 			for (int i=0; i<this.map.getSize(); i++) {
 					map.set(i, j, a*map.get(i, j)-b);
 			}
 		}
-		System.out.println(map);
 	}
 }
