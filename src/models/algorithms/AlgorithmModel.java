@@ -48,4 +48,14 @@ public abstract class AlgorithmModel {
 			System.out.println("Error: "+e);
 		}
 	}
+	
+	public void reformatValue() {
+		double a = 255.0/(map.getMax()-map.getMin());
+		double b = 255.0/(map.getMax()-map.getMin())*map.getMin();
+		for (int j=0;j<this.map.getSize(); j++) {
+			for (int i=0; i<this.map.getSize(); i++) {
+					map.set(i, j, a*map.get(i, j)-b);
+			}
+		}
+	}
 }
