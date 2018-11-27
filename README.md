@@ -1,3 +1,3 @@
 # HeightMapGenerationTools
 
-bite au cul pour les salopes
+This is a Java Tool for generating random heightmaps.
