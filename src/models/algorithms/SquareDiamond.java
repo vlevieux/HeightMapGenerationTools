@@ -52,6 +52,8 @@ public class SquareDiamond extends AlgorithmModel {
 		int rand;
 		for (int j = 0;  j<size-1; j+=stepSize) {
 			for (int i = 0; i<size-1; i+=stepSize) {
+				if (isCancelled())
+					break;
 				topLeft = map.get(i,j);
 				topRight = map.get(i, j + stepSize);
 				botLeft = map.get(i + stepSize, j);
@@ -77,6 +79,8 @@ public class SquareDiamond extends AlgorithmModel {
 				shift = 0;
 			}
 			for (int i = shift; i < size; i+=stepSize) {
+				if (isCancelled())
+					break;
 				n = 0;
 				total = 0;
 				if (i - halfStepSize > 0) {

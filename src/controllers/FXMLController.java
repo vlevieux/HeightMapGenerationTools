@@ -1,28 +1,23 @@
 package controllers;
 
-import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import models.algorithms.AlgorithmModel;
 import models.algorithms.Random;
 import models.algorithms.SquareDiamond;
@@ -56,37 +51,28 @@ public class FXMLController {
 	private ImageView main_image_view_map;
 	
 	@FXML
+	private Button main_button_cancel;
+	
+	@FXML
 	private Label main_label_status;
 	
 	@FXML
 	private ProgressBar main_progress_bar_progress_bar;
 	
-	StringProperty algorithmName = new SimpleStringProperty();
-	
-	DoubleProperty algorithmProgress = new SimpleDoubleProperty(0.0);
-	
 	private TextField[] numericTextFields;
+	
+	StringProperty algorithmName = new SimpleStringProperty();
+	AlgorithmModel algo;
 	
 	public void initialize() {
 		numericTextFields = new TextField[] {random_anchor_text_field_size, random_anchor_text_field_min, random_anchor_text_field_max};
-		for (TextField tf : numericTextFields) {
-			tf.textProperty().addListener(new ChangeListener<String>() {
-			    @Override
-			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-			        String newValue) {
-			        if (!newValue.matches("\\d*")) {
-			        	tf.setText(newValue.replaceAll("[^\\d]", ""));
-			        }
-			    }
-			});
-		}
+		setNumericFields();
     }
 	
 	@FXML
     void menuRun(ActionEvent event) {
 		int size = 0;
-		AlgorithmModel algo;
-		
+				
 		//Checking size != 0
 		size = Integer.valueOf(random_anchor_text_field_size.getText());
 		if (size == 0) {
@@ -114,26 +100,27 @@ public class FXMLController {
 				return;
 		}
 		
-		algo.addListener(new AlgorithmListener() {
-
-			@Override
-			public void onProgressUpdate(double progress) {
-				main_progress_bar_progress_bar.setProgress(progress);
-			}
-
-			@Override
-			public void onFinished(Image img) {
-				main_image_view_map.setImage(img);
-			}
-			
-		});
-		
+		main_progress_bar_progress_bar.progressProperty().bind(algo.progressProperty());
+		algo.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+			    new EventHandler<WorkerStateEvent>() {
+			    @Override
+			    public void handle(WorkerStateEvent t) {
+			    	main_image_view_map.setImage(algo.getValue());
+			    }
+			});
 		Thread t = new Thread(algo);
 		t.start();
     }
 	
 	@FXML
-    void setRandomMenuItem(ActionEvent event) {
+    void cancelTask(ActionEvent event) {
+		algo.cancel();
+		main_progress_bar_progress_bar.progressProperty().unbind();
+		main_progress_bar_progress_bar.setProgress(0.0);
+    }
+	
+	@FXML
+    private void setRandomMenuItem(ActionEvent event) {
 		algorithmName.setValue("Random");
 		main_menu_btn_algorithm_list.setText(algorithmName.getValueSafe());
 		main_anchor_pane_square_diamond.setVisible(false);
@@ -141,7 +128,7 @@ public class FXMLController {
     }
 	
 	@FXML
-	void setSquareDiamondMenuItem(ActionEvent event) {
+	private void setSquareDiamondMenuItem(ActionEvent event) {
 		algorithmName.setValue("Square Diamond");
 		main_menu_btn_algorithm_list.setText(algorithmName.getValueSafe());
 		main_anchor_pane_random.setVisible(false);
@@ -155,5 +142,19 @@ public class FXMLController {
 		alert.setContentText(content);
 
 		alert.showAndWait();
+	}
+	
+	private void setNumericFields() {
+		for (TextField tf : numericTextFields) {
+			tf.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			        String newValue) {
+			        if (!newValue.matches("\\d*")) {
+			        	tf.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			    }
+			});
+		}
 	}
 }
