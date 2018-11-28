@@ -12,27 +12,19 @@ public class Test extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			/*Parent root = FXMLLoader.load(getClass().getResource("/views/licenseView.fxml"));
-		    
-	        Scene scene = new Scene(root);
-	    
+			Parent root = FXMLLoader.load(getClass().getResource("/views/licenseView.fxml"));
+            Scene scene = new Scene(root);
 	        stage.setTitle("Licence Activation");
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
 	        stage.setResizable(false);
-	        stage.show();*/
-	        
-			Parent root = FXMLLoader.load(getClass().getResource("/views/MainView.fxml"));
-		    
-	        Scene scene = new Scene(root);
-	    
-	        stage.setTitle("FXML Welcome");
-	        stage.setScene(scene);
 	        stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	public static void main(String[] args) throws InterruptedException {
 		launch(args);

@@ -19,7 +19,7 @@ public class SquareDiamond extends AlgorithmModel {
 	private int halfStepSize;
 	private int variance = 50;
 	private int minRandom = 50;
-	private int maxRandom = 1000;
+	private int maxRandom = 200;
 	
 	public SquareDiamond(int size){
 		super(size);

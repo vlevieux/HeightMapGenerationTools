@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controllers.FXMLLicenseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLLicenseController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #e7ecef;" BorderPane.alignment="CENTER">
          <children>
@@ -49,6 +49,11 @@
                   <Font size="16.0" />
                </font>
             </Button>
+            <Text fx:id="license_text_error_message" fill="#c72020" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </Text>
          </children>
       </VBox>
    </center>
@@ -86,7 +91,7 @@
    <bottom>
       <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Realised by Clément Deltel &amp; Victor LEVIEUX in 2018">
+            <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Realised by Clément Deltel &amp; Victor LEVIEUX in 2018.">
                <HBox.margin>
                   <Insets left="20.0" top="1.0" />
                </HBox.margin>
