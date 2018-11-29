@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,7 +50,16 @@ public class FXMLController {
 	private TextField random_vbox_text_field_min;
 	
 	@FXML
+	private Slider random_vbox_slider_min;
+	
+	@FXML
 	private TextField random_vbox_text_field_max;
+	
+	@FXML
+	private Slider random_vbox_slider_max;
+	
+	@FXML
+	private TextField square_diamond_vbox_size;
 	
 	@FXML
 	private VBox main_vbox_square_diamond;
@@ -75,14 +85,82 @@ public class FXMLController {
 	@FXML
 	private ProgressBar main_progress_bar_progress_bar;
 	
-	private TextField[] numericTextFields;
-	
 	StringProperty algorithmName = new SimpleStringProperty();
 	AlgorithmModel algo;
 	
 	public void initialize() {
-		numericTextFields = new TextField[] {random_vbox_text_field_size, random_vbox_text_field_min, random_vbox_text_field_max};
-		setNumericFields();
+
+		random_vbox_text_field_size.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue.replaceAll("[^\\d]", "");
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= 5000) {
+			        	random_vbox_text_field_size.setText(String.valueOf(value));
+			        } else {
+			        	random_vbox_text_field_size.setText(oldValue);
+			        }
+		        }
+		    }
+		});
+		
+		random_vbox_text_field_min.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue.replaceAll("[^\\d]", "");
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= 255) {
+			        	random_vbox_text_field_min.setText(String.valueOf(value));
+			        	random_vbox_slider_min.setValue(value);
+			        } else {
+			        	random_vbox_text_field_min.setText(oldValue);
+			        }
+		        }
+		    }
+		});
+		
+		random_vbox_slider_min.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				random_vbox_text_field_min.setText(String.valueOf((int)random_vbox_slider_min.getValue()));
+			}
+			
+		});
+		
+		random_vbox_text_field_max.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue.replaceAll("[^\\d]", "");
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= 255) {
+			        	random_vbox_text_field_max.setText(String.valueOf(value));
+			        	random_vbox_slider_max.setValue(value);
+			        } else {
+			        	random_vbox_text_field_max.setText(oldValue);
+			        }
+		        }
+		    }
+		});
+		
+		random_vbox_slider_max.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				random_vbox_text_field_max.setText(String.valueOf((int)random_vbox_slider_max.getValue()));
+			}
+			
+		});
     }
 	
 	@FXML
@@ -192,25 +270,4 @@ public class FXMLController {
 		alert.showAndWait();
 	}
 	
-	/**
-	 * Set all TextField as NumericField and limit the size to 9 digits for avoiding buffer overflow. You need to add your TextField in the numericTextFields array of this FXML class.
-	 */
-	private void setNumericFields() {
-		for (TextField tf : numericTextFields) {
-			tf.textProperty().addListener(new ChangeListener<String>() {
-			    @Override
-			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-			        String newValue) {
-			        if (!newValue.matches("\\d")) {
-			        	tf.setText(newValue.replaceAll("[^\\d]", ""));
-			        }
-			        //Avoid buffer overflow
-			        if (tf.getText().length() > 9) {
-		                String s = tf.getText().substring(0, 9);
-		                tf.setText(s);
-		            }
-			    }
-			});
-		}
-	}
 }

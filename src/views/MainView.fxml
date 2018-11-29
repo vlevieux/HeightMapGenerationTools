@@ -84,7 +84,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#setSquareDiamondMenuItem" text="SquareDiamond" />
               </items>
             </MenuButton>
-            <VBox fx:id="main_vbox_random" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+            <VBox fx:id="main_vbox_random" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                <children>
                   <Label text="Size (px X px) :" />
                   <TextField fx:id="random_vbox_text_field_size" text="50">
@@ -93,15 +93,17 @@
                      </VBox.margin></TextField>
                   <Label text="Min :" />
                   <TextField fx:id="random_vbox_text_field_min" maxWidth="-Infinity" prefWidth="100.0" text="0" />
+                  <Slider fx:id="random_vbox_slider_min" blockIncrement="1.0" max="255.0" />
                   <Label text="Max :" />
                   <TextField fx:id="random_vbox_text_field_max" maxWidth="-Infinity" prefWidth="100.0" text="255" />
+                  <Slider fx:id="random_vbox_slider_max" blockIncrement="1.0" max="255.0" value="255.0" />
                </children>
             </VBox>
             <VBox fx:id="main_vbox_square_diamond" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label text="Size" />
-                  <TextField maxWidth="-Infinity" prefWidth="100.0" />
-                  <Slider />
+                  <Label text="Size (2^size +1) :" />
+                  <TextField fx:id="square_diamond_vbox_size" maxWidth="-Infinity" prefWidth="100.0" />
+                  <Slider blockIncrement="1.0" max="255.0" showTickLabels="true" showTickMarks="true" />
                   <Label text="Variance" />
                   <TextField maxWidth="-Infinity" prefWidth="100.0" />
                   <Slider />
