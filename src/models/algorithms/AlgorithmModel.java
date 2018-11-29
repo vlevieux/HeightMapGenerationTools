@@ -1,7 +1,6 @@
 package models.algorithms;
 
 import java.awt.image.BufferedImage;
-import controllers.AlgorithmListener;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -14,8 +13,6 @@ public abstract class AlgorithmModel extends Task<Image> {
 	
 	protected int pointDone = 0;
 	protected double progress;
-	
-	protected AlgorithmListener listener;
 	
 	AlgorithmModel(int size){
 		this.size = size;
@@ -68,7 +65,9 @@ public abstract class AlgorithmModel extends Task<Image> {
 	
 	@Override
 	protected Image call() throws Exception {
+		updateMessage("In progress...");
 		this.apply();
+		updateMessage("Displaying image...");
 		return this.generateImage();
 	}
 }

@@ -26,14 +26,12 @@ public class FXMLLicenseController {
     
     //Just basic license store
     private String validLicenses[] = {"1234-1234-1234-1234"};
-
+        
     @FXML
     void activate(ActionEvent event) {
     	if (license_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
-    		if (checklicense(license_textfield_license.getText())) {
-    			Stage stage = (Stage) license_button_activate.getScene().getWindow();
-				stage.close();
-		    	changeStage(stage);
+    		if (checkLicense(license_textfield_license.getText())) {
+    			close();
     		} else {
     			license_text_error_message.setText("The license you have entered is not valid.");
     		}
@@ -41,6 +39,12 @@ public class FXMLLicenseController {
     		license_text_error_message.setText("The license you have entered does not match the license format.");
     	}
     	
+    }
+    
+    private void close() {
+    	Stage stage = (Stage) license_button_activate.getScene().getWindow();
+		stage.close();
+    	changeStage(stage);
     }
     
     private void changeStage(Stage s) {
@@ -57,8 +61,8 @@ public class FXMLLicenseController {
 		}
     }
     
-    // TODO: C. check license
-    private boolean checklicense(String license) {
+    // TODO: C. check license return true if license is ok, false is not.
+    private boolean checkLicense(String license) {
     	return Arrays.asList(validLicenses).contains(license);
     }
 }

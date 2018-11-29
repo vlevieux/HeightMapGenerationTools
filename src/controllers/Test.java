@@ -12,7 +12,8 @@ public class Test extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/views/licenseView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
+			Parent root = (Parent) loader.load();
             Scene scene = new Scene(root);
 	        stage.setTitle("Licence Activation");
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));

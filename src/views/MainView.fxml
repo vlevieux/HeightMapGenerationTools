@@ -19,6 +19,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLController">
    <top>
@@ -42,7 +43,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete">
+              <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="DELETE" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
@@ -59,11 +60,16 @@
                         <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#cancelTask" text="Cancel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F6" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
             </items>
           </Menu>
         </menus>
@@ -72,7 +78,7 @@
    <left>
     <AnchorPane prefHeight="521.0" prefWidth="240.0" style="-fx-background-color: #e7ecef; -fx-border-color: #dfdfdf; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton fx:id="main_menu_btn_algorithm_list" alignment="CENTER" layoutX="10.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <MenuButton fx:id="main_menu_btn_algorithm_list" alignment="CENTER" layoutX="10.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Choose the algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#setRandomMenuItem" text="Random" />
                 <MenuItem mnemonicParsing="false" onAction="#setSquareDiamondMenuItem" text="SquareDiamond" />
@@ -119,16 +125,45 @@
          </BorderPane.margin></ImageView>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="780.0" style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="33.0" prefWidth="780.0" style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="main_label_status" text="In Progress" />
+            <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/ic_size.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="104.5367202758789" />
+            <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="121.58196640014648" />
+            <Label fx:id="main_label_status" text="Status :">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin></Label>
+            <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="130.67423248291016">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="45.33673095703125">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </Text>
             <Button fx:id="main_button_cancel" mnemonicParsing="false" onAction="#cancelTask" text="Cancel">
                <font>
                   <Font size="12.0" />
                </font>
                <graphic>
-                  <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" progress="0.0" />
+                  <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" progress="0.0">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding></ProgressBar>
                </graphic>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
             </Button>
          </children>
       </HBox>

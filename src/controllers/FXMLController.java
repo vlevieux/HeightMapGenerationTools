@@ -19,8 +19,12 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import models.algorithms.AlgorithmModel;
 import models.algorithms.Random;
 import models.algorithms.SquareDiamond;
@@ -57,7 +61,16 @@ public class FXMLController {
 	private Button main_button_cancel;
 	
 	@FXML
+	private Text main_text_size;
+	
+	@FXML
 	private Label main_label_status;
+	
+	@FXML
+	private Text main_text_status;
+	
+	@FXML
+	private Text main_text_time;
 	
 	@FXML
 	private ProgressBar main_progress_bar_progress_bar;
@@ -79,7 +92,7 @@ public class FXMLController {
 		//Checking size != 0
 		size = Integer.valueOf(random_vbox_text_field_size.getText());
 		if (size == 0) {
-			alertDialog("Error in parameters", "Argument size cannot be 0.", "To generate a Map, you must enter a positive integer in the size field.");
+			alertDialog("Error in parameters", "Argument size cannot be 0.", "To generate a Map, you must enter a positive integer in the size field.", AlertType.ERROR);
 			return;
 		}
 		switch (algorithmName.getValueSafe()) {
@@ -89,7 +102,7 @@ public class FXMLController {
 				int min = Integer.valueOf(random_vbox_text_field_min.getText());
 				int max = Integer.valueOf(random_vbox_text_field_max.getText());
 				if (min>max) {
-					alertDialog("Error in parameters", "Argument min is greater than max.", "To generate a Map, you must enter 2 value : min and max.");
+					alertDialog("Error in parameters", "Argument min is greater than max.", "To generate a Map, you must enter 2 value : min and max.", AlertType.ERROR);
 					return;
 				}
 				
@@ -103,16 +116,23 @@ public class FXMLController {
 				algo = new SquareDiamond(129);
 				break;
 			default:
-					alertDialog("Error unknown Algorithm", "Algorithm you have selected is not recognized.", "You must select one algorithm from the menu list.");
+					alertDialog("Error unknown Algorithm", "Algorithm you have selected is not recognized.", "You must select one algorithm from the menu list.", AlertType.ERROR);
 				return;
 		}
 		
 		main_progress_bar_progress_bar.progressProperty().bind(algo.progressProperty());
+		main_text_status.textProperty().bind(algo.messageProperty());
 		algo.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
 			    new EventHandler<WorkerStateEvent>() {
 			    @Override
 			    public void handle(WorkerStateEvent t) {
 			    	main_image_view_map.setImage(algo.getValue());
+			    	double height = main_image_view_map.getImage().getHeight();
+			    	double width = main_image_view_map.getImage().getWidth();
+			    	main_text_size.setText(String.format("%d x %dpx", (int)height, (int)width));
+			    	main_progress_bar_progress_bar.progressProperty().unbind();
+			    	main_text_status.textProperty().unbind();
+			    	main_text_status.setText("Done.");
 			    }
 			});
 		Thread t = new Thread(algo);
@@ -125,6 +145,8 @@ public class FXMLController {
 			algo.cancel();
 		main_progress_bar_progress_bar.progressProperty().unbind();
 		main_progress_bar_progress_bar.setProgress(0.0);
+		main_text_status.textProperty().unbind();
+    	main_text_status.setText("Cancelled.");
     }
 	
 	@FXML
@@ -143,14 +165,36 @@ public class FXMLController {
 		main_vbox_square_diamond.setVisible(true);
 	}
 	
-	private void alertDialog(String title, String header, String content) {
-		Alert alert = new Alert(AlertType.ERROR);
+	@FXML
+    private void showAbout(ActionEvent event) {
+		alertDialog("Height Map Generation Tool","Height Map Generation Tool can be used to generate aleatory\nheight maps based on procedural generation algorithms.\nThe generated images can be imported into 3D design software.","Height Map Generation Tool is an original idea of B. HYON & V. LEVIEUX and was directed by C. DELTEL & V. LEVIEUX.", AlertType.INFORMATION);
+    }
+
+	@FXML
+    private void deleteImage(ActionEvent event) {
+		main_image_view_map.setImage(null);
+    }
+	/**
+	 * Generate Alert Dialog
+	 * @param title (String) Title of the Alert Dialog
+	 * @param header (String) Header of the Alert Dialog
+	 * @param content (String) Content of the Alert Dialog
+	 * @param type (AlertType) AlertType.INFORMATION, AlerType.ERROR, ...
+	 */
+	private void alertDialog(String title, String header, String content, AlertType type) {
+		Alert alert = new Alert(type);
 		alert.setTitle(title);
 		alert.setHeaderText(header);
 		alert.setContentText(content);
+		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 		alert.showAndWait();
 	}
 	
+	/**
+	 * Set all TextField as NumericField and limit the size to 9 digits for avoiding buffer overflow. You need to add your TextField in the numericTextFields array of this FXML class.
+	 */
 	private void setNumericFields() {
 		for (TextField tf : numericTextFields) {
 			tf.textProperty().addListener(new ChangeListener<String>() {
