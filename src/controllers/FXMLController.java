@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -65,6 +66,15 @@ public class FXMLController {
 	private VBox main_vbox_square_diamond;
 	
 	@FXML
+	private CheckBox algorithm_vbox_check_box_reformat_image;
+	
+	@FXML
+	private ImageView algorithm_vbox_warning_reformat_image;
+	
+	@FXML
+	private Text algorithm_vbox_text_reformat_image;
+	
+	@FXML
 	private ImageView main_image_view_map;
 	
 	@FXML
@@ -90,50 +100,10 @@ public class FXMLController {
 	
 	public void initialize() {
 
-		random_vbox_text_field_size.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		        	newValue.replaceAll("[^\\d]", "");
-		        }
-		        if (!newValue.equals("")) {
-		        	int value = Integer.valueOf(newValue);
-			        if (value <= 5000) {
-			        	random_vbox_text_field_size.setText(String.valueOf(value));
-			        } else {
-			        	random_vbox_text_field_size.setText(oldValue);
-			        }
-		        }
-		    }
-		});
-		
-		random_vbox_text_field_min.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		        	newValue.replaceAll("[^\\d]", "");
-		        }
-		        if (!newValue.equals("")) {
-		        	int value = Integer.valueOf(newValue);
-			        if (value <= 255) {
-			        	random_vbox_text_field_min.setText(String.valueOf(value));
-			        	random_vbox_slider_min.setValue(value);
-			        } else {
-			        	random_vbox_text_field_min.setText(oldValue);
-			        }
-		        }
-		    }
-		});
-		
-		random_vbox_slider_min.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				random_vbox_text_field_min.setText(String.valueOf((int)random_vbox_slider_min.getValue()));
-			}
-			
-		});
+		setNumericField(random_vbox_text_field_size, 5000);
+
+		setNumericFieldLinkToSlider(random_vbox_text_field_min, random_vbox_slider_min, 255);
+		setNumericFieldLinkToSlider(random_vbox_text_field_max, random_vbox_slider_max, 255);
 		
 		random_vbox_text_field_max.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
@@ -188,6 +158,7 @@ public class FXMLController {
 				Map <String, String> hm = new HashMap<String, String>();
 				hm.put("min", String.valueOf(min));
 				hm.put("max", String.valueOf(max));
+				hm.put("reformat", String.valueOf(algorithm_vbox_check_box_reformat_image.isSelected()));
 				algo.setParameters(hm);
 				break;
 			case "Square Diamond":
@@ -225,6 +196,13 @@ public class FXMLController {
 		main_progress_bar_progress_bar.setProgress(0.0);
 		main_text_status.textProperty().unbind();
     	main_text_status.setText("Cancelled.");
+    }
+	
+	@FXML
+    void onReformatImage(ActionEvent event) {
+		boolean visible = !algorithm_vbox_check_box_reformat_image.isSelected();
+		algorithm_vbox_warning_reformat_image.setVisible(visible);
+		algorithm_vbox_text_reformat_image.setVisible(visible);
     }
 	
 	@FXML
@@ -268,6 +246,55 @@ public class FXMLController {
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 		alert.showAndWait();
+	}
+	
+	private void setNumericField(TextField tf, int maxValue) {
+		tf.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue.replaceAll("[^\\d]", "");
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= maxValue) {
+			        	tf.setText(String.valueOf(value));
+			        } else {
+			        	tf.setText(oldValue);
+			        }
+		        }
+		    }
+		});
+	}
+	
+	private void setNumericFieldLinkToSlider(TextField tf, Slider s, int maxValue) {
+		tf.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue.replaceAll("[^\\d]", "");
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= maxValue) {
+			        	tf.setText(String.valueOf(value));
+			        	s.setValue(value);
+			        } else {
+			        	tf.setText(oldValue);
+			        }
+		        }
+		    }
+		});
+		
+		s.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				tf.setText(String.valueOf((int)s.getValue()));
+			}
+			
+		});
 	}
 	
 }

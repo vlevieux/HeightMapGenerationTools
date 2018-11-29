@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -84,18 +85,42 @@
                 <MenuItem mnemonicParsing="false" onAction="#setSquareDiamondMenuItem" text="SquareDiamond" />
               </items>
             </MenuButton>
-            <VBox fx:id="main_vbox_random" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+            <VBox fx:id="main_vbox_random" prefHeight="200.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                <children>
                   <Label text="Size (px X px) :" />
-                  <TextField fx:id="random_vbox_text_field_size" text="50">
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin></TextField>
+                  <HBox prefHeight="30.0" prefWidth="160.0">
+                     <children>
+                        <TextField fx:id="random_vbox_text_field_size" text="50" />
+                        <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 5000)">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
                   <Label text="Min :" />
-                  <TextField fx:id="random_vbox_text_field_min" maxWidth="-Infinity" prefWidth="100.0" text="0" />
+                  <HBox prefHeight="30.0" prefWidth="160.0">
+                     <children>
+                        <TextField fx:id="random_vbox_text_field_min" maxWidth="-Infinity" prefWidth="100.0" text="0" />
+                        <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
                   <Slider fx:id="random_vbox_slider_min" blockIncrement="1.0" max="255.0" />
                   <Label text="Max :" />
-                  <TextField fx:id="random_vbox_text_field_max" maxWidth="-Infinity" prefWidth="100.0" text="255" />
+                  <HBox prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="random_vbox_text_field_max" maxWidth="-Infinity" prefWidth="100.0" text="255" />
+                        <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" text="(max. 255)">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
                   <Slider fx:id="random_vbox_slider_max" blockIncrement="1.0" max="255.0" value="255.0" />
                </children>
             </VBox>
@@ -113,6 +138,31 @@
                   <Label text="Max" />
                   <TextField maxWidth="-Infinity" prefWidth="100.0" />
                   <Slider />
+               </children>
+            </VBox>
+            <VBox prefHeight="90.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="350.0">
+               <children>
+                  <CheckBox fx:id="algorithm_vbox_check_box_reformat_image" mnemonicParsing="false" onAction="#onReformatImage" selected="true" text="Reformat Image" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="algorithm_vbox_warning_reformat_image" fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../images/ic_warning.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="1.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text fx:id="algorithm_vbox_text_reformat_image" fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Warning, unexpected behavior." visible="false">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children></AnchorPane>

@@ -14,6 +14,8 @@ public abstract class AlgorithmModel extends Task<Image> {
 	protected int pointDone = 0;
 	protected double progress;
 	
+	protected boolean reformat = true;
+	
 	AlgorithmModel(int size){
 		this.size = size;
 		this.map = new Map(this.size);
@@ -23,7 +25,9 @@ public abstract class AlgorithmModel extends Task<Image> {
 	
 	public abstract void getParameters();
 	
-	public abstract void setParameters(java.util.Map<String,String> parametersMap);
+	public void setParameters(java.util.Map<String,String> parametersMap) {
+		reformat = Boolean.parseBoolean(parametersMap.get("reformat"));
+	}
 	
 	public void setProgress(double progress) {
 		if (progress >= 0 && progress <= 1)
@@ -37,7 +41,8 @@ public abstract class AlgorithmModel extends Task<Image> {
 	}
 	
 	public Image generateImage() {
-		this.reformatValue();
+		if (reformat)
+			this.reformatValue();
 		BufferedImage img = new BufferedImage(this.map.getSize(), this.map.getSize(),BufferedImage.TYPE_INT_RGB);
 		for (int j=0;j<this.map.getSize(); j++) {
 			for (int i=0; i<this.map.getSize(); i++) {

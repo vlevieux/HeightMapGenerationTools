@@ -32,6 +32,7 @@ public class Random extends AlgorithmModel {
 	}
 	@Override
 	public void setParameters(Map<String, String> parametersMap) {
+		super.setParameters(parametersMap);
 		this.minRandom = Integer.valueOf(parametersMap.get("min"));
 		this.maxRandom = Integer.valueOf(parametersMap.get("max"));
 	}
