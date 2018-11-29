@@ -70,9 +70,9 @@
       </MenuBar>
    </top>
    <left>
-    <AnchorPane BorderPane.alignment="CENTER">
+    <AnchorPane prefHeight="521.0" prefWidth="240.0" style="-fx-background-color: #e7ecef; -fx-border-color: #dfdfdf; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton fx:id="main_menu_btn_algorithm_list" alignment="CENTER" layoutX="10.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="10.0">
+            <MenuButton fx:id="main_menu_btn_algorithm_list" alignment="CENTER" layoutX="10.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#setRandomMenuItem" text="Random" />
                 <MenuItem mnemonicParsing="false" onAction="#setSquareDiamondMenuItem" text="SquareDiamond" />
@@ -80,7 +80,7 @@
             </MenuButton>
             <VBox fx:id="main_vbox_random" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label text="Size : (px X px)" />
+                  <Label text="Size (px X px) :" />
                   <TextField fx:id="random_vbox_text_field_size" text="50">
                      <VBox.margin>
                         <Insets bottom="5.0" />
@@ -113,10 +113,13 @@
       <ImageView fx:id="main_image_view_map" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
             <Image url="@../images/firstheightmap.jpg" />
-         </image></ImageView>
+         </image>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin></ImageView>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="780.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="780.0" style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="main_label_status" text="In Progress" />
             <Button fx:id="main_button_cancel" mnemonicParsing="false" onAction="#cancelTask" text="Cancel">

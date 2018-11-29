@@ -56,6 +56,7 @@ public class FXMLLicenseController {
 			e.printStackTrace();
 		}
     }
+    
     // TODO: C. check license
     private boolean checklicense(String license) {
     	return Arrays.asList(validLicenses).contains(license);

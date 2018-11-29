@@ -24,8 +24,6 @@ public class Test extends Application {
 		}
 	}
 	
-	
-	
 	public static void main(String[] args) throws InterruptedException {
 		launch(args);
 	}

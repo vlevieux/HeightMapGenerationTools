@@ -20,7 +20,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import models.algorithms.AlgorithmModel;
 import models.algorithms.Random;
@@ -149,7 +148,6 @@ public class FXMLController {
 		alert.setTitle(title);
 		alert.setHeaderText(header);
 		alert.setContentText(content);
-
 		alert.showAndWait();
 	}
 	
@@ -159,9 +157,14 @@ public class FXMLController {
 			    @Override
 			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
 			        String newValue) {
-			        if (!newValue.matches("\\d*")) {
+			        if (!newValue.matches("\\d")) {
 			        	tf.setText(newValue.replaceAll("[^\\d]", ""));
 			        }
+			        //Avoid buffer overflow
+			        if (tf.getText().length() > 9) {
+		                String s = tf.getText().substring(0, 9);
+		                tf.setText(s);
+		            }
 			    }
 			});
 		}
