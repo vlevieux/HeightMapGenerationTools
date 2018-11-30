@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Size (px X px) :" />
+      <HBox>
+         <children>
+            <TextField fx:id="random_vbox_text_field_size" text="50" />
+            <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 5000)" />
+         </children>
+      </HBox>
+      <Label text="Min :" />
+      <HBox>
+         <children>
+            <TextField fx:id="random_vbox_text_field_min" text="0" />
+            <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)" />
+         </children>
+      </HBox>
+      <Slider fx:id="random_vbox_slider_min" blockIncrement="1.0" max="255.0" />
+      <Label text="Max :" />
+      <HBox>
+         <children>
+            <TextField fx:id="random_vbox_text_field_max" text="255" />
+            <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)" />
+         </children>
+      </HBox>
+      <Slider fx:id="random_vbox_slider_max" blockIncrement="1.0" max="255.0" value="255.0" />
+   </children>
+</VBox>

@@ -37,7 +37,12 @@ public abstract class AlgorithmModel extends Task<Image> {
 	
 	protected void pointCalculated() {
 		pointDone++;
-		this.setProgress((double)(pointDone/((double)this.size*this.size)));
+		this.setProgress((double)(pointDone/((double)this.size*this.size-4)));
+	}
+	
+	protected void pointCalculated(int total) {
+		pointDone++;
+		this.setProgress((double)(pointDone/((double)total)));
 	}
 	
 	public Image generateImage() {

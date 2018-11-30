@@ -18,11 +18,15 @@ public class SquareDiamond extends AlgorithmModel {
 	private int stepSize;
 	private int halfStepSize;
 	private int variance = 50;
-	private int minRandom = 50;
-	private int maxRandom = 200;
+	private final int ZERO = 0;
+	private final int MAX = 255;
+	private int topLeft = -1;
+	private int topRight = -1;
+	private int bottomLeft = -1;
+	private int bottomRight = -1;
 	
 	public SquareDiamond(int size){
-		super(size);
+		super((int)Math.pow(2,size)+1);
 	}
 	
 	public void apply()  {
@@ -30,10 +34,29 @@ public class SquareDiamond extends AlgorithmModel {
 		size = map.getSize();
 		stepSize = size-1;
 		
-		map.set(0, 0, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
-		map.set(size-1, 0, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
-		map.set(0, size-1, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
-		map.set(size-1, size-1, ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1));
+		if (topLeft == -1) {
+			map.set(0, 0, ThreadLocalRandom.current().nextInt(ZERO, MAX + 1));
+		} else {
+			map.set(0, 0, topLeft);
+		}
+		
+		if (topRight == -1) {
+			map.set(size-1, 0, ThreadLocalRandom.current().nextInt(ZERO, MAX + 1));
+		} else {
+			map.set(size-1, 0, topRight);
+		}
+		
+		if (bottomLeft == -1) {
+			map.set(0, size-1, ThreadLocalRandom.current().nextInt(ZERO, MAX + 1));
+		} else {
+			map.set(0, size-1, bottomLeft);
+		}
+		
+		if (bottomRight == -1) {
+			map.set(size-1, size-1, ThreadLocalRandom.current().nextInt(ZERO, MAX + 1));
+		} else {
+			map.set(size-1, size-1, bottomRight);
+		}
 		
 		while (stepSize>1) {
 			halfStepSize = stepSize/2;
@@ -103,8 +126,7 @@ public class SquareDiamond extends AlgorithmModel {
 				average = total / n;
 				rand = ThreadLocalRandom.current().nextInt(0, variance + 1) - variance /2;
 				map.set(i, j, average + rand);
-				pointDone++;
-				this.setProgress((double)(pointDone/((double)this.size*this.size)));
+				pointCalculated();
 			}
 		}
 	}
@@ -117,7 +139,12 @@ public class SquareDiamond extends AlgorithmModel {
 
 	@Override
 	public void setParameters(java.util.Map<String, String> parametersMap) {
-		// TODO Auto-generated method stub
+		super.setParameters(parametersMap);
+		this.variance = Integer.valueOf(parametersMap.get("variance"));
+		this.topLeft = Integer.valueOf(parametersMap.get("topLeft"));
+		this.topRight = Integer.valueOf(parametersMap.get("topRight"));
+		this.bottomLeft = Integer.valueOf(parametersMap.get("bottomLeft"));
+		this.bottomRight = Integer.valueOf(parametersMap.get("bottomRight"));
 		
 	}
 }

@@ -12,6 +12,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.input.KeyCodeCombination?>
@@ -77,23 +78,24 @@
       </MenuBar>
    </top>
    <left>
-    <AnchorPane prefHeight="521.0" prefWidth="240.0" style="-fx-background-color: #e7ecef; -fx-border-color: #dfdfdf; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+    <VBox fx:id="algorithm_vbox" prefHeight="521.0" prefWidth="210.0" style="-fx-background-color: #e7ecef; -fx-border-color: #dfdfdf; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
          <children>
             <MenuButton fx:id="main_menu_btn_algorithm_list" alignment="CENTER" layoutX="10.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Choose the algorithm" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#setRandomMenuItem" text="Random" />
                 <MenuItem mnemonicParsing="false" onAction="#setSquareDiamondMenuItem" text="SquareDiamond" />
+                  <MenuItem mnemonicParsing="false" onAction="#setHillMenuItem" text="Hill" />
               </items>
             </MenuButton>
-            <VBox fx:id="main_vbox_random" prefHeight="200.0" prefWidth="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+            <VBox fx:id="main_vbox_random" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label text="Size (px X px) :" />
+                  <Label text="Size (px) :" />
                   <HBox prefHeight="30.0" prefWidth="160.0">
                      <children>
-                        <TextField fx:id="random_vbox_text_field_size" text="50" />
+                        <TextField fx:id="random_vbox_text_field_size" prefWidth="100.0" text="50" />
                         <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 5000)">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="5.0" top="3.0" />
                            </HBox.margin>
                         </Text>
                      </children>
@@ -104,7 +106,7 @@
                         <TextField fx:id="random_vbox_text_field_min" maxWidth="-Infinity" prefWidth="100.0" text="0" />
                         <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="5.0" top="3.0" />
                            </HBox.margin>
                         </Text>
                      </children>
@@ -116,31 +118,135 @@
                         <TextField fx:id="random_vbox_text_field_max" maxWidth="-Infinity" prefWidth="100.0" text="255" />
                         <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" text="(max. 255)">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="5.0" top="3.0" />
                            </HBox.margin>
                         </Text>
                      </children>
                   </HBox>
                   <Slider fx:id="random_vbox_slider_max" blockIncrement="1.0" max="255.0" value="255.0" />
                </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </VBox>
-            <VBox fx:id="main_vbox_square_diamond" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+            <VBox fx:id="main_vbox_square_diamond" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label text="Size (2^size +1) :" />
-                  <TextField fx:id="square_diamond_vbox_size" maxWidth="-Infinity" prefWidth="100.0" />
-                  <Slider blockIncrement="1.0" max="255.0" showTickLabels="true" showTickMarks="true" />
-                  <Label text="Variance" />
-                  <TextField maxWidth="-Infinity" prefWidth="100.0" />
-                  <Slider />
-                  <Label text="Min" />
-                  <TextField maxWidth="-Infinity" prefWidth="100.0" />
-                  <Slider />
-                  <Label text="Max" />
-                  <TextField maxWidth="-Infinity" prefWidth="100.0" />
-                  <Slider />
+                  <Label fx:id="square_diamond_vbox_label_size" text="Size (2^size +1 px) :" />
+                  <HBox>
+                     <children>
+                        <TextField fx:id="square_diamond_vbox_text_field_size" maxWidth="-Infinity" prefWidth="100.0" text="5" />
+                        <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 12)">
+                           <HBox.margin>
+                              <Insets left="5.0" top="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <Slider fx:id="square_diamond_vbox_slider_size" blockIncrement="1.0" max="12.0" value="5.0" />
+                  <Label text="Variance :" />
+                  <HBox>
+                     <children>
+                        <TextField fx:id="square_diamond_vbox_text_field_variance" maxWidth="-Infinity" prefWidth="100.0" text="50" />
+                        <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
+                           <HBox.margin>
+                              <Insets left="5.0" top="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <Slider fx:id="square_diamond_vbox_slider_variance" blockIncrement="1.0" max="255.0" value="50.0" />
+                  <TitledPane expanded="false" text="Optionnal :">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Top Left Corner :" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="square_diamond_vbox_optionnal_text_field_top_left" maxWidth="-Infinity" prefWidth="100.0" text="50" />
+                                    <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="3.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <Slider fx:id="square_diamond_vbox_optionnal_slider_top_left" blockIncrement="1.0" max="255.0" value="50.0" />
+                              <Label text="Top Right Corner :" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="square_diamond_vbox_optionnal_text_field_top_right" maxWidth="-Infinity" prefWidth="100.0" text="100" />
+                                    <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="3.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <Slider fx:id="square_diamond_vbox_optionnal_slider_top_right" blockIncrement="1.0" max="255.0" value="100.0" />
+                              <Label text="Bottom Left Corner :" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="square_diamond_vbox_optionnal_text_field_bottom_left" maxWidth="-Infinity" prefWidth="100.0" text="150" />
+                                    <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="3.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <Slider fx:id="square_diamond_vbox_optionnal_slider_bottom_left" blockIncrement="1.0" max="255.0" value="150.0" />
+                              <Label text="Bottom Right Corner :" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="square_diamond_vbox_optionnal_text_field_bottom_right" maxWidth="-Infinity" prefWidth="100.0" text="200" />
+                                    <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 255)">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="3.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <Slider fx:id="square_diamond_vbox_optionnal_slider_bottom_right" blockIncrement="1.0" max="255.0" value="200.0" />
+                           </children>
+                        </VBox>
+                     </content>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </TitledPane>
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox fx:id="main_vbox_hill" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Size (px) :" />
+                  <HBox>
+                     <children>
+                        <TextField fx:id="hill_vbox_text_field_size" prefWidth="100.0" text="50" />
+                        <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="(max. 5000)">
+                           <HBox.margin>
+                              <Insets left="5.0" top="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <Label text="KRadius :" />
+                  <HBox>
+                     <children>
+                        <TextField fx:id="hill_vbox_text_field_kradius" prefWidth="100.0" text="0.2" />
+                     </children>
+                  </HBox>
+                  <Label text="Iteration(s) :" />
+                  <HBox>
+                     <children>
+                        <TextField fx:id="hill_vbox_text_field_iteration" prefWidth="100.0" promptText="0.2" text="50" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="90.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="350.0">
+            <VBox style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="350.0">
                <children>
                   <CheckBox fx:id="algorithm_vbox_check_box_reformat_image" mnemonicParsing="false" onAction="#onReformatImage" selected="true" text="Reformat Image" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
@@ -164,8 +270,20 @@
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
             </VBox>
-         </children></AnchorPane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></VBox>
    </left>
    <center>
       <ImageView fx:id="main_image_view_map" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
@@ -187,18 +305,18 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="104.5367202758789" />
-            <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="121.58196640014648" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="81.33673858642578" />
+            <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="108.78197860717773" />
             <Label fx:id="main_label_status" text="Status :">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin></Label>
-            <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="130.67423248291016">
+            <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="142.67423248291016">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Text>
-            <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="45.33673095703125">
+            <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="55.73669362068176">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
@@ -208,7 +326,7 @@
                   <Font size="12.0" />
                </font>
                <graphic>
-                  <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" progress="0.0">
+                  <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="282.0" progress="0.0">
                      <padding>
                         <Insets left="5.0" right="5.0" />
                      </padding></ProgressBar>
