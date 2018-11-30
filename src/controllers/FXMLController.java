@@ -16,6 +16,8 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -28,6 +30,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -455,6 +458,23 @@ public class FXMLController {
 		}), new KeyFrame(Duration.seconds(1))
 		);
 		timeline.setCycleCount(Animation.INDEFINITE);
+	}
+	
+	@FXML
+	private void showAlgorithmInfo(ActionEvent event) {
+		FlowPane root = new FlowPane();
+        root.setPadding(new Insets(10));
+        Text algorithm_info = new Text("In coming...");
+        root.getChildren().addAll(algorithm_info);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Algorithms's Informations");
+ 
+        stage.setWidth(400);
+        stage.setHeight(200);
+ 
+        stage.setScene(scene);
+        stage.show();
 	}
 	
 }
