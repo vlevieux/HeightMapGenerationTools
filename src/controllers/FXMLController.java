@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 
-import java.util.logging.*;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -187,9 +185,6 @@ public class FXMLController {
 	StringProperty algorithmName = new SimpleStringProperty();
 	AlgorithmModel algo;
 	
-	//Log
-	Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
-	
 	public void initialize() {
 		algorithm_vbox.getChildren().remove(main_vbox_random);
 		algorithm_vbox.getChildren().remove(main_vbox_square_diamond);
@@ -281,7 +276,8 @@ public class FXMLController {
 			    new EventHandler<WorkerStateEvent>() {
 			    @Override
 			    public void handle(WorkerStateEvent t) {
-			    	main_image_view_map.setImage(algo.getValue());
+			    	if (algo.getValue()!=null)
+			    		main_image_view_map.setImage(algo.getValue());
 			    	double height = main_image_view_map.getImage().getHeight();
 			    	double width = main_image_view_map.getImage().getWidth();
 			    	main_text_size.setText(String.format("%d x %dpx", (int)height, (int)width));
@@ -292,9 +288,13 @@ public class FXMLController {
 			    	main_text_status.setText("Done.");
 			    }
 			});
-		
+		algo.exceptionProperty().addListener((observable, oldValue, newValue) ->  {
+			if(newValue != null) {
+				this.cancel("Failed.");
+				Exception ex = (Exception) newValue;
+				ex.printStackTrace();
+			}});
 		//Run Algorithm
-		log("Running : "+algo.getValue());		
 		initializeTimeline();
 		Thread t = new Thread(algo);
 		timeline.play();
@@ -303,6 +303,10 @@ public class FXMLController {
 	
 	@FXML
     void cancelTask(ActionEvent event) {
+		this.cancel("Cancelled.");
+    }
+	
+	private void cancel(String msg) {
 		if (algo != null)
 			algo.cancel();
 		if (timeline != null)
@@ -310,8 +314,8 @@ public class FXMLController {
 		main_progress_bar_progress_bar.progressProperty().unbind();
 		main_progress_bar_progress_bar.setProgress(0.0);
 		main_text_status.textProperty().unbind();
-    	main_text_status.setText("Cancelled.");
-    }
+    	main_text_status.setText(msg);
+	}
 	
 	@FXML
     void setOnSave(ActionEvent event) {
@@ -558,25 +562,8 @@ public class FXMLController {
 	}
 	
 	@FXML
-    void showLogs(ActionEvent event) {
+    private void showLogs(ActionEvent event) {
 		new WatchFileChanges().start();
     }
-	
-	public void log(String msg) {
-		try {
-			Handler fh = new FileHandler(LoggerAlgorithm.fileLogName, true);
-			fh.setEncoding("UTF-8");
-			fh.setFormatter(new SimpleFormatter());
-			LOGGER.addHandler(fh);
-			LOGGER.log(Level.INFO, "test");
-			for(Handler h:LOGGER.getHandlers()){h.close();}
-			LOGGER.setUseParentHandlers(false);
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+		
 }

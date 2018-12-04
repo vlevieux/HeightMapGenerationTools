@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLController">
+<BorderPane minHeight="600.0" minWidth="830.0" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -67,7 +67,10 @@
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#showLogs" text="Show Logs" />
+                  <MenuItem mnemonicParsing="false" onAction="#showLogs" text="Show Logs">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F7" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -312,48 +315,73 @@
          </BorderPane.margin></ImageView>
    </center>
    <bottom>
-      <HBox fx:id="hbox_test" alignment="CENTER" prefHeight="33.0" prefWidth="780.0" style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/ic_size.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-            </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="81.33673858642578" HBox.hgrow="ALWAYS" />
-            <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="108.78197860717773" HBox.hgrow="ALWAYS" />
-            <Label fx:id="main_label_status" text="Status :" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin></Label>
-            <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="142.67423248291016" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-            </Text>
-            <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="55.73669362068176" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-            </Text>
-            <Button fx:id="main_button_cancel" mnemonicParsing="false" onAction="#cancelTask" text="Cancel">
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <graphic>
-                  <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="282.0" progress="0.0">
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding></ProgressBar>
-               </graphic>
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
+     <BorderPane prefHeight="29.0" prefWidth="830.0" style="-fx-border-color: #7f7f7f; -fx-border-width: 1 0 0 0;">
+        <left>
+           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <children>
+                 <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                       <Image url="@../images/ic_size.png" />
+                    </image>
+                    <HBox.margin>
+                       <Insets left="10.0" />
+                    </HBox.margin>
+                 </ImageView>
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="85.33673858642578" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                       <Insets left="5.0" />
+                    </HBox.margin>
+                 </Text>
+                 <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="108.78197860717773" HBox.hgrow="ALWAYS" />
+              </children>
+           </HBox>
+        </left>
+        <center>
+           <HBox alignment="CENTER" prefHeight="30.0" prefWidth="308.0" BorderPane.alignment="CENTER_LEFT">
+              <children>
+                 <Label fx:id="main_label_status" text="Status :" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                       <Insets left="5.0" right="5.0" />
+                    </HBox.margin>
+                 </Label>
+                 <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="142.67423248291016" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                       <Insets left="5.0" right="5.0" />
+                    </HBox.margin>
+                 </Text>
+                 <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="55.73669362068176" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                       <Insets left="5.0" right="5.0" />
+                    </HBox.margin>
+                 </Text>
+              </children>
+           </HBox>
+        </center>
+        <right>
+           <HBox prefHeight="30.0" prefWidth="298.0" BorderPane.alignment="CENTER">
+              <children>
+                 <Button fx:id="main_button_cancel" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelTask" prefHeight="26.0" prefWidth="257.0" text="Cancel" HBox.hgrow="ALWAYS">
+                    <font>
+                       <Font size="12.0" />
+                    </font>
+                    <graphic>
+                       <ProgressBar id="ProgressBar" fx:id="main_progress_bar_progress_bar" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="230.0" progress="0.0">
+                          <padding>
+                             <Insets left="5.0" right="5.0" />
+                          </padding>
+                       </ProgressBar>
+                    </graphic>
+                    <HBox.margin>
+                       <Insets left="5.0" right="5.0" />
+                    </HBox.margin>
+                 </Button>
+              </children>
+               <BorderPane.margin>
+                  <Insets bottom="1.0" top="2.0" />
+               </BorderPane.margin>
+           </HBox>
+        </right>
+     </BorderPane>
    </bottom>
    <right>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />

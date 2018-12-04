@@ -1,6 +1,14 @@
 package models.algorithms;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+import controllers.LoggerAlgorithm;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -15,6 +23,9 @@ public abstract class AlgorithmModel extends Task<Image> {
 	protected double progress;
 	
 	protected boolean reformat = true;
+	
+	//Log
+	Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
 	
 	AlgorithmModel(int size){
 		this.size = size;
@@ -76,8 +87,40 @@ public abstract class AlgorithmModel extends Task<Image> {
 	@Override
 	protected Image call() throws Exception {
 		updateMessage("In progress...");
+		this.log("Applying "+this+ String.format(" on a Map of size : %dx%d",this.size,this.size));
 		this.apply();
 		updateMessage("Displaying image...");
-		return this.generateImage();
+		Image img;
+		if (!this.isCancelled()) {	
+			img = this.generateImage();
+			this.log(String.format("Generated Image, size : %dx%dpx",(int)img.getHeight(),(int)img.getWidth()));
+			this.log("Success");
+			return img;
+		}
+		log("Task has been cancelled.");
+		return null;
+	}
+	
+	private void log(String msg) {
+		try {
+			//Uncomment to hide in Console.
+			//LOGGER.setUseParentHandlers(false);
+			Handler fh = new FileHandler(LoggerAlgorithm.fileLogName, true);
+			fh.setEncoding("UTF-8");
+			fh.setFormatter(new SimpleFormatter());
+			LOGGER.addHandler(fh);
+			LOGGER.log(Level.INFO, msg);
+			fh.close();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public String toString() {
+		return this.getClass().getName();
 	}
 }

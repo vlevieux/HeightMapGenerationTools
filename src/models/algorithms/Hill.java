@@ -16,6 +16,9 @@ public class Hill extends AlgorithmModel {
 	public void apply() {
 		this.maximum = (int)((double)this.size * this.kradius);
 		for (int i = 0; i<iter; i++) {
+			if (isCancelled()) {
+				break;
+			}
 			step();
 		}
 	}
@@ -26,6 +29,9 @@ public class Hill extends AlgorithmModel {
 		int radius = ThreadLocalRandom.current().nextInt(0, this.maximum);
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
+				if (isCancelled()) {
+					break;
+				}
 				double z = Math.pow(radius, 2) - (Math.pow(x-j, 2) + Math.pow(y-i, 2));
 				if (z>=0)
 					map.set(i, j, map.get(i, j)+z);

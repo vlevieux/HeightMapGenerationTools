@@ -1,0 +1,45 @@
+2018-12-04 00:39:24 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 50x50
+2018-12-04 00:39:24 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
+2018-12-04 00:39:24 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:39:57 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 500x500
+2018-12-04 00:40:01 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 500x500px
+2018-12-04 00:40:01 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:40:06 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 500x500
+2018-12-04 00:40:10 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 500x500px
+2018-12-04 00:40:10 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:40:28 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.SquareDiamond on a Map of size : 33x33
+2018-12-04 00:40:28 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 33x33px
+2018-12-04 00:40:28 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:40:33 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.SquareDiamond on a Map of size : 4097x4097
+2018-12-04 00:40:35 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 4097x4097px
+2018-12-04 00:40:35 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:40:39 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:40:42 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 00:40:42 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:42:28 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:42:31 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 00:42:31 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:43:41 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:43:44 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 00:43:44 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:45:50 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.SquareDiamond on a Map of size : 4097x4097
+2018-12-04 00:47:49 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.SquareDiamond on a Map of size : 4097x4097
+2018-12-04 00:55:39 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:55:44 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:55:46 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:55:49 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 00:55:49 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:56:45 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:56:45 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 00:56:50 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:56:51 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 00:56:52 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:56:53 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 00:56:54 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:56:57 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 00:56:57 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:56:57 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:57:00 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 00:57:00 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 00:57:01 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 00:57:01 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.

@@ -11,21 +11,21 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.stream.Collectors;
 
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class WatchFileChanges {
 
-    Path watchPath = Paths.get("D:/eclipse-java/workspace/HeightMapGenerationTools/log_algorithm.log");
+    Path watchPath = Paths.get(Paths.get("").toAbsolutePath().toString()+"\\log_algorithm.log");
 
     TextArea textArea;
 
     public void start() {
-
+    	System.out.println(watchPath);
         BorderPane root = new BorderPane();
 
         textArea = new TextArea();
@@ -35,6 +35,9 @@ public class WatchFileChanges {
 
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("Algorithm Logs");
+        stage.setResizable(true);
+        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
         stage.show();
 
         // load file initally
@@ -75,7 +78,6 @@ public class WatchFileChanges {
             try {
 
                 WatchService watcher = FileSystems.getDefault().newWatchService();
-                System.out.println(watchPath.getParent());
                 WatchKey key = watchPath.getParent().register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY);
 
                 while (true) {
@@ -95,7 +97,8 @@ public class WatchFileChanges {
                             continue;
                         }
 
-                        WatchEvent<Path> ev = (WatchEvent<Path>) event;
+                        @SuppressWarnings("unchecked")
+						WatchEvent<Path> ev = (WatchEvent<Path>) event;
 
                         Path path = ev.context();
 
