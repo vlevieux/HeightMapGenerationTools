@@ -91,7 +91,7 @@
    <bottom>
       <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Realised by Clément Deltel &amp; Victor LEVIEUX in 2018.">
+            <Text fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Realised by Clément DELTEL &amp; Victor LEVIEUX in 2018.">
                <HBox.margin>
                   <Insets left="20.0" top="1.0" />
                </HBox.margin>
