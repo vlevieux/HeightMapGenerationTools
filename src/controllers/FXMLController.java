@@ -1,18 +1,25 @@
 package controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
+
+import java.util.logging.*;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,9 +38,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.algorithms.AlgorithmModel;
@@ -124,7 +133,13 @@ public class FXMLController {
 	private TextField hill_vbox_text_field_size;
 	
 	@FXML
-	private TextField hill_vbox_text_field_kradius;
+	private TextField hill_vbox_text_field_kradius_numerator;
+	
+	@FXML
+	private TextField hill_vbox_text_field_kradius_denomitator;
+	
+	@FXML
+	private Text hill_vbox_text_kradius_ratio;
 	
 	@FXML
 	private TextField hill_vbox_text_field_iteration;
@@ -162,12 +177,18 @@ public class FXMLController {
 	@FXML
 	private ProgressBar main_progress_bar_progress_bar;
 	
+	@FXML
+	private HBox hbox_test;
+	
 	DateFormat timeFormat = new SimpleDateFormat("mm:ss");
 	Timeline timeline;
 	
 	//Algorithm Info
 	StringProperty algorithmName = new SimpleStringProperty();
 	AlgorithmModel algo;
+	
+	//Log
+	Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
 	
 	public void initialize() {
 		algorithm_vbox.getChildren().remove(main_vbox_random);
@@ -179,7 +200,7 @@ public class FXMLController {
 		setNumericFieldLinkToSlider(random_vbox_text_field_min, random_vbox_slider_min, (int)random_vbox_slider_min.getMax());
 		setNumericFieldLinkToSlider(random_vbox_text_field_max, random_vbox_slider_max, (int)random_vbox_slider_max.getMax());
 		
-		setNumericFieldLinkToSlider(square_diamond_vbox_text_field_size, square_diamond_vbox_slider_size, square_diamond_vbox_label_size, (int)square_diamond_vbox_slider_size.getMax());
+		setNumericFieldLinkToSliderAndLabel(square_diamond_vbox_text_field_size, square_diamond_vbox_slider_size, square_diamond_vbox_label_size, (int)square_diamond_vbox_slider_size.getMax());
 		setNumericFieldLinkToSlider(square_diamond_vbox_text_field_variance,square_diamond_vbox_slider_variance,(int)square_diamond_vbox_slider_variance.getMax());
 		setNumericFieldLinkToSlider(square_diamond_vbox_optionnal_text_field_top_left, square_diamond_vbox_optionnal_slider_top_left, (int)square_diamond_vbox_optionnal_slider_top_left.getMax());
 		setNumericFieldLinkToSlider(square_diamond_vbox_optionnal_text_field_top_right, square_diamond_vbox_optionnal_slider_top_right, (int)square_diamond_vbox_optionnal_slider_top_right.getMax());
@@ -187,12 +208,16 @@ public class FXMLController {
 		setNumericFieldLinkToSlider(square_diamond_vbox_optionnal_text_field_bottom_right, square_diamond_vbox_optionnal_slider_bottom_right, (int)square_diamond_vbox_optionnal_slider_bottom_right.getMax());
 		
 		setNumericField(hill_vbox_text_field_size, 5000);
-		setDoubleField(hill_vbox_text_field_kradius, 100000);
+		setNumericFieldRatio(hill_vbox_text_field_kradius_numerator, hill_vbox_text_field_kradius_denomitator, hill_vbox_text_kradius_ratio, 10000);
 		setNumericField(hill_vbox_text_field_iteration, 100000);
     }
 	
 	@FXML
     void menuRun(ActionEvent event) {
+		if (algo != null) {
+			if (algo.isRunning())
+				return;
+		}
 		int size = 0;
 		Map <String, String> hm = new HashMap<String, String>();
 		hm.clear();
@@ -232,8 +257,14 @@ public class FXMLController {
 					alertDialog("Error in parameters", "Argument size cannot be 0.", "To generate a Map, you must enter a positive integer in the size field.", AlertType.ERROR);
 					return;
 				}
-				algo = new Hill(20);
-				hm.put("kradius", hill_vbox_text_field_kradius.getText());
+				int kradius_denominator = Integer.valueOf(hill_vbox_text_field_kradius_denomitator.getText());
+				if (kradius_denominator == 0) {
+					alertDialog("Error in parameters", "Argument kradius cannot be 0.", "Impossible to divide by 0.", AlertType.ERROR);
+					return;
+				}
+				algo = new Hill(size);
+				double kradius = Integer.valueOf(hill_vbox_text_field_kradius_numerator.getText())/(double)Integer.valueOf(hill_vbox_text_field_kradius_denomitator.getText());
+				hm.put("kradius", String.valueOf(kradius));
 				hm.put("iteration", hill_vbox_text_field_iteration.getText());
 				break;
 			default:
@@ -263,6 +294,7 @@ public class FXMLController {
 			});
 		
 		//Run Algorithm
+		log("Running : "+algo.getValue());		
 		initializeTimeline();
 		Thread t = new Thread(algo);
 		timeline.play();
@@ -279,6 +311,31 @@ public class FXMLController {
 		main_progress_bar_progress_bar.setProgress(0.0);
 		main_text_status.textProperty().unbind();
     	main_text_status.setText("Cancelled.");
+    }
+	
+	@FXML
+    void setOnSave(ActionEvent event) {
+		Image img = main_image_view_map.getImage();
+		FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+        	String fileName = file.getName();
+        	String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1, file.getName().length());
+        	try {
+    			ImageIO.write(SwingFXUtils.fromFXImage(img, null),  fileExtension, file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+    }
+	
+	@FXML
+    void setOnClose(ActionEvent event) {
+		Platform.exit();
     }
 	
 	@FXML
@@ -342,28 +399,6 @@ public class FXMLController {
 		algorithm_vbox.getChildren().add(1, a);
 	}
 	
-	// TODO: Problem if it is 0.0
-	private void setDoubleField(TextField tf, int maxValue) {
-		tf.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*.\\d*|\\d*")) {
-		        	newValue = newValue.replaceAll("[^\\d*.\\d|\\d]", "");
-		        	tf.setText(String.valueOf(newValue));
-		        }
-		        if (!newValue.equals("")) {
-		        	double value = Double.valueOf(newValue);
-			        if (value <= maxValue) {
-			        	tf.setText(String.valueOf(value));
-			        } else {
-			        	tf.setText(oldValue);
-			        }
-		        }
-		    }
-		});
-	}
-	
 	private void setNumericField(TextField tf, int maxValue) {
 		tf.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
@@ -379,6 +414,53 @@ public class FXMLController {
 			        	tf.setText(String.valueOf(value));
 			        } else {
 			        	tf.setText(oldValue);
+			        }
+		        }
+		    }
+		});
+	}
+	
+	private void setNumericFieldRatio(TextField tfn, TextField tfd, Text t, int maxValue) {
+		tfn.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue = newValue.replaceAll("[^\\d]", "");
+		        	tfn.setText(String.valueOf(newValue));
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= maxValue) {
+			        	tfn.setText(String.valueOf(value));
+			        	if (!tfd.getText().equals(""))
+			        		t.setText(String.valueOf(value/(double)Integer.valueOf(tfd.getText())));
+			        } else {
+			        	tfn.setText(oldValue);
+			        	if (!tfd.getText().equals(""))
+			        		t.setText(String.valueOf(Integer.valueOf(oldValue)/(double)Integer.valueOf(tfd.getText())));
+			        }
+		        }
+		    }
+		});
+		tfd.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	newValue = newValue.replaceAll("[^\\d]", "");
+		        	tfd.setText(String.valueOf(newValue));
+		        }
+		        if (!newValue.equals("")) {
+		        	int value = Integer.valueOf(newValue);
+			        if (value <= maxValue) {
+			        	tfd.setText(String.valueOf(value));
+			        	if (!tfn.getText().equals(""))
+			        		t.setText(String.valueOf(Integer.valueOf(tfn.getText())/(double)value));
+			        } else {
+			        	tfd.setText(oldValue);
+			        	if (!tfn.getText().equals(""))
+			        		t.setText(String.valueOf(Integer.valueOf(tfn.getText())/(double)Integer.valueOf(oldValue)));
 			        }
 		        }
 		    }
@@ -415,7 +497,7 @@ public class FXMLController {
 		});
 	}
 	
-	private void setNumericFieldLinkToSlider(TextField tf, Slider s, Label l, int maxValue) {
+	private void setNumericFieldLinkToSliderAndLabel(TextField tf, Slider s, Label l, int maxValue) {
 		tf.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
@@ -469,12 +551,32 @@ public class FXMLController {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle("Algorithms's Informations");
- 
         stage.setWidth(400);
         stage.setHeight(200);
- 
         stage.setScene(scene);
         stage.show();
 	}
 	
+	@FXML
+    void showLogs(ActionEvent event) {
+		new WatchFileChanges().start();
+    }
+	
+	public void log(String msg) {
+		try {
+			Handler fh = new FileHandler(LoggerAlgorithm.fileLogName, true);
+			fh.setEncoding("UTF-8");
+			fh.setFormatter(new SimpleFormatter());
+			LOGGER.addHandler(fh);
+			LOGGER.log(Level.INFO, "test");
+			for(Handler h:LOGGER.getHandlers()){h.close();}
+			LOGGER.setUseParentHandlers(false);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

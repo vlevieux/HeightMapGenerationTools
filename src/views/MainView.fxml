@@ -29,14 +29,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Save...">
+                  <MenuItem mnemonicParsing="false" onAction="#setOnSave" text="Save...">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Clear" />
-              <MenuItem mnemonicParsing="false" text="Close">
+              <MenuItem mnemonicParsing="false" onAction="#setOnClose" text="Close">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
@@ -67,11 +66,14 @@
                         <KeyCodeCombination alt="UP" code="F6" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#showLogs" text="Show Logs" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#showAlgorithmInfo" text="Algorithm's Info..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -239,7 +241,18 @@
                   <Label text="KRadius :" />
                   <HBox>
                      <children>
-                        <TextField fx:id="hill_vbox_text_field_kradius" prefWidth="100.0" text="0.2" />
+                        <TextField fx:id="hill_vbox_text_field_kradius_numerator" prefHeight="26.0" prefWidth="45.0" text="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                           <HBox.margin>
+                              <Insets left="2.0" right="2.0" top="5.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextField fx:id="hill_vbox_text_field_kradius_denomitator" prefHeight="26.0" prefWidth="44.0" text="5" />
+                        <Text fx:id="hill_vbox_text_kradius_ratio" strokeType="OUTSIDE" strokeWidth="0.0" text="0.2">
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Text>
                      </children>
                   </HBox>
                   <Label text="Iteration(s) :" />
@@ -299,7 +312,7 @@
          </BorderPane.margin></ImageView>
    </center>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="33.0" prefWidth="780.0" style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
+      <HBox fx:id="hbox_test" alignment="CENTER" prefHeight="33.0" prefWidth="780.0" style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -309,18 +322,18 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="81.33673858642578" />
-            <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="108.78197860717773" />
-            <Label fx:id="main_label_status" text="Status :">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Size :" wrappingWidth="81.33673858642578" HBox.hgrow="ALWAYS" />
+            <Text fx:id="main_text_size" strokeType="OUTSIDE" strokeWidth="0.0" text="0 x 0px" wrappingWidth="108.78197860717773" HBox.hgrow="ALWAYS" />
+            <Label fx:id="main_label_status" text="Status :" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin></Label>
-            <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="142.67423248291016">
+            <Text fx:id="main_text_status" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="142.67423248291016" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Text>
-            <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="55.73669362068176">
+            <Text fx:id="main_text_time" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="55.73669362068176" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
