@@ -148,24 +148,6 @@ public class DaoModel {
 	}
 
 	/**
-	 * RETRIEVE DATA METHOD
-	 * This method will return a ResultSet object used for creating output. 
-	 * The result set contains data including the algorithm name, the height and width of the map, but also the map parameters.
-	 */ 
-	public ResultSet retrieveMapParameters(String mapId) {
-		ResultSet rs = null;
-		try {
-			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT Algorithm_name, Height, Width, Map_parameters from HEIGHTMAP_PARAMETERS WHERE Map_id="+mapId;
-			rs = stmt.executeQuery(sql);
-			DBConnectionManager.getConnection().close();
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}
-		return rs;
-	}
-	
-	/**
 	 * DELETE MAP METHOD
 	 * This function allow the user to delete the last generated map from the database
 	 */
@@ -186,6 +168,57 @@ public class DaoModel {
 		catch (SQLException se) { // Handle errors for JDBC
 			se.printStackTrace();
 		}
+	}
+	
+	/**
+	 * RETRIEVE DATA METHOD
+	 * This method will return a ResultSet object used for creating output. 
+	 * The result set contains data including the algorithm name, the height and width of the map, but also the map parameters.
+	 */ 
+	public ResultSet retrieveMapParameters(String mapId) {
+		ResultSet rs = null;
+		try {
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "SELECT Algorithm_name, Height, Width, Map_parameters FROM HEIGHTMAP_PARAMETERS WHERE Map_id="+mapId;
+			rs = stmt.executeQuery(sql);
+			DBConnectionManager.getConnection().close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return rs;
+	}
+	/**
+	 * RETRIEVE FULL TABLES METHOD
+	 * This function all the data from the two first table in order to display
+	 */
+	public ResultSet retrieveFullMapParameters() {
+		ResultSet rs = null;
+
+		try {
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "SELECT Map_id, Algorithm_name, Height, Width, Map_parameters, Dt FROM HEIGHTMAP_PARAMETERS";
+			rs = stmt.executeQuery(sql);
+			
+			DBConnectionManager.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public ResultSet retrieveFullMapStatistics() {
+		ResultSet rs = null;
+
+		try {
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "SELECT Stat_id, Algorithm_name, Max_value, Min_value, Average_value, Median_value, Height_histogram, Dt FROM HEIGHTMAP_STATISTICS";
+			rs = stmt.executeQuery(sql);
+			
+			DBConnectionManager.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 	/**
