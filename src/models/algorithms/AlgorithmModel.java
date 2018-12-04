@@ -11,7 +11,7 @@ public abstract class AlgorithmModel extends Task<Image> {
 	protected Map map;
 	protected int size;
 	
-	protected int pointDone = 0;
+	protected double pointDone = 0;
 	protected double progress;
 	
 	protected boolean reformat = true;

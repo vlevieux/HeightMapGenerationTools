@@ -10,8 +10,6 @@ public class Hill extends AlgorithmModel {
 	
 	public Hill(int size) {
 		super(size);
-		this.kradius = 1.0/5.0;
-		this.iter = 50;
 	}
 
 	@Override

@@ -38,7 +38,6 @@ public class FXMLLicenseController {
     	} else {
     		license_text_error_message.setText("The license you have entered does not match the license format.");
     	}
-    	
     }
     
     private void close() {
@@ -53,6 +52,7 @@ public class FXMLLicenseController {
 			Scene scene = new Scene(root);
 	        Stage stage = s;
 	        stage.setTitle("Height Map Generation Tool");
+	        stage.setResizable(true);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
 	        stage.show();
