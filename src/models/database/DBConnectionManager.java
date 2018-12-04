@@ -23,6 +23,9 @@ public class DBConnectionManager {
 	private static final String USERNAME = "fpuser"; 
 	private static final String PASSWORD = "510";
 
+	/*
+	 * Method to established connection with the database.
+	 */
     public static Connection getConnection() {
         try {
             Class.forName(driverName);
