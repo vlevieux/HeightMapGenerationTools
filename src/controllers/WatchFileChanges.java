@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class WatchFileChanges {
 
-    Path watchPath = Paths.get(Paths.get("").toAbsolutePath().toString()+"\\log_algorithm.log");
+    Path watchPath = Paths.get(Paths.get("").toAbsolutePath().toString()+"/log_algorithm.log");
 
     TextArea textArea;
 

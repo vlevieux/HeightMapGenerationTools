@@ -6,3 +6,15 @@
 2018-12-04 21:02:59 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
 2018-12-04 21:03:02 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
 2018-12-04 21:03:02 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 21:13:07 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 21:14:24 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 21:14:24 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 21:14:46 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 50x50
+2018-12-04 21:14:46 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
+2018-12-04 21:14:46 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 21:14:47 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 50x50
+2018-12-04 21:14:47 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
+2018-12-04 21:14:47 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 21:14:59 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 50x50
+2018-12-04 21:14:59 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
+2018-12-04 21:14:59 INFOS  models.algorithms.AlgorithmModel log Success
