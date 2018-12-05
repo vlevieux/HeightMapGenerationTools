@@ -56,6 +56,9 @@ public class FXMLController {
 	// Naming Convention where_what_why
 	
 	@FXML
+	private MenuItem main_menu_file_save;
+	
+	@FXML
     private MenuItem main_menu_run_run;
 	
 	@FXML
@@ -293,8 +296,10 @@ public class FXMLController {
 			    new EventHandler<WorkerStateEvent>() {
 			    @Override
 			    public void handle(WorkerStateEvent t) {
-			    	if (algo.getValue()!=null)
+			    	if (algo.getValue()!=null) {
 			    		main_image_view_map.setImage(algo.getValue());
+			    		main_menu_file_save.setDisable(false);
+			    	}
 			    	double height = main_image_view_map.getImage().getHeight();
 			    	double width = main_image_view_map.getImage().getWidth();
 			    	main_text_size.setText(String.format("%d x %dpx", (int)height, (int)width));
@@ -314,6 +319,7 @@ public class FXMLController {
 				ex.printStackTrace();
 			}});
 		main_menu_database_store.setDisable(true);
+		main_menu_file_save.setDisable(true);
 		//Run Algorithm
 		initializeTimeline();
 		Thread t = new Thread(algo);
@@ -396,6 +402,7 @@ public class FXMLController {
 
 	@FXML
     private void deleteImage(ActionEvent event) {
+		main_menu_file_save.setDisable(true);
 		main_image_view_map.setImage(null);
     }
 	/**
