@@ -161,6 +161,8 @@ public class DaoModel {
 			// Last map deletion
 			String sql = "DELETE FROM HEIGHTMAP_PARAMETERS WHERE Map_id=(SELECT MAX(Map_id) FROM HEIGHTMAP_PARAMETERS)";
 			stmt.executeUpdate(sql);
+			sql = "DELETE FROM HEIGHTMAP_STATISTICS WHERE Map_id=(SELECT MAX(Map_id) FROM HEIGHTMAP_STATISTICS)";
+			stmt.executeUpdate(sql);
 			System.out.println("Last Map deleted successfully...");
 			
 			DBConnectionManager.getConnection().close(); // Close database connection 

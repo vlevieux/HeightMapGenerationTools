@@ -112,10 +112,8 @@ public abstract class AlgorithmModel extends Task<Image> {
 			LOGGER.log(Level.INFO, msg);
 			fh.close();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

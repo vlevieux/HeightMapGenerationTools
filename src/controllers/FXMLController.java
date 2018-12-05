@@ -346,7 +346,6 @@ public class FXMLController {
         	try {
     			ImageIO.write(SwingFXUtils.fromFXImage(img, null),  fileExtension, file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
