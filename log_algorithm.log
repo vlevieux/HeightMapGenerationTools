@@ -18,3 +18,6 @@
 2018-12-04 21:14:59 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 50x50
 2018-12-04 21:14:59 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
 2018-12-04 21:14:59 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 21:37:51 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 50x50
+2018-12-04 21:37:51 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
+2018-12-04 21:37:51 INFOS  models.algorithms.AlgorithmModel log Success
