@@ -93,7 +93,7 @@ public class DaoModel {
 					"Height BIGINT(18), " + 
 					"Width BIGINT(18), " +
 					"Map_parameters JSON, " +
-					"Dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, " +
+					"Dt DATE DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, " +
 					"PRIMARY KEY (Map_id))";
 			// Execute create query
 			stmt.executeUpdate(sql);
