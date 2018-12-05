@@ -15,6 +15,7 @@ public class Main extends Application {
 	public void start(Stage stage) {
 		setupLogger();
 		try {
+			checkTable();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
 			Parent root = (Parent) loader.load();
             Scene scene = new Scene(root);
@@ -47,7 +48,7 @@ public class Main extends Application {
 	// TODO: C. Deltel check Table existe
 	private void checkTable() {
 		//int table1 = checkExistingTable(HEIGHTMAP_PARAMETERS);
-		//int table2 = checkExistingTable(HEIGHTMAP_STATISTICS);
+		//int table2 = DaoModel.checkExistingTable(HEIGHTMAP_STATISTICS);
 		
 	}
 
