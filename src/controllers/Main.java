@@ -14,6 +14,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) {
+		//checkTable();
 		setupLogger();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
@@ -80,15 +81,12 @@ public class Main extends Application {
 					switch(tableNumber) {
 					case 0:
 						DaoModel.deleteTableMapParameters();
-						DaoModel.createTableMapParameters();
 						break;
 					case 1:
 						DaoModel.deleteTableMapStatistics();
-						DaoModel.createTableMapStatistics();
 						break;
 					case 2:
 						DaoModel.deleteTableLicenses();
-						DaoModel.createTableLicenses();
 						DaoModel.insertTableLicenses();
 						break;	
 				}

@@ -294,7 +294,7 @@ public class DaoModel {
 		return rs;
 	}
 	
-	public ResultSet retrieveLicense(String licenseNumber) {
+	public static ResultSet retrieveLicense(String licenseNumber) {
 		ResultSet rs = null;
 		try {
 			// Database connection

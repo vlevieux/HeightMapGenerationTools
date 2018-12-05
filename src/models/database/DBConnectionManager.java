@@ -18,10 +18,10 @@ public class DBConnectionManager {
 	private static String driverName = "com.mysql.jdbc.Driver";
 	private static Connection con;
 	// Code database URL
-	private static final String DB_URL = "jdbc:mysql://www.papademas.net:3307/fp510?autoReconnect=true&useSSL=false";
+	//private static final String DB_URL = "jdbc:mysql://www.papademas.net:3307/fp510?autoReconnect=true&useSSL=false";
 	// Database credentials
-	private static final String USERNAME = "fpuser"; 
-	private static final String PASSWORD = "510";
+	//private static final String USERNAME = "fpuser"; 
+	//private static final String PASSWORD = "510";
 
 	/*
 	 * Method to established connection with the database.
@@ -30,7 +30,9 @@ public class DBConnectionManager {
         try {
             Class.forName(driverName);
             try {
-                con = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            	Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+    			con = DriverManager.getConnection("jdbc:derby:testdb1;create=true");
+                //con = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             } catch (SQLException ex) {
             	System.out.println("Failed to create the database connection."); 
             	ex.printStackTrace();

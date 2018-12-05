@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.database.DaoModel;
 
 public class FXMLLicenseController {
 
@@ -65,6 +67,16 @@ public class FXMLLicenseController {
     
     // TODO: C. check license return true if license is ok, false is not.
     private boolean checkLicense(String license) {
+    	/*
+    	ResultSet rs = DaoModel.retrieveLicense(license);
+    	if (rs.first()) {
+    		return true
+    	}
+    	else {
+    		return false
+    	}
+    	*/
     	return Arrays.asList(validLicenses).contains(license);
+    	
     }
 }
