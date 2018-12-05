@@ -15,23 +15,17 @@ import java.sql.SQLException;
 
 public class DBConnectionManager {
 	
-	private static String driverName = "com.mysql.jdbc.Driver";
+	private static String driverName = "org.apache.derby.jdbc.EmbeddedDriver";
 	private static Connection con;
-	// Code database URL
-	//private static final String DB_URL = "jdbc:mysql://www.papademas.net:3307/fp510?autoReconnect=true&useSSL=false";
-	// Database credentials
-	//private static final String USERNAME = "fpuser"; 
-	//private static final String PASSWORD = "510";
 
 	/*
 	 * Method to established connection with the database.
 	 */
     public static Connection getConnection() {
         try {
-            Class.forName(driverName);
+        	Class.forName(driverName);
             try {
-            	Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-    			con = DriverManager.getConnection("jdbc:derby:testdb1;create=true");
+    			con = DriverManager.getConnection("jdbc:derby:heightmapdb;create=true");
                 //con = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             } catch (SQLException ex) {
             	System.out.println("Failed to create the database connection."); 

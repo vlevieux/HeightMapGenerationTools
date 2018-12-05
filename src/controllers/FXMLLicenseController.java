@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,16 +68,19 @@ public class FXMLLicenseController {
     
     // TODO: C. check license return true if license is ok, false is not.
     private boolean checkLicense(String license) {
-    	/*
     	ResultSet rs = DaoModel.retrieveLicense(license);
-    	if (rs.first()) {
-    		return true
-    	}
-    	else {
-    		return false
-    	}
-    	*/
-    	return Arrays.asList(validLicenses).contains(license);
+    	try {
+			if (rs.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return false;
+    	//return Arrays.asList(validLicenses).contains(license);
     	
     }
 }

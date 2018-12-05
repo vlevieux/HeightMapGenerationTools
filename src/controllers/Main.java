@@ -14,7 +14,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) {
-		//checkTable();
+		checkTable();
 		setupLogger();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
