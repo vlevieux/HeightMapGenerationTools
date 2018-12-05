@@ -30,7 +30,7 @@ public class WatchFileChanges {
     WatchFileChanges(Path p){
     	this.watchPath = p;
     	if (System.getProperty("os.name").contains("Linux")) {
-    		FXMLController.alertDialog("Feature not supported", "This feature is not supported yet.", "It seems that you are currently using a Linux machine that does not support this feature yet.\n\nOur team is actually working on its implementation.", AlertType.CONFIRMATION);
+    		FXMLController.alertDialog("Feature not supported", "This feature is not supported yet.", "It seems that you are currently using a Linux machine that does not support this feature yet.\n\nOur team is actually working on its implementation.", AlertType.INFORMATION);
     	}
     	NOT_SUPPORTED_WATCH_FILE = System.getProperty("os.name").contains("Linux");
     }
