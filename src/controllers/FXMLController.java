@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -606,7 +608,8 @@ public class FXMLController {
 	
 	@FXML
     private void showLogs(ActionEvent event) {
-		new WatchFileChanges().start();
+		Path watchPath = Paths.get(Paths.get("").toAbsolutePath().toString()+"\\"+LoggerAlgorithm.fileLogName);
+		new WatchFileChanges(watchPath).start();
     }
 		
 }

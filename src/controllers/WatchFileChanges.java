@@ -24,8 +24,11 @@ public class WatchFileChanges {
 
     TextArea textArea;
 
+    WatchFileChanges(Path p){
+    	this.watchPath = p;
+    }
+    
     public void start() {
-    	System.out.println(watchPath);
         BorderPane root = new BorderPane();
 
         textArea = new TextArea();
@@ -35,7 +38,7 @@ public class WatchFileChanges {
 
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Algorithm Logs");
+        stage.setTitle("Algorithm Logs ("+ watchPath +")");
         stage.setResizable(true);
         stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
         stage.show();
@@ -58,6 +61,7 @@ public class WatchFileChanges {
 
             String stringFromFile = Files.lines(watchPath).collect(Collectors.joining("\n"));
             textArea.setText(stringFromFile);
+            textArea.setScrollTop(Double.MAX_VALUE);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -88,12 +88,13 @@ public abstract class AlgorithmModel extends Task<Image> {
 		updateMessage("In progress...");
 		this.log("Applying "+this+ String.format(" on a Map of size : %dx%d",this.size,this.size));
 		this.apply();
-		updateMessage("Displaying image...");
+		updateMessage("Generating image...");
 		Image img;
 		if (!this.isCancelled()) {	
 			img = this.generateImage();
 			this.log(String.format("Generated Image, size : %dx%dpx",(int)img.getHeight(),(int)img.getWidth()));
 			this.log("Success");
+			updateMessage("Displaying image...");
 			return img;
 		}
 		log("Task has been cancelled.");
