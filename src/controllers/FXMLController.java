@@ -400,7 +400,7 @@ public class FXMLController {
 	 * @param content (String) Content of the Alert Dialog
 	 * @param type (AlertType) AlertType.INFORMATION, AlerType.ERROR, ...
 	 */
-	private void alertDialog(String title, String header, String content, AlertType type) {
+	public static void alertDialog(String title, String header, String content, AlertType type) {
 		Alert alert = new Alert(type);
 		alert.setTitle(title);
 		alert.setHeaderText(header);
