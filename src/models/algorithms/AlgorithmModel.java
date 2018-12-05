@@ -116,17 +116,27 @@ public abstract class AlgorithmModel extends Task<Image> {
 			this.statistics.put("median", String.valueOf(this.map.getMedian()));
 	}
 	
+	protected String prettyStatistics() {
+		String s ="";
+		for (String key : this.statistics.keySet())
+			s += key + " : " + this.statistics.get(key)+ ", ";
+		s = s.substring(0, s.length()-2);
+		return s;
+	}
+	
 	@Override
 	protected Image call() throws Exception {
 		updateMessage("In progress...");
 		this.log("Applying "+this+ String.format(" on a Map of size : %dx%d",this.size,this.size));
 		this.apply();
 		updateMessage("Calculating statistics...");
-		if (!this.isCancelled()) 
+		if (!this.isCancelled())
 			calculateStatistics();
-		updateMessage("Generating image...");
+		if (!this.isCancelled())
+			this.log("Statistics : "+this.prettyStatistics());
 		Image img;
-		if (!this.isCancelled()) {	
+		if (!this.isCancelled()) {
+			updateMessage("Generating image...");
 			img = this.generateImage();
 			this.log(String.format("Generated Image, size : %dx%dpx",(int)img.getHeight(),(int)img.getWidth()));
 			this.log("Success");

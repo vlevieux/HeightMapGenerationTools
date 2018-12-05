@@ -20,7 +20,13 @@ public class DaoModel {
 	static Statement stmt = null;
 	
 	/**
-	 * CHECK EXISTING TABLE METHOD
+	 * Check if table exists and return the following error code :
+	 * 	-1 : should not happen,
+	 * 	 1 : table does not exist
+	 * 	 2 : table exists and is empty
+	 *   3 : table exists and is not empty
+	 * @param tableName Name of table
+	 * @return Error Code
 	 */
 	public static int checkExistingTable(String tableName) {
 		try {
@@ -68,7 +74,7 @@ public class DaoModel {
 		catch (SQLException se) { // Handle errors for JDBC
 			se.printStackTrace();
 		}
-		return 0;
+		return -1;
 	}
 
 	/**
