@@ -84,7 +84,7 @@ public class SquareDiamond extends AlgorithmModel {
 				average = (topLeft + topRight + botLeft + botRight)/4;
 				rand = ThreadLocalRandom.current().nextInt(0, variance + 1) - variance /2;
 				map.set(i + halfStepSize, j + halfStepSize, average + rand);
-				pointCalculated();
+				pointCalculated((this.size*this.size)-4);
 			}
 		}
 	}
@@ -126,7 +126,7 @@ public class SquareDiamond extends AlgorithmModel {
 				average = total / n;
 				rand = ThreadLocalRandom.current().nextInt(0, variance + 1) - variance /2;
 				map.set(i, j, average + rand);
-				pointCalculated();
+				pointCalculated((this.size*this.size)-4);
 			}
 		}
 	}
