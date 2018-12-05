@@ -14,17 +14,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.beans.property.StringProperty;
+
 public class DaoModel {
 	//Declare DB objects 
 	DBConnectionManager con = null;
-	Statement stmt = null;
+	static Statement stmt = null;
 	
 	/**
 	 * CHECK EXISTING TABLE METHOD
 	 */
-	public int checkExistingTable(String tableName) {
+	public static int checkExistingTable(String tableName) {
 		try {
-
 			// Open a connection
 			System.out.println("Connecting to database...");
 			DBConnectionManager.getConnection();
@@ -73,10 +74,10 @@ public class DaoModel {
 	}
 
 	/**
-	 * CREATE TABLES METHOD
-	 * This function perform the creation of the two tables about the map.
+	 * CREATE TABLE HEIGHTMAP_PARAMETERS METHOD
+	 * This function perform the creation of the first table about the map.
 	 */
-	public void createTablesMap() {
+	public static void createTableMapParameters() {
 		try {
 
 			System.out.println("Creating tables in given database...");
@@ -93,15 +94,33 @@ public class DaoModel {
 			// Execute create query
 			stmt.executeUpdate(sql);
 			System.out.println("First Table created successfully...");
+
+			// Close database connection 
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) { // Handle errors for JDBC
+			se.printStackTrace();
+		}
+	}
+	
+	/**
+	 * CREATE TABLE HEIGHTMAP_STATISTICS METHOD
+	 * This function perform the creation of the second table about the map.
+	 */
+	public static void createTableMapStatistics() {
+		try {
+
+			System.out.println("Creating tables in given database...");
+			stmt = DBConnectionManager.getConnection().createStatement();
 			
 			// Second table for the map statistics
-			sql = "CREATE TABLE HEIGHTMAP_STATISTICS (" + 
+			String sql = "CREATE TABLE HEIGHTMAP_STATISTICS (" + 
 					"Stat_id INTEGER not NULL AUTO_INCREMENT, " + 
 					"Algorithm_name VARCHAR(50), " +
 					"Max_value SMALLINT(4) UNSIGNED, " + 
 					"Min_value SMALLINT(4) UNSIGNED, " +
-					"Average_value FLOAT(6,2), " +
-					"Median_value FLOAT(6,2), " +
+					"Average_value DOUBLE(6,2), " +
+					"Median_value SMALLINT(4) UNSIGNED, " +
 					"Height_histogram JSON, " +
 					"Dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, " +
 					"PRIMARY KEY (Stat_id))" +
@@ -117,26 +136,78 @@ public class DaoModel {
 			se.printStackTrace();
 		}
 	}
+	
+	/**
+	 * CREATE TABLE LICENSE METHOD
+	 * This function perform the creation of the table for the license numbers.
+	 */
+	public static void createTableLicenses() {
+		try {
+			System.out.println("Creating licenses table in given database...");
+			stmt = DBConnectionManager.getConnection().createStatement();
+
+			// Execute create query
+			String sql = "CREATE TABLE LICENSES (" + 
+					"License_id INTEGER not NULL AUTO_INCREMENT, " + 
+					"License_number VARCHAR(30), " +
+					"License_type VARCHAR(50), " +
+					"Authorized_use_time VARCHAR(50) " +
+					"PRIMARY KEY (License_id))";
+			stmt.executeUpdate(sql);
+			System.out.println("Table created successfully...");
+			
+			// Close database connection 
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) { // Handle errors for JDBC
+			se.printStackTrace();
+		}
+	}
+	
+	public static void insertTableLicenses() {
+		try {
+			System.out.println("Creating licenses table in given database...");
+			stmt = DBConnectionManager.getConnection().createStatement();	
+			// Execute inserting queries
+			String sql = "INSERT INTO LICENSES(License_number, License_type, Authorized_use_time) " + 
+							"VALUES ('5483-1890-4832-0233', 'administrator', 'unlimited'),"
+							+ "('1234-1234-1234-1234', 'user', '1')," // 1 hour license
+							+ "('1234-5678-9101-1121', 'user', '24')," // 24 hour license
+							+ "('3242-5262-7282-9303', 'user', '168')," // 1 week license
+							+ "('1323-3343-5363-7383', 'user', '720')," // 1 month license
+							+ "('9405-0515-2535-4555', 'user', '2160')," // 3 months license
+							+ "('6061-7989-5608-8870', 'user', '4320')," // 6 months license
+							+ "('6961-3289-5028-1266', 'user', '8640')"; // 1 year license
+			stmt.executeUpdate(sql);
+			System.out.println("License numbers inserted in table successfully...");
+			
+			// Close database connection 
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) { // Handle errors for JDBC
+			se.printStackTrace();
+		}
+	}
 
 	/**
 	 * INSERT INTO METHOD
 	 * This method perform the insertion of data into the two tables.
 	 */
 	// TODO JSON mapParameters, JSON heightHistogram;
-	public void insertTablesMap(String algorithmName, long height, long width, 	int maxValue, int minValue, int averageValue, int medianValue) {
+	public static void insertTablesMap(String algorithmeName, long height, long width, 	int maxValue, int minValue, double averageValue, int medianValue) {
 		try {
 			System.out.println("Inserting data into the tables...");
 			stmt = DBConnectionManager.getConnection().createStatement();
 			// Execute a query
 			String sql = 
 					"INSERT INTO HEIGHTMAP_PARAMETERS(Algorithm_name, Height, Width) " + 
-							"VALUES (' "+algorithmName+" ', ' "+height+" ', ' "+width+" ')";
+							"VALUES (' "+algorithmeName+" ', ' "+height+" ', ' "+width+" ')";
 			stmt.executeUpdate(sql);
 			System.out.println("Data inserted in the first table successfully...");
 			// Execute a query
 			sql = 
 					"INSERT INTO HEIGHTMAP_STATISTICS(Algorithm_name, Max_value, Min_value, Average_value, Median_value) " + 
-							"VALUES (' "+algorithmName+" ', ' "+maxValue+" ', ' "+minValue+" ', ' "+averageValue+" ', ' "+medianValue+" ')";
+							"VALUES (' "+algorithmeName+" ', ' "+maxValue+" ', ' "+minValue+" ', ' "+averageValue+" ', ' "+medianValue+" ')";
 			stmt.executeUpdate(sql);
 			System.out.println("Data inserted in the second table successfully...");
 			// Close database connection
@@ -151,7 +222,7 @@ public class DaoModel {
 	 * DELETE MAP METHOD
 	 * This function allow the user to delete the last generated map from the database
 	 */
-	public void deleteLastMap() {
+	public static void deleteLastMap() {
 		try {
 
 			// Execute delete query
@@ -222,75 +293,6 @@ public class DaoModel {
 		}
 		return rs;
 	}
-
-	/**
-	 * DELETE TABLES METHOD
-	 * This function delete the two tables from the database
-	 */
-	public void deleteTables() {
-		try {
-
-			// Execute delete query
-			System.out.println("Deleting tables in given database...");
-			// Database connection
-			stmt = DBConnectionManager.getConnection().createStatement();
-			// First Table
-			String sql = "DELETE FROM HEIGHTMAP_PARAMETERS";
-			stmt.executeUpdate(sql);
-			System.out.println("First Table deleted successfully...");
-			// Second Table
-			sql = "DELETE FROM HEIGHTMAP_STATISTICS";
-			stmt.executeUpdate(sql);
-			System.out.println("Second Table deleted successfully...");
-			
-			DBConnectionManager.getConnection().close(); // Close database connection 
-		}
-		catch (SQLException se) { // Handle errors for JDBC
-			se.printStackTrace();
-		}
-	}
-	
-	
-	/**
-	 * CREATE TABLE LICENSE METHOD
-	 * This function perform the creation of the table for the license numbers.
-	 */
-	public void createTableLicense() {
-		try {
-			System.out.println("Creating licenses table in given database...");
-			stmt = DBConnectionManager.getConnection().createStatement();
-
-			// Execute create query
-			String sql = "CREATE TABLE LICENSES (" + 
-					"License_id INTEGER not NULL AUTO_INCREMENT, " + 
-					"License_number VARCHAR(30), " +
-					"License_type VARCHAR(50), " +
-					"Authorized_use_time VARCHAR(50) " +
-					"PRIMARY KEY (License_id))";
-			stmt.executeUpdate(sql);
-			System.out.println("Table created successfully...");
-			
-			// Execute inserting queries
-			sql = 
-					"INSERT INTO LICENSES(License_number, License_type, Authorized_use_time) " + 
-							"VALUES ('5483-1890-4832-0233', 'administrator', 'unlimited'),"
-							+ "('1234-1234-1234-1234', 'user', '1')," // 1 hour license
-							+ "('1234-5678-9101-1121', 'user', '24')," // 24 hour license
-							+ "('3242-5262-7282-9303', 'user', '168')," // 1 week license
-							+ "('1323-3343-5363-7383', 'user', '720')," // 1 month license
-							+ "('9405-0515-2535-4555', 'user', '2160')," // 3 months license
-							+ "('6061-7989-5608-8870', 'user', '4320')," // 6 months license
-							+ "('6961-3289-5028-1266', 'user', '8640')"; // 1 year license
-			stmt.executeUpdate(sql);
-			System.out.println("License numbers inserted in table successfully...");
-			
-			// Close database connection 
-			DBConnectionManager.getConnection().close();
-		}
-		catch (SQLException se) { // Handle errors for JDBC
-			se.printStackTrace();
-		}
-	}
 	
 	public ResultSet retrieveLicense(String licenseNumber) {
 		ResultSet rs = null;
@@ -308,4 +310,66 @@ public class DaoModel {
 		return rs;
 	}
 
+	/**
+	 * This function delete the table HEIGHTMAP_PARAMETERS from the database
+	 */
+	public static void deleteTableMapParameters() {
+		try {
+
+			// Execute delete query
+			System.out.println("Deleting table in given database...");
+			// Database connection
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "DELETE FROM HEIGHTMAP_PARAMETERS";
+			stmt.executeUpdate(sql);
+			System.out.println("Table deleted successfully...");
+			// Close database connection 
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) { // Handle errors for JDBC
+			se.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This function delete the table HEIGHTMAP_STATISTICS from the database
+	 */
+	public static void deleteTableMapStatistics() {
+		try {
+
+			// Execute delete query
+			System.out.println("Deleting table in given database...");
+			// Database connection
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "DELETE FROM HEIGHTMAP_STATISTICS";
+			stmt.executeUpdate(sql);
+			System.out.println("Table deleted successfully...");
+			// Close database connection 
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) { // Handle errors for JDBC
+			se.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This function delete the table HEIGHTMAP_PARAMETERS from the database
+	 */
+	public static void deleteTableLicenses() {
+		try {
+
+			// Execute delete query
+			System.out.println("Deleting table in given database...");
+			// Database connection
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "DELETE FROM LICENSES";
+			stmt.executeUpdate(sql);
+			System.out.println("Table deleted successfully...");
+			// Close database connection 
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) { // Handle errors for JDBC
+			se.printStackTrace();
+		}
+	}
 }

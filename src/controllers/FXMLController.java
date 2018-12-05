@@ -49,6 +49,7 @@ import models.algorithms.AlgorithmModel;
 import models.algorithms.Hill;
 import models.algorithms.Random;
 import models.algorithms.SquareDiamond;
+import models.database.DaoModel;
 
 public class FXMLController {
 	
@@ -611,10 +612,9 @@ public class FXMLController {
 		new WatchFileChanges(watchPath).start();
     }
 		
-    //TODO: C. Deltel
 	@FXML
 	void databaseDeleteLastOne(ActionEvent event) {
-		//deleteLastMap();
+		DaoModel.deleteLastMap();
     }
 
     //TODO: C. Deltel
@@ -632,6 +632,11 @@ public class FXMLController {
     //TODO: C. Deltel
     @FXML
     void databaseStore(ActionEvent event) {
-    	//insertTablesMap(String algorithmName, long height, long width, 	int maxValue, int minValue, int averageValue, int medianValue)
+    	String algoName = "Random";
+    	long height = 50;
+    	long width = 50;
+    	int maxValue = 2, minValue = 1, medianValue=1;
+    	double averageValue = 1.0;
+    	DaoModel.insertTablesMap(algoName, height, width, maxValue, minValue, averageValue, medianValue);
     }
 }

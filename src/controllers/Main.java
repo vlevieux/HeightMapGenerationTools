@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import models.database.DaoModel;
 
 public class Main extends Application {
 	
@@ -45,9 +46,57 @@ public class Main extends Application {
 	}
 	
 	// TODO: C. Deltel check Table existe
-	private void checkTable() {
-		//int table1 = checkExistingTable(HEIGHTMAP_PARAMETERS);
-		//int table2 = checkExistingTable(HEIGHTMAP_STATISTICS);
+	private void checkTables() {
+		String [] tables = {"HEIGHTMAP_PARAMETERS","HEIGHTMAP_STATISTICS", "LICENSES"};
+		for (int tableNumber = 0; tableNumber<3; tableNumber++) {
+			String table = tables[tableNumber];
+			int result = DaoModel.checkExistingTable(table);
+			
+			switch(result) {
+				case 1:
+					// The table does not exist
+					switch(tableNumber) {
+						case 0:
+							DaoModel.createTableMapParameters();
+							break;
+						case 1:
+							DaoModel.createTableMapStatistics();
+							break;
+						case 2:
+							DaoModel.createTableLicenses();
+							DaoModel.insertTableLicenses();
+							break;	
+					}
+					break;
+				case 2:
+					//The table exist but is empty
+					if (tableNumber == 2) {
+						DaoModel.insertTableLicenses();
+					}
+					
+					break;
+				case 3:
+					//The table exist and is not empty
+					switch(tableNumber) {
+					case 0:
+						DaoModel.deleteTableMapParameters();
+						DaoModel.createTableMapParameters();
+						break;
+					case 1:
+						DaoModel.deleteTableMapStatistics();
+						DaoModel.createTableMapStatistics();
+						break;
+					case 2:
+						DaoModel.deleteTableLicenses();
+						DaoModel.createTableLicenses();
+						DaoModel.insertTableLicenses();
+						break;	
+				}
+				break;
+			}
+		}
+		
+		
 		
 	}
 
