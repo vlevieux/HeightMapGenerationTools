@@ -261,7 +261,7 @@
                   <Label text="Iteration(s) :" />
                   <HBox>
                      <children>
-                        <TextField fx:id="hill_vbox_text_field_iteration" prefWidth="100.0" promptText="0.2" text="50" />
+                        <TextField fx:id="hill_vbox_text_field_iteration" prefWidth="100.0" text="50" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">

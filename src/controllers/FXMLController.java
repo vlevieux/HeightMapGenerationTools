@@ -458,7 +458,7 @@ public class FXMLController {
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
 		        String newValue) {
-		        if (newValue.matches("\\d*")) {
+		        if (newValue.matches("\\d*") & !newValue.equals("")) {
 		        	boolean visibility = false;
 		        	if (Integer.valueOf(tf1.getText())*Integer.valueOf(newValue)>=max)
 		        		visibility = true;

@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Test extends Application {
+public class Main extends Application {
 	
 	//public final static Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
 	
