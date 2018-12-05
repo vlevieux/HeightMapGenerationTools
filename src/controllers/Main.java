@@ -46,7 +46,9 @@ public class Main extends Application {
 	
 	// TODO: C. Deltel check Table existe
 	private void checkTable() {
-	
+		//int table1 = checkExistingTable(HEIGHTMAP_PARAMETERS);
+		//int table2 = checkExistingTable(HEIGHTMAP_STATISTICS);
+		
 	}
 
 }
