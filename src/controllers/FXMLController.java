@@ -608,7 +608,7 @@ public class FXMLController {
 	
 	@FXML
     private void showLogs(ActionEvent event) {
-		Path watchPath = Paths.get(Paths.get("").toAbsolutePath().toString()+"\\"+LoggerAlgorithm.fileLogName);
+		Path watchPath = Paths.get("LoggerAlgorithm.fileLogName").toAbsolutePath();
 		new WatchFileChanges(watchPath).start();
     }
 		
