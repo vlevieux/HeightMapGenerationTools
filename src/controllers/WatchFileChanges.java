@@ -14,21 +14,30 @@ import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class WatchFileChanges {
 
+	final boolean NOT_SUPPORTED_WATCH_FILE;
+	
     Path watchPath = Paths.get(LoggerAlgorithm.fileLogName);
 
     TextArea textArea;
 
     WatchFileChanges(Path p){
     	this.watchPath = p;
+    	if (System.getProperty("os.name").contains("Linux")) {
+    		FXMLController.alertDialog("Feature not supported", "This feature is not supported yet.", "It seems that you are currently using a Linux machine that does not support this feature yet.\n\nOur team is actually working on its implementation.", AlertType.CONFIRMATION);
+    	}
+    	NOT_SUPPORTED_WATCH_FILE = System.getProperty("os.name").contains("Linux");
     }
     
     public void start() {
+    	if (NOT_SUPPORTED_WATCH_FILE)
+    		return;
         BorderPane root = new BorderPane();
 
         textArea = new TextArea();
