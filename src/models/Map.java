@@ -160,7 +160,6 @@ public class Map {
 				sum+=item;
 			}
 		}
-		System.out.println(sum);
 		return sum/(this.size*this.size);
 	}
 	

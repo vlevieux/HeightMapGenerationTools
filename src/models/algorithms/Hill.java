@@ -40,11 +40,6 @@ public class Hill extends AlgorithmModel {
 		}
 	}
 
-	@Override
-	public void getParameters() {
-
-	}
-	
 	public void setParameters(java.util.Map<String,String> parametersMap) {
 		super.setParameters(parametersMap);
 		this.kradius = Double.valueOf(parametersMap.get("kradius"));

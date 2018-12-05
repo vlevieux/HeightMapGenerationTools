@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javafx.beans.property.StringProperty;
-
 public class DaoModel {
 	//Declare DB objects 
 	DBConnectionManager con = null;
@@ -194,7 +192,7 @@ public class DaoModel {
 	 * This method perform the insertion of data into the two tables.
 	 */
 	// TODO JSON mapParameters, JSON heightHistogram;
-	public static void insertTablesMap(String algorithmeName, long height, long width, 	int maxValue, int minValue, double averageValue, int medianValue) {
+	public static void insertTablesMap(String algorithmeName, String height, String width, 	String maxValue, String minValue, String averageValue, String medianValue) {
 		try {
 			System.out.println("Inserting data into the tables...");
 			stmt = DBConnectionManager.getConnection().createStatement();

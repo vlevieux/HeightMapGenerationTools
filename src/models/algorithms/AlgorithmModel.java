@@ -2,6 +2,7 @@ package models.algorithms;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -18,6 +19,8 @@ public abstract class AlgorithmModel extends Task<Image> {
 	
 	protected Map map;
 	protected int size;
+	protected java.util.Map<String, String> parameters;
+	protected java.util.Map<String, String> statistics;
 	
 	protected double pointDone = 0;
 	protected double progress;
@@ -29,16 +32,30 @@ public abstract class AlgorithmModel extends Task<Image> {
 	AlgorithmModel(int size){
 		this.size = size;
 		this.map = new Map(this.size);
+		this.parameters = new HashMap<String,String>();
+		this.setParameter("size", this.size);
+		this.statistics = new HashMap<String,String>();
 	}
 	
 	public abstract void apply();
 	
-	public abstract void getParameters();
+	public java.util.Map<String, String> getParameters() {
+		return this.parameters;
+	}
+	
+	public String getParameter(String key) {
+		return this.parameters.get(key);
+	}
 	
 	public void setParameters(java.util.Map<String,String> parametersMap) {
 		reformat = Boolean.parseBoolean(parametersMap.get("reformat"));
+		this.parameters = parametersMap;
 	}
 	
+	public void setParameter(String key, Object value) {
+		this.parameters.put(key, String.valueOf(value));
+	}
+
 	public void setProgress(double progress) {
 		if (progress >= 0 && progress <= 1)
 			this.progress = progress;
@@ -83,11 +100,30 @@ public abstract class AlgorithmModel extends Task<Image> {
 		}
 	}
 	
+	public java.util.Map<String, String> getStatistics() {
+		return this.statistics;
+	}
+	
+	protected void calculateStatistics() {
+		this.statistics.put("size", String.valueOf(this.map.getSize()));
+		if (!this.isCancelled())
+			this.statistics.put("min", String.valueOf(this.map.getMin()));
+		if (!this.isCancelled()) 
+			this.statistics.put("max", String.valueOf(this.map.getMax()));
+		if (!this.isCancelled()) 
+			this.statistics.put("average", String.valueOf(this.map.getAverage()));
+		if (!this.isCancelled()) 
+			this.statistics.put("median", String.valueOf(this.map.getMedian()));
+	}
+	
 	@Override
 	protected Image call() throws Exception {
 		updateMessage("In progress...");
 		this.log("Applying "+this+ String.format(" on a Map of size : %dx%d",this.size,this.size));
 		this.apply();
+		updateMessage("Calculating statistics...");
+		if (!this.isCancelled()) 
+			calculateStatistics();
 		updateMessage("Generating image...");
 		Image img;
 		if (!this.isCancelled()) {	
@@ -121,4 +157,5 @@ public abstract class AlgorithmModel extends Task<Image> {
 	public String toString() {
 		return this.getClass().getName();
 	}
+	
 }

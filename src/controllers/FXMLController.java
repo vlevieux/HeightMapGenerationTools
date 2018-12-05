@@ -59,6 +59,9 @@ public class FXMLController {
     private MenuItem main_menu_run_run;
 	
 	@FXML
+	private MenuItem main_menu_database_store;
+	
+	@FXML
 	private VBox algorithm_vbox;
 	
 	@FXML
@@ -282,7 +285,6 @@ public class FXMLController {
 				return;
 		}
 		
-		
 		hm.put("reformat", String.valueOf(algorithm_vbox_check_box_reformat_image.isSelected()));
 		algo.setParameters(hm);
 		main_progress_bar_progress_bar.progressProperty().bind(algo.progressProperty());
@@ -301,6 +303,7 @@ public class FXMLController {
 			    	if (timeline != null)
 			    		timeline.stop();
 			    	main_text_status.setText("Done.");
+			    	main_menu_database_store.setDisable(false);
 			    }
 			});
 		algo.exceptionProperty().addListener((observable, oldValue, newValue) ->  {
@@ -310,6 +313,7 @@ public class FXMLController {
 				Exception ex = (Exception) newValue;
 				ex.printStackTrace();
 			}});
+		main_menu_database_store.setDisable(true);
 		//Run Algorithm
 		initializeTimeline();
 		Thread t = new Thread(algo);
@@ -629,15 +633,20 @@ public class FXMLController {
 
     }
 
-    //TODO: C. Deltel
     @FXML
     void databaseStore(ActionEvent event) {
-    	System.out.println(algo.getClass().getName());
-    	
-    	/*long height = 50;
-    	long width = 50;
-    	int maxValue = 2, minValue = 1, medianValue=1;
-    	double averageValue = 1.0;
-    	DaoModel.insertTablesMap(algoName, height, width, maxValue, minValue, averageValue, medianValue);*/
+    	//Should never happen.
+    	if (algo==null) {
+    		alertDialog("Nothing to store", "You should run at least on algorithm.", "You have not run an algorithm yet. Please select one in the list and run it (Ctrl+F5) to allow store feature.", AlertType.ERROR);
+    		return;
+    	}
+    	String algoName = algo.getClass().getName();
+    	Map<String, String> statMap = algo.getStatistics();
+    	String height = statMap.get("size");
+    	String max = statMap.get("max");
+    	String min = statMap.get("min");
+    	String average = statMap.get("average");
+    	String median = statMap.get("median");
+    	DaoModel.insertTablesMap(algoName, height, height, max, min, average, median);
     }
 }

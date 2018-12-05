@@ -132,11 +132,6 @@ public class SquareDiamond extends AlgorithmModel {
 	}
 
 	@Override
-	public void getParameters() {
-		
-	}
-
-	@Override
 	public void setParameters(java.util.Map<String, String> parametersMap) {
 		super.setParameters(parametersMap);
 		this.variance = Integer.valueOf(parametersMap.get("variance"));
