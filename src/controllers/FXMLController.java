@@ -614,7 +614,7 @@ public class FXMLController {
     //TODO: C. Deltel
 	@FXML
 	void databaseDeleteLastOne(ActionEvent event) {
-
+		//deleteLastMap();
     }
 
     //TODO: C. Deltel
@@ -632,6 +632,6 @@ public class FXMLController {
     //TODO: C. Deltel
     @FXML
     void databaseStore(ActionEvent event) {
-
+    	//insertTablesMap(String algorithmName, long height, long width, 	int maxValue, int minValue, int averageValue, int medianValue)
     }
 }
