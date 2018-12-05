@@ -612,4 +612,27 @@ public class FXMLController {
 		new WatchFileChanges(watchPath).start();
     }
 		
+    //TODO: C. Deltel
+	@FXML
+	void databaseDeleteLastOne(ActionEvent event) {
+
+    }
+
+    //TODO: C. Deltel
+    @FXML
+    void databaseShowParameters(ActionEvent event) {
+
+    }
+
+    //TODO: C. Deltel
+    @FXML
+    void databaseShowStatistics(ActionEvent event) {
+
+    }
+
+    //TODO: C. Deltel
+    @FXML
+    void databaseStore(ActionEvent event) {
+
+    }
 }

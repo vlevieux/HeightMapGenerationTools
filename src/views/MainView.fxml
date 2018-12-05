@@ -83,6 +83,19 @@
                      </accelerator></MenuItem>
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Database">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#databaseStore" text="Store" />
+                  <Menu mnemonicParsing="false" text="Show">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#databaseShowParameters" text="Parameters" />
+                        <MenuItem mnemonicParsing="false" onAction="#databaseShowStatistics" text="Statistics" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#databaseDeleteLastOne" text="Delete last one" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
