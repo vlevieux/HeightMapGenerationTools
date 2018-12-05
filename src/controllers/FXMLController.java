@@ -632,11 +632,12 @@ public class FXMLController {
     //TODO: C. Deltel
     @FXML
     void databaseStore(ActionEvent event) {
-    	String algoName = "Random";
-    	long height = 50;
+    	System.out.println(algo.getClass().getName());
+    	
+    	/*long height = 50;
     	long width = 50;
     	int maxValue = 2, minValue = 1, medianValue=1;
     	double averageValue = 1.0;
-    	DaoModel.insertTablesMap(algoName, height, width, maxValue, minValue, averageValue, medianValue);
+    	DaoModel.insertTablesMap(algoName, height, width, maxValue, minValue, averageValue, medianValue);*/
     }
 }

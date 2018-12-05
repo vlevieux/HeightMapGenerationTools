@@ -85,7 +85,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Database">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#databaseStore" text="Store" />
+                <MenuItem disable="true" mnemonicParsing="false" onAction="#databaseStore" text="Store" />
                   <Menu mnemonicParsing="false" text="Show">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#databaseShowParameters" text="Parameters" />
