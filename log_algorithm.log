@@ -43,3 +43,46 @@
 2018-12-04 00:57:00 INFOS  models.algorithms.AlgorithmModel log Success
 2018-12-04 00:57:01 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
 2018-12-04 00:57:01 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:43:00 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Random on a Map of size : 5000x5000
+2018-12-04 16:43:01 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:45:39 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:47:17 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:49:12 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:49:28 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:49:35 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:49:43 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:49:47 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:49:59 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 16:49:59 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 16:50:05 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:50:41 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:50:47 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:50:51 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:50:53 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:51:30 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 16:51:30 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 16:51:43 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:52:43 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 16:52:43 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 16:52:50 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:54:04 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 5000x5000px
+2018-12-04 16:54:04 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 16:54:11 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:54:15 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:54:19 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:54:22 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:54:24 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:54:43 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:54:46 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:55:58 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:56:49 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:57:09 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 16:57:12 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 5000x5000
+2018-12-04 16:57:22 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 18:43:16 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 1000x1000
+2018-12-04 18:43:26 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.
+2018-12-04 18:43:55 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 50x50
+2018-12-04 18:43:56 INFOS  models.algorithms.AlgorithmModel log Generated Image, size : 50x50px
+2018-12-04 18:43:56 INFOS  models.algorithms.AlgorithmModel log Success
+2018-12-04 18:44:09 INFOS  models.algorithms.AlgorithmModel log Applying models.algorithms.Hill on a Map of size : 500x500
+2018-12-04 18:44:38 INFOS  models.algorithms.AlgorithmModel log Task has been cancelled.

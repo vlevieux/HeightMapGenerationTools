@@ -24,7 +24,6 @@ public abstract class AlgorithmModel extends Task<Image> {
 	
 	protected boolean reformat = true;
 	
-	//Log
 	Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
 	
 	AlgorithmModel(int size){

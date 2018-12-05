@@ -142,6 +142,12 @@ public class FXMLController {
 	@FXML
 	private TextField hill_vbox_text_field_iteration;
 	
+	@FXML
+	private ImageView hill_vbox_error_parameters;
+	
+	@FXML
+	private Text hill_vbox_text_error_parameters;
+	
 	//AlgorithmModel
 	@FXML
 	private CheckBox algorithm_vbox_check_box_reformat_image;
@@ -204,7 +210,8 @@ public class FXMLController {
 		
 		setNumericField(hill_vbox_text_field_size, 5000);
 		setNumericFieldRatio(hill_vbox_text_field_kradius_numerator, hill_vbox_text_field_kradius_denomitator, hill_vbox_text_kradius_ratio, 10000);
-		setNumericField(hill_vbox_text_field_iteration, 100000);
+		setNumericField(hill_vbox_text_field_iteration, 10000);
+		setProductLimitWarning(hill_vbox_text_field_size, hill_vbox_text_field_iteration, 425000, hill_vbox_error_parameters, hill_vbox_text_error_parameters);
     }
 	
 	@FXML
@@ -257,6 +264,11 @@ public class FXMLController {
 					alertDialog("Error in parameters", "Argument kradius cannot be 0.", "Impossible to divide by 0.", AlertType.ERROR);
 					return;
 				}
+				if (Integer.valueOf(hill_vbox_text_field_iteration.getText())*size>425000) {
+					alertDialog("Error in parameters", "Size of the map or Iteration value is too high.", "The number of possible interations for this size of map is too high. You should reduce the size or the number of iteration.", AlertType.ERROR);
+					return;
+				}
+				
 				algo = new Hill(size);
 				double kradius = Integer.valueOf(hill_vbox_text_field_kradius_numerator.getText())/(double)Integer.valueOf(hill_vbox_text_field_kradius_denomitator.getText());
 				hm.put("kradius", String.valueOf(kradius));
@@ -291,6 +303,7 @@ public class FXMLController {
 		algo.exceptionProperty().addListener((observable, oldValue, newValue) ->  {
 			if(newValue != null) {
 				this.cancel("Failed.");
+				/* For debugging */
 				Exception ex = (Exception) newValue;
 				ex.printStackTrace();
 			}});
@@ -419,6 +432,36 @@ public class FXMLController {
 			        } else {
 			        	tf.setText(oldValue);
 			        }
+		        }
+		    }
+		});
+	}
+	
+	private void setProductLimitWarning(TextField tf1, TextField tf2, int max, ImageView imgv, Text txt) {
+		
+		tf1.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (newValue.matches("\\d*") & !newValue.equals("")) {
+		        	boolean visibility = false;
+		        	if (Integer.valueOf(newValue)*Integer.valueOf(tf2.getText())>=max)
+		        		visibility = true;
+		        	imgv.setVisible(visibility);
+		        	txt.setVisible(visibility);
+		        }
+		    }
+		});
+		tf2.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (newValue.matches("\\d*")) {
+		        	boolean visibility = false;
+		        	if (Integer.valueOf(tf1.getText())*Integer.valueOf(newValue)>=max)
+		        		visibility = true;
+		        	imgv.setVisible(visibility);
+		        	txt.setVisible(visibility);
 		        }
 		    }
 		});

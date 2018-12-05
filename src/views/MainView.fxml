@@ -264,6 +264,26 @@
                         <TextField fx:id="hill_vbox_text_field_iteration" prefWidth="100.0" promptText="0.2" text="50" />
                      </children>
                   </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="hill_vbox_error_parameters" fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../images/ic_error.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="1.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text fx:id="hill_vbox_text_error_parameters" fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Error, value is too high." visible="false">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox style="-fx-border-color: #dfdfdf; -fx-border-width: 1 0 0 0;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="350.0">
