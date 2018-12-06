@@ -23,7 +23,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -623,6 +625,22 @@ public class FXMLController {
 		new WatchFileChanges(watchPath).start();
     }
 		
+	@FXML
+	void adminAddLicense(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/views/adminAddView.fxml"));
+			Scene scene = new Scene(root);
+	        Stage stage = new Stage();
+	        stage.setTitle("[ADMIN] Add License");
+	        stage.setResizable(false);
+	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
+	        stage.setScene(scene);
+	        stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@FXML
 	void databaseDeleteLastOne(ActionEvent event) {
 		DaoModel.deleteLastMap();

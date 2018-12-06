@@ -96,6 +96,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#databaseDeleteLastOne" text="Delete last one" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Admin">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#adminAddLicense" text="Add License" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
