@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.prefs.Preferences;
+
 import javax.imageio.ImageIO;
 
 import javafx.animation.Animation;
@@ -23,13 +25,16 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -39,6 +44,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -63,6 +69,9 @@ public class FXMLController {
 	
 	@FXML
 	private MenuItem main_menu_database_store;
+	
+	@FXML
+	private Menu main_menu_admin;
 	
 	@FXML
 	private VBox algorithm_vbox;
@@ -200,7 +209,13 @@ public class FXMLController {
 	StringProperty algorithmName = new SimpleStringProperty();
 	AlgorithmModel algo;
 	
+	Preferences sessionPreferences = Preferences.userRoot();
+	
 	public void initialize() {
+		if (sessionPreferences.getInt("LICENSE_TYPE", 1)==2) {
+			main_menu_admin.setVisible(true);
+			main_menu_admin.setDisable(false);
+		}
 		algorithm_vbox.getChildren().remove(main_vbox_random);
 		algorithm_vbox.getChildren().remove(main_vbox_square_diamond);
 		algorithm_vbox.getChildren().remove(main_vbox_hill);
@@ -221,7 +236,11 @@ public class FXMLController {
 		setNumericFieldRatio(hill_vbox_text_field_kradius_numerator, hill_vbox_text_field_kradius_denomitator, hill_vbox_text_kradius_ratio, 10000);
 		setNumericField(hill_vbox_text_field_iteration, 10000);
 		setProductLimitWarning(hill_vbox_text_field_size, hill_vbox_text_field_iteration, 425000, hill_vbox_error_parameters, hill_vbox_text_error_parameters);
-    }
+    
+		main_image_view_map.setPreserveRatio(true);
+    	main_image_view_map.fitWidthProperty().bind(((Pane)main_image_view_map.getParent()).widthProperty());
+    	main_image_view_map.fitHeightProperty().bind(((Pane)main_image_view_map.getParent()).heightProperty());
+	}
 	
 	@FXML
     void menuRun(ActionEvent event) {
@@ -624,6 +643,22 @@ public class FXMLController {
     }
 		
 	@FXML
+	void adminAddLicense(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/views/adminAddView.fxml"));
+			Scene scene = new Scene(root);
+	        Stage stage = new Stage();
+	        stage.setTitle("[ADMIN] Add License");
+	        stage.setResizable(false);
+	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
+	        stage.setScene(scene);
+	        stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
 	void databaseDeleteLastOne(ActionEvent event) {
 		DaoModel.deleteLastMap();
     }
@@ -637,7 +672,8 @@ public class FXMLController {
     //TODO: C. Deltel
     @FXML
     void databaseShowStatistics(ActionEvent event) {
-
+    	System.out.println(((Stage)main_image_view_map.getScene().getWindow()).getWidth());
+    	System.out.println(((Stage)main_image_view_map.getScene().getWindow()).getHeight());
     }
 
     @FXML

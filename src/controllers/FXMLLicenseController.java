@@ -3,7 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.util.prefs.Preferences;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,8 @@ import models.database.DaoModel;
 
 public class FXMLLicenseController {
 
+	Preferences sessionPreferences = Preferences.userRoot();
+	
     @FXML
     private TextField license_textfield_license;
 
@@ -26,15 +29,14 @@ public class FXMLLicenseController {
     
     @FXML
     private Text license_text_error_message;
-    
-    //Just basic license store
-    private String validLicenses[] = {"1234-1234-1234-1234"};
         
     @FXML
     void activate(ActionEvent event) {
     	if (license_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
-    		if (checkLicense(license_textfield_license.getText())) {
-    			close();
+    		int licenseType = checkLicense(license_textfield_license.getText());
+    		if (licenseType>0) {
+    			sessionPreferences.putInt("LICENSE_TYPE", licenseType);
+    			this.close();
     		} else {
     			license_text_error_message.setText("The license you have entered is not valid.");
     		}
@@ -55,8 +57,8 @@ public class FXMLLicenseController {
 			Scene scene = new Scene(root);
 	        Stage stage = s;
 	        stage.setTitle("Height Map Generation Tool");
-	        stage.setMinWidth(850);
-	        stage.setMinHeight(700);
+	        stage.setMinWidth(1000);
+	        stage.setMinHeight(900);
 	        stage.setResizable(true);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
