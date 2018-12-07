@@ -65,14 +65,14 @@ public class Main extends Application {
 							break;
 						case 2:
 							DaoModel.createTableLicenses();
-							DaoModel.insertTableLicenses();
+							DaoModel.insertTableLicensesAdmin();
 							break;	
 					}
 					break;
 				case 2:
 					//The table exist but is empty
 					if (tableNumber == 2) {
-						DaoModel.insertTableLicenses();
+						DaoModel.insertTableLicensesAdmin();
 					}
 					
 					break;
@@ -84,10 +84,6 @@ public class Main extends Application {
 						break;
 					case 1:
 						DaoModel.deleteTableMapStatistics();
-						break;
-					case 2:
-						DaoModel.deleteTableLicenses();
-						DaoModel.insertTableLicenses();
 						break;	
 				}
 				break;
