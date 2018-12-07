@@ -97,7 +97,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#databaseDeleteLastOne" text="Delete last one" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Admin">
+            <Menu fx:id="main_menu_admin" disable="true" mnemonicParsing="false" text="Admin" visible="false">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#adminAddLicense" text="Add License" />
               </items>

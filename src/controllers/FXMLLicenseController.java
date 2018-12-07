@@ -33,9 +33,9 @@ public class FXMLLicenseController {
     @FXML
     void activate(ActionEvent event) {
     	if (license_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
-    		Boolean licenseType = checkLicense(license_textfield_license.getText());
-    		if (licenseType) {
-    			sessionPreferences.putInt("LICENSE_TYPE", (licenseType)? 1:0 );
+    		int licenseType = checkLicense(license_textfield_license.getText());
+    		if (licenseType>0) {
+    			sessionPreferences.putInt("LICENSE_TYPE", licenseType);
     			this.close();
     		} else {
     			license_text_error_message.setText("The license you have entered is not valid.");

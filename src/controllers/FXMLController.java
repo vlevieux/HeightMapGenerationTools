@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.prefs.Preferences;
+
 import javax.imageio.ImageIO;
 
 import javafx.animation.Animation;
@@ -32,6 +34,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -39,7 +42,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -67,6 +69,9 @@ public class FXMLController {
 	
 	@FXML
 	private MenuItem main_menu_database_store;
+	
+	@FXML
+	private Menu main_menu_admin;
 	
 	@FXML
 	private VBox algorithm_vbox;
@@ -204,7 +209,13 @@ public class FXMLController {
 	StringProperty algorithmName = new SimpleStringProperty();
 	AlgorithmModel algo;
 	
+	Preferences sessionPreferences = Preferences.userRoot();
+	
 	public void initialize() {
+		if (sessionPreferences.getInt("LICENSE_TYPE", 1)==2) {
+			main_menu_admin.setVisible(true);
+			main_menu_admin.setDisable(false);
+		}
 		algorithm_vbox.getChildren().remove(main_vbox_random);
 		algorithm_vbox.getChildren().remove(main_vbox_square_diamond);
 		algorithm_vbox.getChildren().remove(main_vbox_hill);

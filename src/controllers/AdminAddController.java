@@ -7,7 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class AdminAddView {
+public class AdminAddController {
 
     @FXML
     private TextField admin_add_textfield_license;
@@ -35,6 +35,10 @@ public class AdminAddView {
     	if (admin_add_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
     		//TODO C. Deltel Insert License in DAO.
     		System.out.println(admin_add_textfield_license.getText()+" "+licenseType+" "+duration);
+    	} else if (licenseType==0) {
+    		admin_text_message.setText("You must select a license type.");
+    	} else if (duration==0) {
+    		admin_text_message.setText("You must select a duration type.");
     	} else {
     		admin_text_message.setText("The license you have entered does not match the license format.");
     	}
