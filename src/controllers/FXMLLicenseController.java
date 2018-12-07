@@ -1,8 +1,11 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
@@ -80,8 +83,27 @@ public class FXMLLicenseController {
 				}
 				// normal user
 				else if (licenseType.equals("1")){
-					DaoModel.ValidateLicense(license);
-					return 1;
+					Date date = rs.getDate(4);
+					// First activation of the license
+					if (date == null) {
+						DaoModel.ValidateLicense(license);
+						return 1;
+					}
+					// Check if the license expired
+					else {
+						int authorizedUseTime = rs.getInt(5);
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						cal.add(Calendar.DATE, authorizedUseTime);
+						Date newDate = (Date) cal.getTime(); 
+						// License expired
+						if (Date.valueOf(LocalDate.now()).compareTo(newDate) > 0) {
+							return 3;
+						}
+						else {
+							return 1;
+						}
+					}
 				}
 			}
 			else {

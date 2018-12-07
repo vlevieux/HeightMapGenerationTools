@@ -112,7 +112,6 @@ public class DaoModel {
 					"Min_value SMALLINT, " +
 					"Average_value DOUBLE PRECISION, " +
 					"Median_value SMALLINT, " +
-					"Height_histogram VARCHAR(5000), " +
 					"Date DATE, " +
 					"Time TIME," +
 					"PRIMARY KEY (Stat_id))";
@@ -206,29 +205,10 @@ public class DaoModel {
 	}
 	
 	/**
-	 * This function insert into the table licenses the license numbers
-	 * with different authorized use time.
-	 */
-	public static void ValidateLicense(String licenseNumber) {
-		try {	
-			// Execute inserting query
-			String sql = "UPDATE LICENSES SET Date VALUES (?)";
-			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
-			// Set fields
-			ps.setDate(1, Date.valueOf(LocalDate.now()));
-			ps.executeUpdate();
-			DBConnectionManager.getConnection().close();
-		}
-		catch (SQLException se) {
-			se.printStackTrace();
-		}
-	}
-
-	/**
 	 * This method perform the insertion of data into the two tables.
 	 */
-	//TODO generate string values mapParameters and heightHistogram
-	public static void insertTablesMap(String algorithmName, String height, String width, String mapParameters, String maxValue, String minValue, String averageValue, String medianValue, String heightHistogram) {
+	//TODO generate string values mapParameters
+	public static void insertTablesMap(String algorithmName, String height, String width, String mapParameters, String maxValue, String minValue, String averageValue, String medianValue) {
 		try {
 			String sql = "INSERT INTO HEIGHTMAP_PARAMETERS (Algorithm_name, Height, Width, Map_parameters, Date, Time) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
@@ -241,7 +221,7 @@ public class DaoModel {
 			ps.setTime(6, Time.valueOf(LocalTime.now()));
 			ps.executeUpdate();
 					
-			sql = "INSERT INTO HEIGHTMAP_STATISTICS(Algorithm_name, Max_value, Min_value, Average_value, Median_value, Height_histogram, Date, Time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO HEIGHTMAP_STATISTICS(Algorithm_name, Max_value, Min_value, Average_value, Median_value, Date, Time) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			ps = DBConnectionManager.getConnection().prepareStatement(sql);
 			// Set fields
 			ps.setString(1, algorithmName);
@@ -249,9 +229,8 @@ public class DaoModel {
 			ps.setString(3, minValue);
 			ps.setString(4, averageValue);
 			ps.setString(5, medianValue);
-			ps.setString(6, mapParameters);
-			ps.setDate(7, Date.valueOf(LocalDate.now()));
-			ps.setTime(8, Time.valueOf(LocalTime.now()));
+			ps.setDate(6, Date.valueOf(LocalDate.now()));
+			ps.setTime(7, Time.valueOf(LocalTime.now()));
 			ps.executeUpdate();
 			
 			DBConnectionManager.getConnection().close();
@@ -345,7 +324,7 @@ public class DaoModel {
 			// Database connection
 			stmt = DBConnectionManager.getConnection().createStatement();
 			// Execute retrieve query
-			String sql = "SELECT License_number, License_type, Authorized_use_time FROM LICENSES WHERE License_number='"+licenseNumber+"'";
+			String sql = "SELECT * FROM LICENSES WHERE License_number='"+licenseNumber+"'";
 			rs = stmt.executeQuery(sql);
 			// Close database connection
 			DBConnectionManager.getConnection().close();
@@ -353,6 +332,25 @@ public class DaoModel {
 			se.printStackTrace();
 		}
 		return rs;
+	}
+	
+	/**
+	 * This function insert into the table licenses the license numbers
+	 * with different authorized use time.
+	 */
+	public static void ValidateLicense(String licenseNumber) {
+		try {	
+			// Execute inserting query
+			String sql = "UPDATE LICENSES SET Date VALUES (?)";
+			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
+			// Set fields
+			ps.setDate(1, Date.valueOf(LocalDate.now()));
+			ps.executeUpdate();
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 
 	/**
@@ -401,17 +399,3 @@ public class DaoModel {
 		}
 	}
 }
-
-
-
-/*
-sql = "INSERT INTO LICENSES(License_number, License_type, Authorized_use_time) " + 
-		"VALUES ('1234-1234-1234-1234', '2', '0')," //50 years license
-		+ "('5483-1890-4832-0233', '1', '3600')," // 1 hour license
-		+ "('1234-5678-9101-1121', '1', '86400')," // 24 hour license
-		+ "('3242-5262-7282-9303', '1', '604800')," // 1 week license
-		+ "('1323-3343-5363-7383', '1', '2592000')," // 1 month license
-		+ "('9405-0515-2535-4555', '1', '7776000')," // 3 months license
-		+ "('6061-7989-5608-8870', '1', '15552000')," // 6 months license
-		+ "('6961-3289-5028-1266', '1', '31536000')"; // 1 year license
-*/
