@@ -73,7 +73,16 @@ public class FXMLLicenseController {
     	ResultSet rs = DaoModel.retrieveLicense(license);
     	try {
 			if (rs.next()) {
-				return 1;
+				String licenseType = rs.getString("License_type");
+				// admin user
+				if (licenseType.equals("2")) {
+					return 2;
+				}
+				// normal user
+				else if (licenseType.equals("1")){
+					DaoModel.ValidateLicense(license);
+					return 1;
+				}
 			}
 			else {
 				return 0;
@@ -81,7 +90,7 @@ public class FXMLLicenseController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	return 0;
+    	return -1;
     	//return Arrays.asList(validLicenses).contains(license);
     	
     }

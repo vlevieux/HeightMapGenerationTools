@@ -135,7 +135,7 @@ public class DaoModel {
 			String sql = "CREATE TABLE LICENSES (" + 
 					"License_id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " + 
 					"License_number VARCHAR(30), " +
-					"License_type VARCHAR(50), " +
+					"License_type INTEGER, " +
 					"Date DATE," + 
 					"Authorized_use_time INTEGER, " +
 					"PRIMARY KEY (License_id))";
