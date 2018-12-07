@@ -6,6 +6,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import models.database.DaoModel;
 
 public class AdminAddController {
 
@@ -33,7 +34,10 @@ public class AdminAddController {
     @FXML
     void adminAddLicense(ActionEvent event) {
     	if (admin_add_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
-    		//TODO C. Deltel Insert License in DAO.
+    		int add = DaoModel.insertTableLicenses(admin_add_textfield_license.getText(), licenseType, duration);
+    		if (add == 1) {
+    			admin_text_message.setText("This license already exist in the database.");
+    		}
     		System.out.println(admin_add_textfield_license.getText()+" "+licenseType+" "+duration);
     	} else if (licenseType==0) {
     		admin_text_message.setText("You must select a license type.");
