@@ -39,8 +39,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -223,7 +225,11 @@ public class FXMLController {
 		setNumericFieldRatio(hill_vbox_text_field_kradius_numerator, hill_vbox_text_field_kradius_denomitator, hill_vbox_text_kradius_ratio, 10000);
 		setNumericField(hill_vbox_text_field_iteration, 10000);
 		setProductLimitWarning(hill_vbox_text_field_size, hill_vbox_text_field_iteration, 425000, hill_vbox_error_parameters, hill_vbox_text_error_parameters);
-    }
+    
+		main_image_view_map.setPreserveRatio(true);
+    	main_image_view_map.fitWidthProperty().bind(((Pane)main_image_view_map.getParent()).widthProperty());
+    	main_image_view_map.fitHeightProperty().bind(((Pane)main_image_view_map.getParent()).heightProperty());
+	}
 	
 	@FXML
     void menuRun(ActionEvent event) {
@@ -655,7 +661,8 @@ public class FXMLController {
     //TODO: C. Deltel
     @FXML
     void databaseShowStatistics(ActionEvent event) {
-
+    	System.out.println(((Stage)main_image_view_map.getScene().getWindow()).getWidth());
+    	System.out.println(((Stage)main_image_view_map.getScene().getWindow()).getHeight());
     }
 
     @FXML
