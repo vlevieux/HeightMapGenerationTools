@@ -35,10 +35,10 @@ public class DaoModel {
 	 */
 	public static int checkExistingTable(String tableName) {
 		try {
-			DBConnectionManager.getConnection();
 			DatabaseMetaData dbmd = DBConnectionManager.getConnection().getMetaData();
 			ResultSet tables = dbmd.getTables(null, null, tableName, null);
-
+			DBConnectionManager.getConnection().close();
+			
 			// Check if "tableName" table is already there
 			if (tables.next()) {
 				//System.out.println("The table already exists...");
@@ -136,7 +136,8 @@ public class DaoModel {
 					"License_id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " + 
 					"License_number VARCHAR(30), " +
 					"License_type VARCHAR(50), " +
-					"Authorized_use_time VARCHAR(50), " +
+					"Date DATE," + 
+					"Authorized_use_time INTEGER, " +
 					"PRIMARY KEY (License_id))";
 			stmt.executeUpdate(sql);
 			DBConnectionManager.getConnection().close();
@@ -147,23 +148,75 @@ public class DaoModel {
 	}
 	
 	/**
+	 * This function insert into the table licenses only the admin license number 
+	 */
+	public static void insertTableLicensesAdmin() {
+		try {
+			// Execute inserting query
+			String sql = "INSERT INTO LICENSES(License_number, License_type, Date, Authorized_use_time) VALUES (?, ?, ?, ?)";
+			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
+			// Set fields
+			ps.setString(1, "1234-1234-1234-1234");
+			ps.setString(2, "2");
+			ps.setDate(3, Date.valueOf(LocalDate.now()));
+			ps.setString(4, "0");
+			ps.executeUpdate();
+			DBConnectionManager.getConnection().close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This function insert into the table licenses the license numbers
+	 * with different authorized use time.
+	 * @param licenseNumber
+	 * @param licenseType
+	 * @param authorizedUseTime
+	 */
+	public static int insertTableLicenses(String licenseNumber, String licenseType, String authorizedUseTime) {
+		ResultSet rs = null;
+		try {	
+			// Check if the license already exist in the database
+			stmt = DBConnectionManager.getConnection().createStatement();
+			String sql = "SELECT License_number FROM LICENSES WHERE License_number = "+licenseNumber;
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				DBConnectionManager.getConnection().close();
+				return 0;
+			}
+			else {
+				// Execute inserting query
+				sql = "INSERT INTO LICENSES(License_number, License_type, Authorized_use_time) VALUES (?, ?, ?)";
+				PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
+				// Set fields
+				ps.setString(1, licenseNumber);
+				ps.setString(2, licenseType);
+				ps.setString(3, authorizedUseTime);
+				ps.executeUpdate();
+				DBConnectionManager.getConnection().close();
+				return 1;
+			}
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return -1;
+	}
+	
+	/**
 	 * This function insert into the table licenses the license numbers
 	 * with different authorized use time.
 	 */
-	public static void insertTableLicenses() {
-		try {
-			stmt = DBConnectionManager.getConnection().createStatement();	
+	public static void ValidateLicense(String licenseNumber) {
+		try {	
 			// Execute inserting query
-			String sql = "INSERT INTO LICENSES(License_number, License_type, Authorized_use_time) " + 
-							"VALUES ('1234-1234-1234-1234', 'administrator', 'unlimited'),"
-							+ "('5483-1890-4832-0233', 'user', '1')," // 1 hour license
-							+ "('1234-5678-9101-1121', 'user', '24')," // 24 hour license
-							+ "('3242-5262-7282-9303', 'user', '168')," // 1 week license
-							+ "('1323-3343-5363-7383', 'user', '720')," // 1 month license
-							+ "('9405-0515-2535-4555', 'user', '2160')," // 3 months license
-							+ "('6061-7989-5608-8870', 'user', '4320')," // 6 months license
-							+ "('6961-3289-5028-1266', 'user', '8640')"; // 1 year license
-			stmt.executeUpdate(sql);
+			String sql = "UPDATE LICENSES SET Date VALUES (?)";
+			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
+			// Set fields
+			ps.setDate(1, Date.valueOf(LocalDate.now()));
+			ps.executeUpdate();
 			DBConnectionManager.getConnection().close();
 		}
 		catch (SQLException se) {
@@ -348,3 +401,17 @@ public class DaoModel {
 		}
 	}
 }
+
+
+
+/*
+sql = "INSERT INTO LICENSES(License_number, License_type, Authorized_use_time) " + 
+		"VALUES ('1234-1234-1234-1234', '2', '0')," //50 years license
+		+ "('5483-1890-4832-0233', '1', '3600')," // 1 hour license
+		+ "('1234-5678-9101-1121', '1', '86400')," // 24 hour license
+		+ "('3242-5262-7282-9303', '1', '604800')," // 1 week license
+		+ "('1323-3343-5363-7383', '1', '2592000')," // 1 month license
+		+ "('9405-0515-2535-4555', '1', '7776000')," // 3 months license
+		+ "('6061-7989-5608-8870', '1', '15552000')," // 6 months license
+		+ "('6961-3289-5028-1266', '1', '31536000')"; // 1 year license
+*/

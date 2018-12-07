@@ -67,19 +67,19 @@ public class FXMLLicenseController {
     }
     
     // TODO: C. check license return true if license is ok, false is not.
-    private boolean checkLicense(String license) {
+    private int checkLicense(String license) {
     	ResultSet rs = DaoModel.retrieveLicense(license);
     	try {
 			if (rs.next()) {
-				return true;
+				return 1;
 			}
 			else {
-				return false;
+				return 0;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	return false;
+    	return 0;
     	//return Arrays.asList(validLicenses).contains(license);
     	
     }
