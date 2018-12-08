@@ -181,8 +181,8 @@ public class DaoModel {
 			stmt = DBConnectionManager.getConnection().createStatement();
 			String sql = "SELECT License_number FROM LICENSES WHERE License_number ='"+licenseNumber+"'";
 			rs = stmt.executeQuery(sql);
+			DBConnectionManager.getConnection().close();
 			if (rs.next()) {
-				DBConnectionManager.getConnection().close();
 				return 1;
 			}
 			else {
