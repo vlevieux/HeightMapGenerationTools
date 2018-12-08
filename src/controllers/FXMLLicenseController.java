@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,7 +41,7 @@ public class FXMLLicenseController {
     		switch(check) {
 	    		case 1:
 	    			int days = checkDays(license_textfield_license.getText());
-	    			//TODO pop up with the remaining days of use
+	    			FXMLController.alertDialog("Current License", "Time left : "+days+" days.", "When your license will be finished, please see your administrator.", AlertType.INFORMATION);
 	    			sessionPreferences.putInt("LICENSE_TYPE", check);
 	    			this.close();
 	    			break;

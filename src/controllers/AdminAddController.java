@@ -40,7 +40,6 @@ public class AdminAddController {
     		}
     		else {
     			System.out.println(admin_add_textfield_license.getText()+" "+licenseType+" "+duration);
-    			//TODO add automatic exit
     		}
     	} else if (licenseType==0) {
     		admin_text_message.setText("You must select a license type.");

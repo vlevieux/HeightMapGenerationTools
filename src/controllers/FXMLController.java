@@ -683,14 +683,17 @@ public class FXMLController {
     		alertDialog("Nothing to store", "You should run at least on algorithm.", "You have not run an algorithm yet. Please select one in the list and run it (Ctrl+F5) to allow store feature.", AlertType.ERROR);
     		return;
     	}
+    	String paramMap = algo.getParameters().toString();
     	String algoName = algo.getClass().getName();
-    	//TODO convert the statMap into a string
     	Map<String, String> statMap = algo.getStatistics();
     	String height = statMap.get("size");
     	String max = statMap.get("max");
     	String min = statMap.get("min");
     	String average = statMap.get("average");
     	String median = statMap.get("median");
-    	DaoModel.insertTablesMap(algoName, height, height, height, max, min, average, median);
+    	DaoModel.insertTablesMap(algoName, height, height, paramMap, max, min, average, median);
+    	
+    	
+    	
     }
 }
