@@ -219,6 +219,7 @@ public class DaoModel {
 			ps.setTime(5, Time.valueOf(LocalTime.now()));
 			ps.setDate(6, Date.valueOf(LocalDate.now()));
 			ps.executeUpdate();
+			DBConnectionManager.getConnection().close();
 					
 			sql = "INSERT INTO HEIGHTMAP_STATISTICS(Algorithm_name, Max_value, Min_value, Average_value, Median_value, Time, Date) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			ps = DBConnectionManager.getConnection().prepareStatement(sql);
@@ -231,10 +232,7 @@ public class DaoModel {
 			ps.setTime(6, Time.valueOf(LocalTime.now()));
 			ps.setDate(7, Date.valueOf(LocalDate.now()));
 			ps.executeUpdate();
-			
 			DBConnectionManager.getConnection().close();
-			checkExistingTable("HEIGHTMAP_PARAMETERS");
-			checkExistingTable("HEIGHTMAP_STATISTICS");
 		}
 		catch (SQLException se) { 
 			se.printStackTrace();  
