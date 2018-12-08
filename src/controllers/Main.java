@@ -46,7 +46,6 @@ public class Main extends Application {
                 "%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$-6s %2$s %5$s%6$s%n");
 	}
 	
-	// TODO: C. Deltel check Table existe
 	private void checkTable() {
 		String [] tables = {"HEIGHTMAP_PARAMETERS","HEIGHTMAP_STATISTICS", "LICENSES"};
 		for (int tableNumber = 0; tableNumber<3; tableNumber++) {
