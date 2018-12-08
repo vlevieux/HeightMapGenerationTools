@@ -77,14 +77,9 @@ public class Main extends Application {
 					break;
 				case 3:
 					//The table exist and is not empty
-					switch(tableNumber) {
-					case 0:
-						DaoModel.deleteTableMapParameters();
-						break;
-					case 1:
-						DaoModel.deleteTableMapStatistics();
-						break;	
-				}
+					if (tableNumber==0 || tableNumber==1) {
+						DaoModel.deleteTables();
+					}
 				break;
 			}
 		}	

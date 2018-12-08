@@ -6,22 +6,54 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="600.0" maxWidth="1000.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerController">
-   <bottom>
-      <Text fx:id="db_text_title" fill="#c72020" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" BorderPane.alignment="CENTER_LEFT">
+<BorderPane maxHeight="600.0" maxWidth="1000.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLDatabaseController">
+    <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Table View">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <MenuButton fx:id="db_menu_button_action" alignment="CENTER" maxWidth="350.0" minWidth="350.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" text="Action" textAlignment="RIGHT">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#setTables" text="Show Tables" />
+                  <MenuItem mnemonicParsing="false" onAction="#setRetrieveParameters" text="Retrieve Parameters" />
+                  <MenuItem mnemonicParsing="false" onAction="#setDelLastMap" text="Delete Last Map" />
+                  <MenuItem mnemonicParsing="false" onAction="#setDelTables" text="Delete Tables" />
+              </items>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="100.0" top="30.0" />
+               </HBox.margin>
+            </MenuButton>
+            <TextField fx:id="db_text_field" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" visible="false">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="30.0" top="30.0" />
+               </HBox.margin>
+            </TextField>
+            <Button maxWidth="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#executeQuery" prefWidth="75.0" text="Execute">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="150.0" right="20.0" top="60.0" />
+               </HBox.margin>
+            </Button>
+         </children>
          <BorderPane.margin>
-            <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
+            <Insets />
          </BorderPane.margin>
-      </Text>
-   </bottom>
+      </HBox>
+   </top>
    <center>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox fx:id="db_vbox_tables" visible="false" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="5.0" right="5.0" />
          </BorderPane.margin>
@@ -52,39 +84,11 @@
          </children>
       </VBox>
    </center>
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Table View">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <MenuButton alignment="CENTER" maxWidth="350.0" minWidth="350.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" text="Action" textAlignment="RIGHT">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Show Table Parameters" />
-                <MenuItem mnemonicParsing="false" text="Show Table Statistics" />
-                  <MenuItem mnemonicParsing="false" text="Retrieve Parameters" />
-                  <MenuItem mnemonicParsing="false" text="Delete Last Map" />
-                  <MenuItem mnemonicParsing="false" text="Delete Table Parameters" />
-                  <MenuItem mnemonicParsing="false" text="Delete Table Statistics" />
-              </items>
-               <HBox.margin>
-                  <Insets bottom="10.0" left="100.0" top="30.0" />
-               </HBox.margin>
-            </MenuButton>
-            <Button maxWidth="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#executeQuery" prefWidth="75.0" text="Execute">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="150.0" right="20.0" top="50.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </HBox>
-   </top>
+   <bottom>
+	   <Text fx:id="db_text_message" fill="#c72020" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" BorderPane.alignment="CENTER_LEFT">
+	      <BorderPane.margin>
+	         <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
+	      </BorderPane.margin>
+	   </Text>
+   </bottom>
 </BorderPane>

@@ -663,17 +663,20 @@ public class FXMLController {
 		DaoModel.deleteLastMap();
     }
 
-    //TODO: C. Deltel
     @FXML
-    void databaseShowParameters(ActionEvent event) {
-
-    }
-
-    //TODO: C. Deltel
-    @FXML
-    void databaseShowStatistics(ActionEvent event) {
-    	System.out.println(((Stage)main_image_view_map.getScene().getWindow()).getWidth());
-    	System.out.println(((Stage)main_image_view_map.getScene().getWindow()).getHeight());
+    void databaseShow(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/views/DatabaseView.fxml"));
+			Scene scene = new Scene(root);
+	        Stage stage = new Stage();
+	        stage.setTitle("Database HeighMap Generation Tools");
+	        stage.setResizable(false);
+	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
+	        stage.setScene(scene);
+	        stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML

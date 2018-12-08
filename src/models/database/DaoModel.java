@@ -112,8 +112,8 @@ public class DaoModel {
 					"Min_value SMALLINT, " +
 					"Average_value DOUBLE PRECISION, " +
 					"Median_value SMALLINT, " +
-					"Date DATE, " +
 					"Time TIME," +
+					"Date DATE, " +
 					"PRIMARY KEY (Stat_id))";
 			// Execute create query
 			stmt.executeUpdate(sql);
@@ -209,30 +209,32 @@ public class DaoModel {
 	 */
 	public static void insertTablesMap(String algorithmName, String height, String width, String mapParameters, String maxValue, String minValue, String averageValue, String medianValue) {
 		try {
-			String sql = "INSERT INTO HEIGHTMAP_PARAMETERS (Algorithm_name, Height, Width, Map_parameters, Date, Time) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO HEIGHTMAP_PARAMETERS (Algorithm_name, Height, Width, Map_parameters, Time, Date) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
 			// Set fields
 			ps.setString(1, algorithmName);
 			ps.setString(2, height);
 			ps.setString(3, width);
 			ps.setString(4, mapParameters);
-			ps.setDate(5, Date.valueOf(LocalDate.now()));
-			ps.setTime(6, Time.valueOf(LocalTime.now()));
+			ps.setTime(5, Time.valueOf(LocalTime.now()));
+			ps.setDate(6, Date.valueOf(LocalDate.now()));
 			ps.executeUpdate();
 					
-			sql = "INSERT INTO HEIGHTMAP_STATISTICS(Algorithm_name, Max_value, Min_value, Average_value, Median_value, Date, Time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO HEIGHTMAP_STATISTICS(Algorithm_name, Max_value, Min_value, Average_value, Median_value, Time, Date) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			ps = DBConnectionManager.getConnection().prepareStatement(sql);
 			// Set fields
 			ps.setString(1, algorithmName);
-			ps.setString(2, maxValue);
-			ps.setString(3, minValue);
-			ps.setString(4, averageValue);
-			ps.setString(5, medianValue);
-			ps.setDate(6, Date.valueOf(LocalDate.now()));
-			ps.setTime(7, Time.valueOf(LocalTime.now()));
+			ps.setInt(2, (int)Double.parseDouble(maxValue));
+			ps.setInt(3, (int)Double.parseDouble(minValue));
+			ps.setDouble(4, (int)Double.parseDouble(averageValue));
+			ps.setInt(5, (int)Double.parseDouble(medianValue));		
+			ps.setTime(6, Time.valueOf(LocalTime.now()));
+			ps.setDate(7, Date.valueOf(LocalDate.now()));
 			ps.executeUpdate();
 			
 			DBConnectionManager.getConnection().close();
+			checkExistingTable("HEIGHTMAP_PARAMETERS");
+			checkExistingTable("HEIGHTMAP_STATISTICS");
 		}
 		catch (SQLException se) { 
 			se.printStackTrace();  
@@ -247,9 +249,9 @@ public class DaoModel {
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
 			// Last map deletion
-			String sql = "DELETE FROM HEIGHTMAP_PARAMETERS WHERE Map_id=(SELECT MAX(Map_id) FROM HEIGHTMAP_PARAMETERS)";
+			String sql = "DELETE FROM HEIGHTMAP_STATISTICS WHERE Stat_id=(SELECT MAX(Stat_id) FROM HEIGHTMAP_STATISTICS)";
 			stmt.executeUpdate(sql);
-			sql = "DELETE FROM HEIGHTMAP_STATISTICS WHERE Stat_id=(SELECT MAX(Stat_id) FROM HEIGHTMAP_STATISTICS)";
+			sql = "DELETE FROM HEIGHTMAP_PARAMETERS WHERE Map_id=(SELECT MAX(Map_id) FROM HEIGHTMAP_PARAMETERS)";
 			stmt.executeUpdate(sql);
 			
 			DBConnectionManager.getConnection().close(); 
@@ -270,7 +272,7 @@ public class DaoModel {
 		ResultSet rs = null;
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT Algorithm_name, Height, Width, Map_parameters FROM HEIGHTMAP_PARAMETERS WHERE Map_id='"+mapId+"'";
+			String sql = "SELECT * FROM HEIGHTMAP_PARAMETERS WHERE Map_id='"+mapId+"'";
 			rs = stmt.executeQuery(sql);
 			DBConnectionManager.getConnection().close();
 		} catch (SQLException se) {
@@ -337,7 +339,7 @@ public class DaoModel {
 	 * @param licenseNumber
 	 * This function update the current license for the user with the start date.
 	 */
-	public static void ValidateLicense(String licenseNumber) {
+	public static void validateLicense(String licenseNumber) {
 		try {	
 			// Execute inserting query
 			String sql = "UPDATE LICENSES SET Date = ?";
@@ -353,28 +355,14 @@ public class DaoModel {
 	}
 
 	/**
-	 * This function delete the table HEIGHTMAP_PARAMETERS from the database
+	 * This function delete the tables HEIGHTMAP_PARAMETERS and HEIGHTMAP_STATISTICS from the database
 	 */
-	public static void deleteTableMapParameters() {
-		try {
-			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "DELETE FROM HEIGHTMAP_PARAMETERS";
-			// Execute delete query
-			stmt.executeUpdate(sql);
-			DBConnectionManager.getConnection().close();
-		}
-		catch (SQLException se) {
-			se.printStackTrace();
-		}
-	}
-	
-	/**
-	 * This function delete the table HEIGHTMAP_STATISTICS from the database
-	 */
-	public static void deleteTableMapStatistics() {
+	public static void deleteTables() {
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
 			String sql = "DELETE FROM HEIGHTMAP_STATISTICS";
+			stmt.executeUpdate(sql);
+			sql = "DELETE FROM HEIGHTMAP_PARAMETERS";
 			stmt.executeUpdate(sql);
 			DBConnectionManager.getConnection().close();
 		}
