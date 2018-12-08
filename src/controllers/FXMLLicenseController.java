@@ -36,10 +36,13 @@ public class FXMLLicenseController {
     @FXML
     void activate(ActionEvent event) {
     	if (license_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
-    		int licenseType = checkLicense(license_textfield_license.getText());
-    		if (licenseType>0) {
-    			sessionPreferences.putInt("LICENSE_TYPE", licenseType);
+    		int check = checkLicense(license_textfield_license.getText());
+    		if (check == 1 || check == 2) {
+    			sessionPreferences.putInt("LICENSE_TYPE", check);
     			this.close();
+    		} 
+    		else if (check == 3) {
+    			license_text_error_message.setText("The license you have entered is expired.");			
     		} else {
     			license_text_error_message.setText("The license you have entered is not valid.");
     		}
@@ -71,23 +74,22 @@ public class FXMLLicenseController {
 		}
     }
     
-    // TODO: C. check license return true if license is ok, false is not.
     private int checkLicense(String license) {
     	ResultSet rs = DaoModel.retrieveLicense(license);
     	try {
 			if (rs.next()) {
-				String licenseType = rs.getString("License_type");
+				int licenseType = rs.getInt(3);
 				// admin user
-				if (licenseType.equals("2")) {
-					return 2;
+				if (licenseType == 2) {
+					return licenseType;
 				}
 				// normal user
-				else if (licenseType.equals("1")){
+				else if (licenseType == 1){
 					Date date = rs.getDate(4);
 					// First activation of the license
 					if (date == null) {
 						DaoModel.ValidateLicense(license);
-						return 1;
+						return licenseType;
 					}
 					// Check if the license expired
 					else {
@@ -101,7 +103,7 @@ public class FXMLLicenseController {
 							return 3;
 						}
 						else {
-							return 1;
+							return licenseType;
 						}
 					}
 				}
