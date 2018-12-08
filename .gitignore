@@ -1,4 +1,4 @@
 /bin/
-/log_algorithm.log
-/derby.log
+log_algorithm.log
+derby.log
 /heightmapdb/
