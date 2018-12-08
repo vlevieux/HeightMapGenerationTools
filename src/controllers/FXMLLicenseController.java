@@ -101,7 +101,7 @@ public class FXMLLicenseController {
 					Date date = rs.getDate(4);
 					// First activation of the license
 					if (date == null) {
-						DaoModel.ValidateLicense(license);
+						DaoModel.validateLicense(license);
 						return licenseType;
 					}
 					// Check if the license expired
