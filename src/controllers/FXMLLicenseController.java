@@ -37,14 +37,23 @@ public class FXMLLicenseController {
     void activate(ActionEvent event) {
     	if (license_textfield_license.getText().matches("^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$")) {
     		int check = checkLicense(license_textfield_license.getText());
-    		if (check == 1 || check == 2) {
-    			sessionPreferences.putInt("LICENSE_TYPE", check);
-    			this.close();
-    		} 
-    		else if (check == 3) {
-    			license_text_error_message.setText("The license you have entered is expired.");			
-    		} else {
-    			license_text_error_message.setText("The license you have entered is not valid.");
+    		switch(check) {
+	    		case 1:
+	    			int days = checkDays(license_textfield_license.getText());
+	    			System.out.println(days);
+	    			//TODO pop up with the remaining days of use
+	    			sessionPreferences.putInt("LICENSE_TYPE", check);
+	    			this.close();
+	    			break;
+	    		case 2:
+	    			sessionPreferences.putInt("LICENSE_TYPE", check);
+	    			this.close();
+	    			break;
+	    		case 3:
+	    			license_text_error_message.setText("The license you have entered is expired.");
+	    			break;
+	    		default :
+	    			license_text_error_message.setText("The license you have entered is not valid.");
     		}
     	} else {
     		license_text_error_message.setText("The license you have entered does not match the license format.");
@@ -74,6 +83,11 @@ public class FXMLLicenseController {
 		}
     }
     
+    /**
+     * 
+     * @param license
+     * @return
+     */
     private int checkLicense(String license) {
     	ResultSet rs = DaoModel.retrieveLicense(license);
     	try {
@@ -93,13 +107,9 @@ public class FXMLLicenseController {
 					}
 					// Check if the license expired
 					else {
-						int authorizedUseTime = rs.getInt(5);
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(date);
-						cal.add(Calendar.DATE, authorizedUseTime);
-						Date newDate = (Date) cal.getTime(); 
 						// License expired
-						if (Date.valueOf(LocalDate.now()).compareTo(newDate) > 0) {
+						int days = checkDays(license);
+						if (days < 0) {
 							return 3;
 						}
 						else {
@@ -117,5 +127,30 @@ public class FXMLLicenseController {
     	return -1;
     	//return Arrays.asList(validLicenses).contains(license);
     	
+    }
+    
+    /**
+     * 
+     * @param license
+     * @return
+     */
+    private int checkDays(String license) {
+    	ResultSet rs = DaoModel.retrieveLicense(license);
+    	Date date;
+		try {
+			if(rs.next()) {
+				date = rs.getDate(4);
+				int authorizedUseTime = rs.getInt(5);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(date);
+				cal.add(Calendar.DATE, authorizedUseTime);
+				Date newDate = (Date) cal.getTime(); 
+				int days = newDate.compareTo(Date.valueOf(LocalDate.now()));
+				return days;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
     }
 }
