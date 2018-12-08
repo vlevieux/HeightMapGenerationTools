@@ -41,7 +41,7 @@ public class DaoModel {
 			
 			// Check if "tableName" table is already there
 			if (tables.next()) {
-				//System.out.println("The table already exists...");
+				System.out.println("The table already exists...");
 				stmt = DBConnectionManager.getConnection().createStatement();
 				String sql = "SELECT COUNT(*) FROM "+tableName;
 				ResultSet rs = stmt.executeQuery(sql);
@@ -50,19 +50,19 @@ public class DaoModel {
 					rows = rs.getInt(1);
 				}
 				if(rows == 0) {
-					//System.out.println("The table is empty.");
+					System.out.println("The table is empty.");
 					DBConnectionManager.getConnection().close();
 					return 2;
 				}
 				else {
-					//System.out.println("The table is not empty.");
-					//System.out.println("There are "+rows+" rows in your table.");
+					System.out.println("The table is not empty.");
+					System.out.println("There are "+rows+" rows in your table.");
 					DBConnectionManager.getConnection().close();
 					return 3;
 				}
 			}
 			else {
-				//System.out.println("There is no table called "+tableName+ " in this database.");
+				System.out.println("There is no table called "+tableName+ " in this database.");
 				DBConnectionManager.getConnection().close(); 
 				return 1;
 			}
@@ -174,16 +174,16 @@ public class DaoModel {
 	 * @param licenseType
 	 * @param authorizedUseTime
 	 */
-	public static int insertTableLicenses(String licenseNumber, String licenseType, String authorizedUseTime) {
+	public static int insertTableLicenses(String licenseNumber, int licenseType, int authorizedUseTime) {
 		ResultSet rs = null;
 		try {	
 			// Check if the license already exist in the database
 			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT License_number FROM LICENSES WHERE License_number = "+licenseNumber;
+			String sql = "SELECT License_number FROM LICENSES WHERE License_number ='"+licenseNumber+"'";
 			rs = stmt.executeQuery(sql);
 			if (rs.next()) {
 				DBConnectionManager.getConnection().close();
-				return 0;
+				return 1;
 			}
 			else {
 				// Execute inserting query
@@ -191,11 +191,11 @@ public class DaoModel {
 				PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
 				// Set fields
 				ps.setString(1, licenseNumber);
-				ps.setString(2, licenseType);
-				ps.setString(3, authorizedUseTime);
+				ps.setInt(2, licenseType);
+				ps.setInt(3, authorizedUseTime);
 				ps.executeUpdate();
 				DBConnectionManager.getConnection().close();
-				return 1;
+				return 0;
 			}
 		}
 		catch (SQLException se) {
@@ -207,7 +207,6 @@ public class DaoModel {
 	/**
 	 * This method perform the insertion of data into the two tables.
 	 */
-	//TODO generate string values mapParameters
 	public static void insertTablesMap(String algorithmName, String height, String width, String mapParameters, String maxValue, String minValue, String averageValue, String medianValue) {
 		try {
 			String sql = "INSERT INTO HEIGHTMAP_PARAMETERS (Algorithm_name, Height, Width, Map_parameters, Date, Time) VALUES (?, ?, ?, ?, ?, ?)";
@@ -271,7 +270,7 @@ public class DaoModel {
 		ResultSet rs = null;
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT Algorithm_name, Height, Width, Map_parameters FROM HEIGHTMAP_PARAMETERS WHERE Map_id="+mapId;
+			String sql = "SELECT Algorithm_name, Height, Width, Map_parameters FROM HEIGHTMAP_PARAMETERS WHERE Map_id='"+mapId+"'";
 			rs = stmt.executeQuery(sql);
 			DBConnectionManager.getConnection().close();
 		} catch (SQLException se) {
@@ -287,7 +286,7 @@ public class DaoModel {
 		ResultSet rs = null;
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT Map_id, Algorithm_name, Height, Width, Map_parameters, Date, Time FROM HEIGHTMAP_PARAMETERS";
+			String sql = "SELECT * FROM HEIGHTMAP_PARAMETERS";
 			rs = stmt.executeQuery(sql);	
 			DBConnectionManager.getConnection().close();
 		} catch (SQLException e) {
@@ -304,7 +303,7 @@ public class DaoModel {
 		ResultSet rs = null;
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT Stat_id, Algorithm_name, Max_value, Min_value, Average_value, Median_value, Height_histogram, Date, Time FROM HEIGHTMAP_STATISTICS";
+			String sql = "SELECT * FROM HEIGHTMAP_STATISTICS";
 			rs = stmt.executeQuery(sql);		
 			DBConnectionManager.getConnection().close();
 		} catch (SQLException e) {
@@ -335,13 +334,13 @@ public class DaoModel {
 	}
 	
 	/**
-	 * This function insert into the table licenses the license numbers
-	 * with different authorized use time.
+	 * @param licenseNumber
+	 * This function update the current license for the user with the start date.
 	 */
 	public static void ValidateLicense(String licenseNumber) {
 		try {	
 			// Execute inserting query
-			String sql = "UPDATE LICENSES SET Date VALUES (?)";
+			String sql = "UPDATE LICENSES SET Date = ?";
 			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
 			// Set fields
 			ps.setDate(1, Date.valueOf(LocalDate.now()));

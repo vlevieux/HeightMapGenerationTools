@@ -1,11 +1,11 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.lang.Math;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
@@ -40,7 +40,6 @@ public class FXMLLicenseController {
     		switch(check) {
 	    		case 1:
 	    			int days = checkDays(license_textfield_license.getText());
-	    			System.out.println(days);
 	    			//TODO pop up with the remaining days of use
 	    			sessionPreferences.putInt("LICENSE_TYPE", check);
 	    			this.close();
@@ -136,17 +135,27 @@ public class FXMLLicenseController {
      */
     private int checkDays(String license) {
     	ResultSet rs = DaoModel.retrieveLicense(license);
-    	Date date;
 		try {
 			if(rs.next()) {
-				date = rs.getDate(4);
+				Date date = rs.getDate(4);
 				int authorizedUseTime = rs.getInt(5);
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(date);
-				cal.add(Calendar.DATE, authorizedUseTime);
-				Date newDate = (Date) cal.getTime(); 
-				int days = newDate.compareTo(Date.valueOf(LocalDate.now()));
-				return days;
+				
+				Calendar calLicense = Calendar.getInstance();
+				calLicense.setTime(date);
+				calLicense.add(Calendar.DATE, authorizedUseTime);
+				
+				Calendar calLocale = Calendar.getInstance();
+				Date localeDate = new Date();
+				calLocale.setTime(localeDate);
+				
+				Date startDate = calLocale.getTime();
+				Date endDate = calLicense.getTime();
+				long startTime = startDate.getTime();
+				long endTime = endDate.getTime();
+				long diffTime = endTime - startTime;
+				long days = diffTime / (1000 * 60 * 60 * 24);
+
+				return Math.toIntExact(days);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
