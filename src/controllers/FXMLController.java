@@ -694,6 +694,6 @@ public class FXMLController {
     	String min = statMap.get("min");
     	String average = statMap.get("average");
     	String median = statMap.get("median");
-    	DaoModel.insertTablesMap(algoName, height, height, paramMap, max, min, average, median);
+    	DaoModel.insertTablesMap(algoName, height, height, paramMap, min, max, average, median);
     }
 }

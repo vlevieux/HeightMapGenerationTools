@@ -108,10 +108,10 @@ public class DaoModel {
 			String sql = "CREATE TABLE HEIGHTMAP_STATISTICS (" + 
 					"Stat_id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) REFERENCES HEIGHTMAP_PARAMETERS(Map_id), " + 
 					"Algorithm_name VARCHAR(50), " +
-					"Max_value SMALLINT, " + 
-					"Min_value SMALLINT, " +
+					"Min_value INT, " + 
+					"Max_value INT, " +
 					"Average_value DOUBLE PRECISION, " +
-					"Median_value SMALLINT, " +
+					"Median_value INT, " +
 					"Time TIME," +
 					"Date DATE, " +
 					"PRIMARY KEY (Stat_id))";
@@ -207,7 +207,7 @@ public class DaoModel {
 	/**
 	 * This method perform the insertion of data into the two tables.
 	 */
-	public static void insertTablesMap(String algorithmName, String height, String width, String mapParameters, String maxValue, String minValue, String averageValue, String medianValue) {
+	public static void insertTablesMap(String algorithmName, String height, String width, String mapParameters, String minValue, String maxValue, String averageValue, String medianValue) {
 		try {
 			String sql = "INSERT INTO HEIGHTMAP_PARAMETERS (Algorithm_name, Height, Width, Map_parameters, Time, Date) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = DBConnectionManager.getConnection().prepareStatement(sql);
@@ -225,8 +225,8 @@ public class DaoModel {
 			ps = DBConnectionManager.getConnection().prepareStatement(sql);
 			// Set fields
 			ps.setString(1, algorithmName);
-			ps.setInt(2, (int)Double.parseDouble(maxValue));
-			ps.setInt(3, (int)Double.parseDouble(minValue));
+			ps.setInt(2, (int)Double.parseDouble(minValue));
+			ps.setInt(3, (int)Double.parseDouble(maxValue));
 			ps.setDouble(4, (int)Double.parseDouble(averageValue));
 			ps.setInt(5, (int)Double.parseDouble(medianValue));		
 			ps.setTime(6, Time.valueOf(LocalTime.now()));

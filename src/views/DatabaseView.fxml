@@ -17,7 +17,7 @@
     <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Table View">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Map Parameters / Statistics">
                <HBox.margin>
                   <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
                </HBox.margin>
@@ -64,9 +64,9 @@
                 <TableColumn fx:id="db_table_map_col_algorithm" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" text="Algorithm" />
                   <TableColumn fx:id="db_table_map_col_height" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Height" />
                   <TableColumn fx:id="db_table_map_col_width" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Width" />
-                  <TableColumn fx:id="db_table_map_col_param" maxWidth="600.0" minWidth="250.0" prefWidth="250.0" text="Parameters" />
-                  <TableColumn fx:id="db_table_map_col_time" maxWidth="170.0" minWidth="110.0" prefWidth="110.0" text="Time" />
-                  <TableColumn fx:id="db_table_map_col_date" maxWidth="170.0" minWidth="110.0" prefWidth="110.0" text="Date" />
+                  <TableColumn fx:id="db_table_map_col_param" maxWidth="800.0" minWidth="250.0" prefWidth="250.0" text="Parameters" />
+                  <TableColumn fx:id="db_table_map_col_time" maxWidth="120.0" minWidth="110.0" prefWidth="110.0" text="Time" />
+                  <TableColumn fx:id="db_table_map_col_date" maxWidth="120.0" minWidth="110.0" prefWidth="110.0" text="Date" />
               </columns>
             </TableView>
             <TableView fx:id="db_table_stat" layoutX="10.0" layoutY="10.0">
@@ -77,8 +77,8 @@
                   <TableColumn fx:id="db_table_stat_col_max" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Max" />
                   <TableColumn fx:id="db_table_stat_col_avg" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Average" />
                   <TableColumn fx:id="db_table_stat_col_med" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Median" />
-                  <TableColumn fx:id="db_table_stat_col_time" maxWidth="170.0" minWidth="120.0" prefWidth="120.0" text="Time" />
-                  <TableColumn fx:id="db_table_stat_col_date" maxWidth="170.0" minWidth="120.0" prefWidth="120.0" text="Date" />
+                  <TableColumn fx:id="db_table_stat_col_time" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Time" />
+                  <TableColumn fx:id="db_table_stat_col_date" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Date" />
                </columns>
             </TableView>
          </children>
