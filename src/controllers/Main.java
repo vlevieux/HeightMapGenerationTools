@@ -20,8 +20,13 @@ public class Main extends Application {
 	
 	public final static Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
 	
+	public final static String greetingMessage = "HeightMapGenerationTool Version 1.0, 12/09/2018\n"
+			+ "Directed by C. DELTEL & V. LEVIEUX on an original idea of B. HYON & V. LEVIEUX\n"
+			+ "GitHub : https://github.com/vlevieux/HeightMapGenerationTools";
+	
 	@Override
 	public void start(Stage stage) {
+		System.out.println(greetingMessage);
 		setupLogger();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/loadingView.fxml"));
