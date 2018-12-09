@@ -56,13 +56,13 @@ public class FXMLDatabaseController {
     	db_table_map.setEditable(true);
     	db_table_stat.setEditable(true);
     	 
-    	db_table_map_col_id = new TableColumn<Data, String>("ID");
-    	db_table_map_col_algorithm = new TableColumn<Data, String>();
-    	db_table_map_col_height = new TableColumn<Data, String>();
-    	db_table_map_col_width = new TableColumn<Data, String>();
-    	db_table_map_col_param = new TableColumn<Data, String>();
-    	db_table_map_col_time = new TableColumn<Data, String>();
-    	db_table_map_col_date = new TableColumn<Data, String>();
+//    	db_table_map_col_id = new TableColumn<Data, String>("ID");
+//    	db_table_map_col_algorithm = new TableColumn<Data, String>();
+//    	db_table_map_col_height = new TableColumn<Data, String>();
+//    	db_table_map_col_width = new TableColumn<Data, String>();
+//    	db_table_map_col_param = new TableColumn<Data, String>();
+//    	db_table_map_col_time = new TableColumn<Data, String>();
+//    	db_table_map_col_date = new TableColumn<Data, String>();
     	
     	db_table_map_col_id.setCellValueFactory(new PropertyValueFactory<Data, String>("mapId"));
     	db_table_map_col_algorithm.setCellValueFactory(new PropertyValueFactory<Data, String>("mapAlgorithm"));
@@ -104,9 +104,7 @@ public class FXMLDatabaseController {
 					}
 					
 					db_table_map.setItems(dataMap);
-					db_table_map.getColumns().addAll(db_table_map_col_id, db_table_map_col_algorithm, db_table_map_col_height, db_table_map_col_width, db_table_map_col_param, db_table_map_col_time, db_table_map_col_date);
 					db_table_stat.setItems(dataStat);
-					db_table_map.getColumns().addAll(db_table_stat_col_id, db_table_stat_col_algorithm, db_table_stat_col_min, db_table_stat_col_max, db_table_stat_col_avg, db_table_stat_col_med, db_table_stat_col_time, db_table_map_col_date);
 					
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -197,92 +195,92 @@ public class FXMLDatabaseController {
 		/**
 		 * @return the mapId
 		 */
-		protected SimpleStringProperty getMapId() {
-			return mapId;
+		public String getMapId() {
+			return mapId.getValue();
 		}
 		/**
 		 * @return the mapAlgorithm
 		 */
-		protected SimpleStringProperty getMapAlgorithm() {
-			return mapAlgorithm;
+		public String getMapAlgorithm() {
+			return mapAlgorithm.getValue();
 		}
 		/**
 		 * @return the mapHeight
 		 */
-		protected SimpleStringProperty getMapHeight() {
-			return mapHeight;
+		public String getMapHeight() {
+			return mapHeight.getValue();
 		}
 		/**
 		 * @return the mapWidth
 		 */
-		protected SimpleStringProperty getMapWidth() {
-			return mapWidth;
+		public String getMapWidth() {
+			return mapWidth.getValue();
 		}
 		/**
 		 * @return the mapParam
 		 */
-		protected SimpleStringProperty getMapParam() {
-			return mapParam;
+		public String getMapParam() {
+			return mapParam.getValue();
 		}
 		/**
 		 * @return the mapTime
 		 */
-		protected SimpleStringProperty getMapTime() {
-			return mapTime;
+		public String getMapTime() {
+			return mapTime.getValue();
 		}
 		/**
 		 * @return the mapDate
 		 */
-		protected SimpleStringProperty getMapDate() {
-			return mapDate;
+		public String getMapDate() {
+			return mapDate.getValue();
 		}
 		/**
 		 * @return the statId
 		 */
-		protected SimpleStringProperty getStatId() {
-			return statId;
+		public String getStatId() {
+			return statId.getValue();
 		}
 		/**
 		 * @return the statAlgorithm
 		 */
-		protected SimpleStringProperty getStatAlgorithm() {
-			return statAlgorithm;
+		public String getStatAlgorithm() {
+			return statAlgorithm.getValue();
 		}
 		/**
 		 * @return the statMin
 		 */
-		protected SimpleStringProperty getStatMin() {
-			return statMin;
+		public String getStatMin() {
+			return statMin.getValue();
 		}
 		/**
 		 * @return the statMax
 		 */
-		protected SimpleStringProperty getStatMax() {
-			return statMax;
+		public String getStatMax() {
+			return statMax.getValue();
 		}
 		/**
 		 * @return the statAvg
 		 */
-		protected SimpleStringProperty getStatAvg() {
-			return statAvg;
+		public String getStatAvg() {
+			return statAvg.getValue();
 		}
 		/**
 		 * @return the statMed
 		 */
-		protected SimpleStringProperty getStatMed() {
-			return statMed;
+		public String getStatMed() {
+			return statMed.getValue();
 		}
 		/**
 		 * @return the statTime
 		 */
-		protected SimpleStringProperty getStatTime() {
-			return statTime;
+		public String getStatTime() {
+			return statTime.getValue();
 		}
 		/**
 		 * @return the statDate
 		 */
-		protected SimpleStringProperty getStatDate() {
-			return statDate;
+		public String getStatDate() {
+			return statDate.getValue();
 		}
 		
 		
