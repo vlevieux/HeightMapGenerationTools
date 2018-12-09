@@ -185,6 +185,9 @@ public class FXMLController {
 	private Button main_button_cancel;
 	
 	@FXML
+	private ImageView main_image_size;
+	
+	@FXML
 	private Text main_text_size;
 	
 	@FXML
@@ -212,10 +215,16 @@ public class FXMLController {
 	Preferences sessionPreferences = Preferences.userRoot();
 	
 	public void initialize() {
+		main_image_view_map.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream("images/firstheightmap.jpg")));
+		algorithm_vbox_warning_reformat_image.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream("images/ic_warning.png")));
+		hill_vbox_error_parameters.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream("images/ic_error.png")));
+		main_image_size.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream("images/ic_size.png")));
+		
 		if (sessionPreferences.getInt("LICENSE_TYPE", 1)==2) {
 			main_menu_admin.setVisible(true);
 			main_menu_admin.setDisable(false);
 		}
+		
 		algorithm_vbox.getChildren().remove(main_vbox_random);
 		algorithm_vbox.getChildren().remove(main_vbox_square_diamond);
 		algorithm_vbox.getChildren().remove(main_vbox_hill);

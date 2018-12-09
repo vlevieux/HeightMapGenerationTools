@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.database.DaoModel;
@@ -21,10 +22,10 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) {
-		setupLogger();
+		//setupLogger();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/loadingView.fxml"));
-			Parent root = (Parent) loader.load();
+			AnchorPane root = (AnchorPane) loader.load();
             Scene scene = new Scene(root);
 	        stage.initStyle(StageStyle.UNDECORATED);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
