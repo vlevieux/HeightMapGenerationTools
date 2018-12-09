@@ -22,7 +22,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) {
-		//setupLogger();
+		setupLogger();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/loadingView.fxml"));
 			AnchorPane root = (AnchorPane) loader.load();
