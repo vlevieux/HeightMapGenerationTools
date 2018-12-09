@@ -3,8 +3,10 @@ package controllers;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
+
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,37 +38,38 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		Platform.runLater(new Runnable() {
-            @Override public void run() {
-        		loading(stage);
-            }
-        });		
+		
+		InitializingTask task = new InitializingTask();
+		task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
+			    new EventHandler<WorkerStateEvent>() {
+
+					@Override
+					public void handle(WorkerStateEvent event) {
+						try {
+							stage.close();
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
+							Parent root = (Parent) loader.load();
+				            Scene scene = new Scene(root);
+				            stage2 = new Stage();
+				            stage2.initStyle(StageStyle.DECORATED);
+					        stage2.setTitle("Licence Activation");
+					        stage2.getIcons().add(new Image("/images/firstheightmap.jpg"));
+					        stage2.setScene(scene);
+					        stage2.setResizable(false);
+					        //stage.setOnHiding( event -> {for(Handler h:LOGGER.getHandlers()){h.close();}} );
+					        stage2.show();
+						} catch(Exception e) {
+							e.printStackTrace();
+						}					
+					}});
+		Thread t = new Thread(task);
+		t.start();
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
 		launch(args);
 	}
 
-	private void loading(Stage stage) {
-		checkTable();
-		
-		try {
-			stage.close();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
-			Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            stage2 = new Stage();
-            stage2.initStyle(StageStyle.DECORATED);
-	        stage2.setTitle("Licence Activation");
-	        stage2.getIcons().add(new Image("/images/firstheightmap.jpg"));
-	        stage2.setScene(scene);
-	        stage2.setResizable(false);
-	        //stage.setOnHiding( event -> {for(Handler h:LOGGER.getHandlers()){h.close();}} );
-	        stage2.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	private void setupLogger() {
 		LOGGER.setUseParentHandlers(false);
 		Logger globalLogger = Logger.getLogger("global");
@@ -78,7 +81,7 @@ public class Main extends Application {
                 "%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$-6s %2$s %5$s%6$s%n");
 	}
 	
-	private void checkTable() {
+	public static void checkTable() {
 		String [] tables = {"HEIGHTMAP_PARAMETERS","HEIGHTMAP_STATISTICS", "LICENSES"};
 		for (int tableNumber = 0; tableNumber<3; tableNumber++) {
 			String table = tables[tableNumber];
