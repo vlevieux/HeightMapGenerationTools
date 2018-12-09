@@ -20,4 +20,11 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>images</name>
+			<type>2</type>
+			<location>D:/eclipse-java/workspace/HeightMapGenerationTools/src/images</location>
+		</link>
+	</linkedResources>
 </projectDescription>

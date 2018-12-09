@@ -1,6 +1,11 @@
 package controllers;
 
+import java.io.File;
+import java.net.URL;
+
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class LoadingController {
@@ -8,14 +13,10 @@ public class LoadingController {
     @FXML
     private Text text_loading;
 
+    @FXML
+    private ImageView loading_image;
+    
     public void initialize() {
-    	
-    	/*time.scheduleAtFixedRate( 
-    	        new java.util.TimerTask() {
-    	            @Override
-    	            public void run() {
-    	            	setLoading();
-    	            }
-    	        }, 0, 500); */
+    	loading_image.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream("images/loading.jpg")));
     }
 }

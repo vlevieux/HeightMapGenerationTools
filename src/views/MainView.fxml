@@ -344,7 +344,7 @@
         <left>
            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <children>
-                 <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                 <ImageView fx:id="main_image_size" fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                        <Image url="@../images/ic_size.png" />
                     </image>

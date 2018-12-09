@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.database.DaoModel;
@@ -33,6 +34,13 @@ public class FXMLLicenseController {
     
     @FXML
     private Text license_text_error_message;
+    
+    @FXML
+    private ImageView greeting_image;
+    
+    public void initialize() {
+    	greeting_image.setImage(new Image(this.getClass().getClassLoader().getResourceAsStream("images/firstheightmap.jpg")));
+    }
         
     @FXML
     void activate(ActionEvent event) {

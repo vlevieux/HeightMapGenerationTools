@@ -77,7 +77,7 @@
                   </Text>
                </children>
             </VBox>
-            <ImageView fitHeight="150.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="greeting_image" fitHeight="150.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/firstheightmap.jpg" />
                </image>
