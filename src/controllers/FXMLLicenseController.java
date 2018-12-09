@@ -72,9 +72,9 @@ public class FXMLLicenseController {
 			Scene scene = new Scene(root);
 	        Stage stage = s;
 	        stage.setTitle("Height Map Generation Tool");
-	        stage.setMinWidth(1000);
-	        stage.setMinHeight(900);
 	        stage.setResizable(true);
+	        stage.setMinHeight(300);
+	        stage.setMinWidth(400);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
 	        stage.show();
