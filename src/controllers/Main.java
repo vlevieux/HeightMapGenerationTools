@@ -88,15 +88,8 @@ public class Main extends Application {
 					//The table exist but is empty
 					if (tableNumber == 2) {
 						DaoModel.insertTableLicensesAdmin();
-					}
-					
+					}			
 					break;
-				case 3:
-					//The table exist and is not empty
-					if (tableNumber==0 || tableNumber==1) {
-						DaoModel.deleteTables();
-					}
-				break;
 			}
 		}	
 	}
