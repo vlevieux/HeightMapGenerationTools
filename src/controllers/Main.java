@@ -19,22 +19,18 @@ public class Main extends Application {
 	
 	public final static Logger LOGGER = Logger.getLogger( LoggerAlgorithm.class.getName());
 	
-	public Stage stage2;
-	LoadingController controller;
 	@Override
 	public void start(Stage stage) {
 		setupLogger();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/loadingView.fxml"));
 			Parent root = (Parent) loader.load();
-			controller = (LoadingController)loader.getController();
             Scene scene = new Scene(root);
 	        stage.initStyle(StageStyle.UNDECORATED);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
 	        stage.setResizable(false);
 	        stage.show();
-	        
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -42,25 +38,10 @@ public class Main extends Application {
 		InitializingTask task = new InitializingTask();
 		task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,
 			    new EventHandler<WorkerStateEvent>() {
-
 					@Override
 					public void handle(WorkerStateEvent event) {
-						try {
-							stage.close();
-							FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
-							Parent root = (Parent) loader.load();
-				            Scene scene = new Scene(root);
-				            stage2 = new Stage();
-				            stage2.initStyle(StageStyle.DECORATED);
-					        stage2.setTitle("Licence Activation");
-					        stage2.getIcons().add(new Image("/images/firstheightmap.jpg"));
-					        stage2.setScene(scene);
-					        stage2.setResizable(false);
-					        //stage.setOnHiding( event -> {for(Handler h:LOGGER.getHandlers()){h.close();}} );
-					        stage2.show();
-						} catch(Exception e) {
-							e.printStackTrace();
-						}					
+						stage.close();
+						loadingLicenseScreen();			
 					}});
 		Thread t = new Thread(task);
 		t.start();
@@ -72,7 +53,7 @@ public class Main extends Application {
 
 	private void setupLogger() {
 		LOGGER.setUseParentHandlers(false);
-		Logger globalLogger = Logger.getLogger("global");
+		Logger globalLogger = Logger.getLogger("");
 		Handler[] handlers = globalLogger.getHandlers();
 		for(Handler handler : handlers) {
 		    globalLogger.removeHandler(handler);
@@ -117,6 +98,25 @@ public class Main extends Application {
 					}
 				break;
 			}
+		}	
+	}
+	
+	private void loadingLicenseScreen() {
+		try {
+			Stage stageLicense;
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/licenseView.fxml"));
+			Parent root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            stageLicense = new Stage();
+            stageLicense.initStyle(StageStyle.DECORATED);
+	        stageLicense.setTitle("Licence Activation");
+	        stageLicense.getIcons().add(new Image("/images/firstheightmap.jpg"));
+	        stageLicense.setScene(scene);
+	        stageLicense.setResizable(false);
+	        stageLicense.setOnHiding( event -> {for(Handler h:LOGGER.getHandlers()){h.close();}} );
+	        stageLicense.show();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}	
 	}
 }
