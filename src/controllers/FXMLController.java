@@ -681,7 +681,7 @@ public class FXMLController {
 	        stage.setTitle("Database HeighMap Generation Tools");
 	        stage.setResizable(true);
 	        stage.setMinHeight(600);
-	        stage.setMinHeight(900);
+	        stage.setMinWidth(900);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
 	        stage.show();
