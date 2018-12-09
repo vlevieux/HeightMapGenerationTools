@@ -696,7 +696,7 @@ public class FXMLController {
     		return;
     	}
     	String paramMap = algo.getParameters().toString();
-    	String algoName = algo.getClass().getName();
+    	String algoName = algo.getClass().getName().substring(18);
     	Map<String, String> statMap = algo.getStatistics();
     	String height = statMap.get("size");
     	String max = statMap.get("max");

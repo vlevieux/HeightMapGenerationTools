@@ -2,181 +2,228 @@
 <class-diagram version="1.2.2" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="controllers.FXMLLicenseController" project="HeightMapGenerationTools" 
+  <class id="1" language="java" name="controllers.InitializingTask" project="HeightMapGenerationTools" 
+    file="/HeightMapGenerationTools/src/controllers/InitializingTask.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="551" y="31"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="controllers.FXMLLicenseController" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/FXMLLicenseController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1015" y="75"/>    
+    <position height="-1" width="-1" x="866" y="730"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="models.algorithms.Hill" project="HeightMapGenerationTools" 
+  <class id="3" language="java" name="models.algorithms.Hill" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/algorithms/Hill.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="934" y="692"/>    
+    <position height="-1" width="-1" x="1362" y="699"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="controllers.FXMLDatabaseController" project="HeightMapGenerationTools" 
+  <class id="4" language="java" name="controllers.FXMLDatabaseController" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/FXMLDatabaseController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="240" y="-86"/>    
+    <position height="-1" width="-1" x="590" y="908"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="models.database.DaoModel" project="HeightMapGenerationTools" 
+  <class id="5" language="java" name="models.database.DaoModel" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/database/DaoModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="331" y="428"/>    
+    <position height="-1" width="-1" x="1070" y="345"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="controllers.AdminAddController" project="HeightMapGenerationTools" 
+  <class id="6" language="java" name="controllers.AdminAddController" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/AdminAddController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="744" y="84"/>    
+    <position height="-1" width="-1" x="902" y="1005"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="models.algorithms.AlgorithmModel" project="HeightMapGenerationTools" 
+  <class id="7" language="java" name="models.algorithms.AlgorithmModel" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/algorithms/AlgorithmModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1455" y="432"/>    
+    <position height="-1" width="-1" x="1625" y="343"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="models.algorithms.Random" project="HeightMapGenerationTools" 
+  <class id="8" language="java" name="models.algorithms.Random" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/algorithms/Random.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1169" y="898"/>    
+    <position height="-1" width="-1" x="1677" y="849"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="controllers.FXMLController" project="HeightMapGenerationTools" 
+  <class id="9" language="java" name="controllers.FXMLController" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/FXMLController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2239" y="339"/>    
+    <position height="-1" width="-1" x="2297" y="670"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="controllers.LoggerAlgorithm" project="HeightMapGenerationTools" 
+  <class id="10" language="java" name="controllers.LoggerAlgorithm" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/LoggerAlgorithm.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1481" y="-287"/>    
+    <position height="-1" width="-1" x="417" y="30"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="models.algorithms.SquareDiamond" project="HeightMapGenerationTools" 
+  <class id="11" language="java" name="controllers.LoadingController" project="HeightMapGenerationTools" 
+    file="/HeightMapGenerationTools/src/controllers/LoadingController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="542" y="177"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="models.algorithms.SquareDiamond" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/algorithms/SquareDiamond.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1470" y="955"/>    
+    <position height="-1" width="-1" x="1952" y="852"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="models.database.DBConnectionManager" project="HeightMapGenerationTools" 
+  <class id="13" language="java" name="models.database.DBConnectionManager" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/database/DBConnectionManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="325" y="755"/>    
+    <position height="-1" width="-1" x="684" y="464"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="controllers.WatchFileChanges" project="HeightMapGenerationTools" 
+  <class id="14" language="java" name="controllers.FXMLDatabaseController.Data" project="HeightMapGenerationTools" 
+    file="/HeightMapGenerationTools/src/controllers/FXMLDatabaseController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="181" y="891"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="controllers.WatchFileChanges" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/WatchFileChanges.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1325" y="-196"/>    
+    <position height="-1" width="-1" x="269" y="61"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="models.Map" project="HeightMapGenerationTools" 
+  <class id="16" language="java" name="models.Map" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/models/Map.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1751" y="744"/>    
+    <position height="-1" width="-1" x="1431" y="1019"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="controllers.WatchFileChanges.WatchThread" project="HeightMapGenerationTools" 
+  <class id="17" language="java" name="controllers.WatchFileChanges.WatchThread" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/WatchFileChanges.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1420" y="-17"/>    
+    <position height="-1" width="-1" x="118" y="44"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="controllers.Main" project="HeightMapGenerationTools" 
+  <class id="18" language="java" name="controllers.Main" project="HeightMapGenerationTools" 
     file="/HeightMapGenerationTools/src/controllers/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1006" y="-310"/>    
+    <position height="-1" width="-1" x="1089" y="19"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="16">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="17" name="algo"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+  <association id="19">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="20" name="dataMap"/>      
+      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="19">    
-    <end type="SOURCE" refId="12"/>    
+  <generalization id="22">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <nesting id="24">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="14"/>  
   </nesting>  
-  <generalization id="20">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="21">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="22">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="23" name="con"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="25">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="26">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="27" name="map"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+  <association id="25">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="26" name="con"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="29" name="dataStat"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="32" name="algo"/>      
+      <multiplicity id="33" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="34">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <association id="35">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="36" name="map"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
