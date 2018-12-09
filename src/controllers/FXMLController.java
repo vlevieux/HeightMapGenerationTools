@@ -670,7 +670,7 @@ public class FXMLController {
 			Scene scene = new Scene(root);
 	        Stage stage = new Stage();
 	        stage.setTitle("Database HeighMap Generation Tools");
-	        stage.setResizable(false);
+	        stage.setResizable(true);
 	        stage.getIcons().add(new Image("/images/firstheightmap.jpg"));
 	        stage.setScene(scene);
 	        stage.show();

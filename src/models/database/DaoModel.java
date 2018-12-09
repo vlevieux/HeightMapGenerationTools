@@ -41,7 +41,7 @@ public class DaoModel {
 			
 			// Check if "tableName" table is already there
 			if (tables.next()) {
-				System.out.println("The table already exists...");
+				//System.out.println("The table already exists...");
 				stmt = DBConnectionManager.getConnection().createStatement();
 				String sql = "SELECT COUNT(*) FROM "+tableName;
 				ResultSet rs = stmt.executeQuery(sql);
@@ -50,19 +50,19 @@ public class DaoModel {
 					rows = rs.getInt(1);
 				}
 				if(rows == 0) {
-					System.out.println("The table is empty.");
+					//System.out.println("The table is empty.");
 					DBConnectionManager.getConnection().close();
 					return 2;
 				}
 				else {
-					System.out.println("The table is not empty.");
-					System.out.println("There are "+rows+" rows in your table.");
+					//System.out.println("The table is not empty.");
+					//System.out.println("There are "+rows+" rows in your table.");
 					DBConnectionManager.getConnection().close();
 					return 3;
 				}
 			}
 			else {
-				System.out.println("There is no table called "+tableName+ " in this database.");
+				//System.out.println("There is no table called "+tableName+ " in this database.");
 				DBConnectionManager.getConnection().close(); 
 				return 1;
 			}
@@ -269,7 +269,7 @@ public class DaoModel {
 		ResultSet rs = null;
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
-			String sql = "SELECT * FROM HEIGHTMAP_PARAMETERS WHERE Map_id='"+mapId+"'";
+			String sql = "SELECT * FROM HEIGHTMAP_PARAMETERS WHERE Map_id="+mapId;
 			rs = stmt.executeQuery(sql);
 			DBConnectionManager.getConnection().close();
 		} catch (SQLException se) {

@@ -13,6 +13,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -55,14 +56,6 @@ public class FXMLDatabaseController {
     	
     	db_table_map.setEditable(true);
     	db_table_stat.setEditable(true);
-    	 
-//    	db_table_map_col_id = new TableColumn<Data, String>("ID");
-//    	db_table_map_col_algorithm = new TableColumn<Data, String>();
-//    	db_table_map_col_height = new TableColumn<Data, String>();
-//    	db_table_map_col_width = new TableColumn<Data, String>();
-//    	db_table_map_col_param = new TableColumn<Data, String>();
-//    	db_table_map_col_time = new TableColumn<Data, String>();
-//    	db_table_map_col_date = new TableColumn<Data, String>();
     	
     	db_table_map_col_id.setCellValueFactory(new PropertyValueFactory<Data, String>("mapId"));
     	db_table_map_col_algorithm.setCellValueFactory(new PropertyValueFactory<Data, String>("mapAlgorithm"));
@@ -78,8 +71,10 @@ public class FXMLDatabaseController {
     	db_table_stat_col_max.setCellValueFactory(new PropertyValueFactory<Data, String>("statMax"));
     	db_table_stat_col_avg.setCellValueFactory(new PropertyValueFactory<Data, String>("statAvg"));
     	db_table_stat_col_med.setCellValueFactory(new PropertyValueFactory<Data, String>("statMed"));
-    	db_table_stat_col_time.setCellValueFactory(new PropertyValueFactory<Data, String>("statTme"));
+    	db_table_stat_col_time.setCellValueFactory(new PropertyValueFactory<Data, String>("statTime"));
     	db_table_stat_col_date.setCellValueFactory(new PropertyValueFactory<Data, String>("statDate"));    	
+    	
+    	this.showTable();
     }
       
 	@FXML
@@ -111,14 +106,16 @@ public class FXMLDatabaseController {
 				}
 	    		break;
 	    	case "Retrieve Parameters":
-	    		String mapId = db_text_field.getText();
-	    		DaoModel.retrieveMapParameters(mapId);
+	    		FXMLController.alertDialog("Not implemented feature", "Retrieve a map by its ID is not implemented yet.", "Our team is currently working on this feature and it may appear in future version.", AlertType.INFORMATION);
+	    		this.showTable();
 	    		break;
 	    	case "Delete Last Map":
 	    		DaoModel.deleteLastMap();
+	    		this.showTable();
 	    		break;
 	    	case "Delete Tables":
 	    		DaoModel.deleteTables();
+	    		this.showTable();
 	    		break;
     	}    	
     }
@@ -151,6 +148,13 @@ public class FXMLDatabaseController {
 		db_menu_button_action.setText(action.getValueSafe());
 		db_text_field.setVisible(false);
     }
+	
+	private void showTable() {
+		String tmp = action.getValue();
+		action.setValue("Show Tables");
+		executeQuery(null);
+		action.setValue(tmp);
+	}
 	
 	public class Data {
 		
