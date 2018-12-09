@@ -242,7 +242,6 @@ public class DaoModel {
 	/**
 	 * This function allow the user to delete the last generated map from the database.
 	 */
-	//TODO Solve the problem with the foreign key when I delete a map
 	public static void deleteLastMap() {
 		try {
 			stmt = DBConnectionManager.getConnection().createStatement();
