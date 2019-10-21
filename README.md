@@ -2,6 +2,8 @@
 
 This is a Java Tool for generating random heightmaps with GUI.
 
+![alt text](https://github.com/vlevieux/HeightMapGenerationTools/raw/master/demo.gif "demo.gif")
+
 This offers few tools to generate heightmaps. The main idea is that algorithm can be easily added to this software. The GUI is realised with JavaFX.
 
 ```
